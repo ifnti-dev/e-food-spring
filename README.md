@@ -13,8 +13,9 @@
 1. cloner le projet depuis github
 
  ```bash
-   git clone https://github.com/ifnti-dev/e-food-spring.git
-    ```
+ git clone https://github.com/ifnti-dev/e-food-spring.git
+
+ ```
 >[!NOTE]
 >Ouvrez un terminal et lancez la commande ci-dessus à là où vous voulez l'avoir
 2. Entrer dans le projet comme suit:
