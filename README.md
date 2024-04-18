@@ -53,4 +53,4 @@ mvn spring-boot:run
 5. Comment y accéder sur un navigateur ?
 
 - Taper l'URL suivant:
-  127.0.0.1:8081/e-food
+  127.0.0.1:8081/e-food/
