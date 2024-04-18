@@ -13,9 +13,14 @@
 1. cloner le projet depuis github
 
  ```bash
+<<<<<<< HEAD
  git clone https://github.com/ifnti-dev/e-food-spring.git
 
  ```
+=======
+   git clone https://github.com/ifnti-dev/e-food-spring.git
+    ```
+>>>>>>> 83c08e91e09c84a34945efce3e3677ffed8e0b3c
 >[!NOTE]
 >Ouvrez un terminal et lancez la commande ci-dessus à là où vous voulez l'avoir
 2. Entrer dans le projet comme suit:
@@ -54,6 +59,6 @@ mvn spring-boot:run
 5. Comment y accéder sur un navigateur ?
 
 - Taper l'URL suivant:
-  127.0.0.1:8081/e-food
 
-  ```````
+  127.0.0.1:8081/e-food/
+>>>>>>> 83c08e91e09c84a34945efce3e3677ffed8e0b3c
