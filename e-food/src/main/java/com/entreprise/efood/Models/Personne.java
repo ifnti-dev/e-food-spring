@@ -10,44 +10,46 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+import jakarta.persistence.MappedSuperclass;
 
 /**
  *
  * @author david
  */
-@Entity 
-@Table(name = "personne")
-public class Personne {
+
+@MappedSuperclass
+public abstract class Personne {
   
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long pers_id;
+    private Long id;
   
     @Basic
-    @Column(length = 30, nullable = false)
+    @Column(name = "nom",length = 30, nullable = false)
     private String nom;
     
     @Basic
-    @Column(length = 30, nullable = false)
+    @Column(name = "prenom",length = 30, nullable = false)
     private String prenom;
     
     @Basic
-    @Column(length = 15, nullable = false)
+    @Column(name = "telephone", nullable = false,unique = true)
     private String telephone;
     
     @Basic
-    @Column(length = 50, nullable = false, unique=true)
+    @Column(name = "email", unique=true)
     private String email;
     
     @Basic
-    @Column(length = 30, nullable = false) 
+    @Column(name = "ville") 
     private String ville;
     
     @Basic
-    @Column(length = 30, nullable = false)
-    private String addresse;
+    @Column( name = "adresse")
+    private String adresse;
     
     //private String profile;
      
@@ -65,16 +67,16 @@ public class Personne {
        this.telephone = telephone;
        this.email = email;
        this.ville = ville;
-       this.addresse = addresse;
+       this.adresse = addresse;
       
 
    }
      public Long getPersone_id() {
-        return pers_id;
+        return id;
     }
 
     public void setPersone_id(Long pers_id) {
-        this.pers_id = pers_id;
+        this.id = pers_id;
     }
      
    public String getNom(){
@@ -118,11 +120,11 @@ public class Personne {
     }
 
     public String getAddresse() {
-        return addresse;
+        return adresse;
     }
 
     public void setAddresse(String addresse) {
-        this.addresse = addresse;
+        this.adresse = addresse;
     }
 
    /* public String getProfile() {

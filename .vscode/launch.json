@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-EFoodApplication<e-food>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.entreprise.efood.EFoodApplication",
+            "projectName": "e-food",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
