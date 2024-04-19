@@ -1,6 +1,8 @@
 package com.entreprise.efood.Models;
 
+
 import jakarta.persistence.Table;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -108,6 +110,7 @@ public class Restaurant {
         this.id = id;
     }
 
+
     public String getNom() {
         return nom;
     }
@@ -170,6 +173,7 @@ public class Restaurant {
 
     public void setCoordonnee_gps_y(String coordonnee_gps_y) {
         this.coordonnee_gps_y = coordonnee_gps_y;
+
     }
 
     public String getEtat() {
@@ -179,6 +183,7 @@ public class Restaurant {
     public void setEtat(String etat) {
         this.etat = etat;
     }
+
 
     public List<Evenement> getEvenements() {
         return evenements;

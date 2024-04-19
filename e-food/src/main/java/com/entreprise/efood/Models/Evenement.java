@@ -3,6 +3,7 @@ package com.entreprise.efood.Models;
 import org.hibernate.annotations.ManyToAny;
 
 import jakarta.persistence.Basic;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,6 +15,7 @@ import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+
 
 @Entity
 @Table(name = "evenements")
@@ -91,17 +93,21 @@ public class Evenement {
         return id;
     }
 
+
     public String getTitre() {
         return titre;
     }
+
 
     public String getDescription() {
         return description;
     }
 
+
     public String getDate_debut() {
         return date_debut;
     }
+
 
     public String getDate_fin() {
         return date_fin;
@@ -116,5 +122,4 @@ public class Evenement {
     private Restaurant restaurant;
 
     
-
 }
