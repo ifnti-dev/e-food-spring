@@ -1,98 +1,113 @@
 package com.entreprise.efood.Models;
 
+
+import jakarta.persistence.Table;
+
+
 import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
-import jakarta.persistence.Table;
+
 @Entity
 @Table(name = "restaurants")
 public class Restaurant {
-
     @Id
     @Column(name = "code")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "restaurant_id_seq")
-    @SequenceGenerator(name = "restaurant_id_seq", sequenceName = "restaurant_id_seq",  allocationSize=50)
-    private String id_restaurant;
-
-    @Column(name = "nom",length = 50)
+    @SequenceGenerator(name = "restaurant_id_seq", sequenceName = "restaurant_id_seq",allocationSize = 100)
+    private Long id;
+    
+    @Basic
+    @Column(name = "nom", length = 30, nullable = false)
     private String nom;
 
+    @Basic
     @Column(name = "adresse")
     private String adresse;
 
-    @Column(name = "telephone",unique = true)
+    @Basic
+    @Column(name = "telephone",length = 30, nullable = false, unique =true)
     private String telephone;
 
-    @Column(name = "ville",length = 100)
-    private String ville;
-
-    @Column(name = "heure_ouverture")
+    @Basic
+    @Column(name = "heure_ouverture", nullable = false)
     private String heure_ouverture;
 
-    @Column(name = "heure_fermeture")
+    @Basic
+    @Column(name = "heure_fermeture", nullable = false)
     private String heure_fermeture;
 
     @Basic
-    @Column(name = "jours_ouverture", columnDefinition = "text[]")
-    private ArrayList<String> jours_ouverture;
+    @Column(name = "jour_ouverture", nullable = false)
+    private ArrayList<String> jour_ouverture;
 
     @Basic
-    @Column(name = "coordonnee_latitude", unique=true)
-    private double coordonnee_latitude;
-    
-    @Basic
-    @Column(name = "coordonnee_longitude",unique = true)
-    private double coordonnee_longitude;
+    @Column(name = "coordonnee_gps_x")
+    private String coordonnee_gps_x;
 
-    @Column(name = "etat")
+    @Basic
+    @Column(name = "coordonnee_gps_y")
+    private String coordonnee_gps_y;
+
+    @Basic
+    @Column(length = 30, nullable = false)
     private String etat;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "restaurant")
     private List<Evenement> evenements;
 
-
-    @OneToMany
+    @OneToMany(mappedBy = "restaurant")
     private List<Adhesion> adhesions;
 
 
-    @OneToMany
+    @OneToMany(mappedBy = "restaurant")
+    private List<Publicite> publicites;
+
+    @OneToMany(mappedBy = "restaurant")
     private List<Menu> menus;
 
-    public List<Menu> getMenus() {
-        return menus;
+    @OneToMany(mappedBy = "restaurant")
+    private List<Employee> employees;
+
+    public Restaurant(List<Employee> employees) {
+        this.employees = employees;
     }
 
-    public void setMenus(List<Menu> menus) {
-        this.menus = menus;
-    }
-
-    public List<Adhesion> getAdhesions() {
-        return adhesions;
-    }
-
-    public void setAdhesions(List<Adhesion> adhesions) {
-        this.adhesions = adhesions;
-    }
-
-    public List<Evenement> getEvenements() {
-        return evenements;
-    }
-
-    public void setEvenements(List<Evenement> evenements) {
+    public Restaurant(Long id, String nom, String adresse, String telephone, String heure_ouverture,
+            String heure_fermeture, ArrayList<String> jour_ouverture, String coordonnee_gps_x, String coordonnee_gps_y,
+            String etat, List<Evenement> evenements, List<Adhesion> adhesions, List<Publicite> publicites,
+            List<Menu> menus, List<Employee> employees) {
+        this.id = id;
+        this.nom = nom;
+        this.adresse = adresse;
+        this.telephone = telephone;
+        this.heure_ouverture = heure_ouverture;
+        this.heure_fermeture = heure_fermeture;
+        this.jour_ouverture = jour_ouverture;
+        this.coordonnee_gps_x = coordonnee_gps_x;
+        this.coordonnee_gps_y = coordonnee_gps_y;
+        this.etat = etat;
         this.evenements = evenements;
+        this.adhesions = adhesions;
+        this.publicites = publicites;
+        this.menus = menus;
+        this.employees = employees;
     }
 
-    public String getId_restaurant() {
-        return id_restaurant;
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
 
@@ -120,14 +135,6 @@ public class Restaurant {
         this.telephone = telephone;
     }
 
-    public String getVille() {
-        return ville;
-    }
-
-    public void setVille(String ville) {
-        this.ville = ville;
-    }
-
     public String getHeure_ouverture() {
         return heure_ouverture;
     }
@@ -144,28 +151,29 @@ public class Restaurant {
         this.heure_fermeture = heure_fermeture;
     }
 
-    public ArrayList<String> getJours_ouverture() {
-        return jours_ouverture;
+    public ArrayList<String> getJour_ouverture() {
+        return jour_ouverture;
     }
 
-    public void setJours_ouverture(ArrayList<String> jours_ouverture) {
-        this.jours_ouverture = jours_ouverture;
+    public void setJour_ouverture(ArrayList<String> jour_ouverture) {
+        this.jour_ouverture = jour_ouverture;
     }
 
-    public double getCoordonnee_latitude() {
-        return coordonnee_latitude;
+    public String getCoordonnee_gps_x() {
+        return coordonnee_gps_x;
     }
 
-    public void setCoordonnee_latitude(double coordonnee_latitude) {
-        this.coordonnee_latitude = coordonnee_latitude;
+    public void setCoordonnee_gps_x(String coordonnee_gps_x) {
+        this.coordonnee_gps_x = coordonnee_gps_x;
     }
 
-    public double getCoordonnee_longitude() {
-        return coordonnee_longitude;
+    public String getCoordonnee_gps_y() {
+        return coordonnee_gps_y;
     }
 
-    public void setCoordonnee_longitude(double coordonnee_longitude) {
-        this.coordonnee_longitude = coordonnee_longitude;
+    public void setCoordonnee_gps_y(String coordonnee_gps_y) {
+        this.coordonnee_gps_y = coordonnee_gps_y;
+
     }
 
     public String getEtat() {
@@ -176,6 +184,46 @@ public class Restaurant {
         this.etat = etat;
     }
 
-    // Getters and setters
+
+    public List<Evenement> getEvenements() {
+        return evenements;
+    }
+
+    public void setEvenements(List<Evenement> evenements) {
+        this.evenements = evenements;
+    }
+
+    public List<Adhesion> getAdhesions() {
+        return adhesions;
+    }
+
+    public void setAdhesions(List<Adhesion> adhesions) {
+        this.adhesions = adhesions;
+    }
+
+    public List<Publicite> getPublicites() {
+        return publicites;
+    }
+
+    public void setPublicites(List<Publicite> publicites) {
+        this.publicites = publicites;
+    }
+
+    public List<Menu> getMenus() {
+        return menus;
+    }
+
+    public void setMenus(List<Menu> menus) {
+        this.menus = menus;
+    }
+
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
+    }
     
+
 }
