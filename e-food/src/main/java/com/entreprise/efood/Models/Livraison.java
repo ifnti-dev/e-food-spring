@@ -1,6 +1,5 @@
 package com.entreprise.efood.Models;
-
-import java.util.List;
+import java.time.LocalDate;
 
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
@@ -30,7 +29,7 @@ public class Livraison {
 
     @Basic
     @Column(length = 30, nullable = false)
-    private String date;
+    private LocalDate date;
 
     @Basic
     @Column(length = 30, nullable = false)
@@ -48,7 +47,7 @@ public class Livraison {
     @JoinColumn(name = "employee_id")
     private Employee employee;
 
-    public Livraison(Long id, String code, String description, String date, String statut, Long coordonnee_x,
+    public Livraison(Long id, String code, String description, LocalDate date, String statut, Long coordonnee_x,
             Long coordonnee_y, Employee employee) {
         this.id = id;
         this.code = code;
@@ -60,7 +59,7 @@ public class Livraison {
         this.employee = employee;
     }
 
-    public Livraison(Long id, String code, String description, String date, String statut, Long coordonnee_x,
+    public Livraison(Long id, String code, String description, LocalDate date, String statut, Long coordonnee_x,
             Long coordonnee_y) {
         this.id = id;
         this.code = code;
@@ -98,11 +97,11 @@ public class Livraison {
         this.description = description;
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

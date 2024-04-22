@@ -1,7 +1,9 @@
 package com.entreprise.efood.Models;
 
 
+import java.time.LocalDate;
 import java.util.List;
+
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,7 +11,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
@@ -28,16 +29,16 @@ public class Commande {
 
     @Temporal(TemporalType.DATE)
     @Column(name = "date_commande")
-    private String date_commande;
+    private LocalDate date_commande;
 
-    @Column(name = "etat",columnDefinition = "l'etat de la commande: traité/encours/en attente")
+    @Column(name = "etat")
     private String etat;
 
     @Column(name = "montant")
     private double montant;
 
 
-    public Commande(Long id, String date_commande, String etat, double montant, Client client) {
+    public Commande(Long id, LocalDate date_commande, String etat, double montant, Client client) {
         this.id = id;
         this.date_commande = date_commande;
         this.etat = etat;
@@ -57,11 +58,11 @@ public class Commande {
         this.id = id;
     }
 
-    public String getDate_commande() {
+    public LocalDate getDate_commande() {
         return date_commande;
     }
 
-    public void setDate_commande(String date_commande) {
+    public void setDate_commande(LocalDate date_commande) {
         this.date_commande = date_commande;
     }
 

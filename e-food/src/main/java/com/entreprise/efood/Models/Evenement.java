@@ -1,5 +1,7 @@
 package com.entreprise.efood.Models;
 
+import java.sql.Date;
+
 import org.hibernate.annotations.ManyToAny;
 
 import jakarta.persistence.Basic;
@@ -36,14 +38,14 @@ public class Evenement {
     @Column(name = "description",length = 30, nullable = false)
     private String description;
 
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "date_debut")
-    private String date_debut;
+    private Date date_debut;
 
     public Evenement() {
     }
 
-    public Evenement(Long id, String titre, String description, String date_debut, String date_fin) {
+    public Evenement(Long id, String titre, String description, Date date_debut, Date date_fin) {
         this.id = id;
         this.titre = titre;
         this.description = description;
@@ -51,7 +53,7 @@ public class Evenement {
         this.date_fin = date_fin;
     }
 
-    public Evenement(Long id, String titre, String description, String date_debut, String date_fin,
+    public Evenement(Long id, String titre, String description, Date date_debut, Date date_fin,
             Restaurant restaurant) {
         this.id = id;
         this.titre = titre;
@@ -61,9 +63,9 @@ public class Evenement {
         this.restaurant = restaurant;
     }
 
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "date_fin")
-    private String date_fin;
+    private Date date_fin;
 
     public void setId(Long id) {
         this.id = id;
@@ -77,11 +79,11 @@ public class Evenement {
         this.description = description;
     }
 
-    public void setDate_debut(String date_debut) {
+    public void setDate_debut(Date date_debut) {
         this.date_debut = date_debut;
     }
 
-    public void setDate_fin(String date_fin) {
+    public void setDate_fin(Date date_fin) {
         this.date_fin = date_fin;
     }
 
@@ -104,12 +106,12 @@ public class Evenement {
     }
 
 
-    public String getDate_debut() {
+    public Date getDate_debut() {
         return date_debut;
     }
 
 
-    public String getDate_fin() {
+    public Date getDate_fin() {
         return date_fin;
     }
 
