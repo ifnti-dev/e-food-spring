@@ -9,7 +9,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
@@ -30,8 +29,9 @@ public class Commande {
     @Column(name = "date_commande")
     private String date_commande;
 
-    @Column(name = "etat",columnDefinition = "l'etat de la commande: traité/encours/en attente")
+    @Column(name = "etat"   /*l'etat de la commande: traité/encours/en attente"*/)
     private String etat;
+    
 
     @Column(name = "montant")
     private double montant;
@@ -107,7 +107,6 @@ public class Commande {
 
     
 
-    
 
 
     @OneToOne
