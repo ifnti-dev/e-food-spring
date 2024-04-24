@@ -30,7 +30,7 @@ public class Commande {
     @Column(name = "date_commande")
     private String date_commande;
 
-    @Column(name = "etat",columnDefinition = "l'etat de la commande: traité/encours/en attente")
+    @Column(name = "etat")
     private String etat;
 
     @Column(name = "montant")
