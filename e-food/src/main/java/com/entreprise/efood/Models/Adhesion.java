@@ -10,6 +10,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
+
 @Entity
 @Table(name = "adhesions")
 public class Adhesion {
@@ -41,6 +42,7 @@ public class Adhesion {
         this.restaurant = restaurant;
     }
 
+
     public Long getId() {
         return id;
     }
@@ -52,6 +54,7 @@ public class Adhesion {
     public Restaurant getRestaurant() {
         return restaurant;
     }
+
 
     public void setId(Long id) {
         this.id = id;

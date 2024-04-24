@@ -1,5 +1,7 @@
 package com.entreprise.efood.Models;
 
+import java.sql.Date;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -33,6 +35,20 @@ public class Paiement {
     @Column(name = "statut")
     private String statut;
 
+    
+    @Column(length = 30, nullable = false)
+    private Date date;
+
+    public Paiement(Long id, double montant, double prix_livraison, String type_paiement, String numero_paiement,
+            String statut, Date date) {
+        this.id = id;
+        this.montant = montant;
+        this.prix_livraison = prix_livraison;
+        this.type_paiement = type_paiement;
+        this.numero_paiement = numero_paiement;
+        this.statut = statut;
+        this.date = date;
+    }
     public Paiement(Long id, double montant, double prix_livraison, String type_paiement, String numero_paiement,
             String statut) {
         this.id = id;
@@ -45,7 +61,7 @@ public class Paiement {
 
     public Paiement() {
     }
-
+    
     public Long getId() {
         return id;
     }
@@ -93,6 +109,17 @@ public class Paiement {
     public void setStatut(String statut) {
         this.statut = statut;
     }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+
+    
 
 
 

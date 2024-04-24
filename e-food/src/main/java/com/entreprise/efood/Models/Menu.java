@@ -80,6 +80,7 @@ public class Menu {
 
     public void setNom(String nom) {
         this.nom = nom;
+
     }
 
     public void setPrix(double prix) {
@@ -116,6 +117,7 @@ public class Menu {
 
     public int getTemps_preparation() {
         return temps_preparation;
+
     }
 
     public String getStatut() {
@@ -140,5 +142,6 @@ public class Menu {
     private List<Composant> composants;
     
 }
+
 
 
