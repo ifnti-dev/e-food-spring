@@ -33,6 +33,7 @@ public class Commande {
 
     @Column(name = "etat")
     private String etat;
+    
 
     @Column(name = "montant")
     private double montant;
@@ -108,7 +109,6 @@ public class Commande {
 
     
 
-    
 
 
     @OneToOne
