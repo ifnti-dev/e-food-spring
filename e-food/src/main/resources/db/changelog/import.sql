@@ -33,12 +33,10 @@
 /**
 
 **/
--- INSERT INTO manage.dealer(id, name,tier_limit)
--- values 
--- ('HDAI','Hyundai',4),
--- ('HD','Honda',10),
--- ('GC','GMC',0),
--- ('II','INFINITI',2)
--- ON CONFLICT (id) DO UPDATE 
--- SET name=EXCLUDED.name,
--- tier_limit=EXCLUDED.tier_limit;
+INSERT INTO menu.images(id, url)
+values 
+(1,'http://image.jpg'),
+(2,'http://image2.jpg'),
+(3,'http://image3.jpg')
+ON CONFLICT (id) DO UPDATE 
+SET url=EXCLUDED.url;

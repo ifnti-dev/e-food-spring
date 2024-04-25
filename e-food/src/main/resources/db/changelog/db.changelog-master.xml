@@ -29,7 +29,7 @@
         <sqlFile 
             encoding="utf8"
             endDelimiter="\nGO"
-            path="db/changelog/schema_order.sql"
+            path="db/changelog/schema_command.sql"
             splitStatements="true"
             stripComments="true"/>
     </changeSet>
