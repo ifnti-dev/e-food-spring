@@ -1,0 +1,58 @@
+<databaseChangeLog 
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd 
+   http://www.liquibase.org/xml/ns/dbchangelog 
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    
+    <changeSet author="liquibase-docs" id="schema-1.0.0">
+        <sqlFile 
+            encoding="utf8"
+            endDelimiter="\nGO"
+            path="db/changelog/schema_menu.sql"
+            splitStatements="true"
+            stripComments="true"/>
+    </changeSet>
+
+    <changeSet author="liquibase-docs" id="schema-1.0.1">
+        <sqlFile 
+            encoding="utf8"
+            endDelimiter="\nGO"
+            path="db/changelog/schema_staff.sql"
+            splitStatements="true"
+            stripComments="true"/>
+    </changeSet>
+
+    <changeSet author="liquibase-docs" id="schema-1.0.2">
+        <sqlFile 
+            encoding="utf8"
+            endDelimiter="\nGO"
+            path="db/changelog/schema_order.sql"
+            splitStatements="true"
+            stripComments="true"/>
+    </changeSet>
+
+    <changeSet author="liquibase-docs" id="schema-1.0.3">
+        <sqlFile 
+            encoding="utf8"
+            endDelimiter="\nGO"
+            path="db/changelog/schema_restaurant.sql"
+            splitStatements="true"
+            stripComments="true"/>
+    </changeSet>
+    
+    <include file="db/changelog/schema_menu/schema-create.xml" relativeToChangelogFile="false"/>
+    
+    <changeSet author="liquibase-docs" id="import-data-1.0.7">
+        <sqlFile 
+            encoding="utf8"
+            endDelimiter="\nGO"
+            path="db/changelog/import.sql"
+            splitStatements="true"
+            stripComments="true"/>
+    </changeSet>
+
+</databaseChangeLog>
+
