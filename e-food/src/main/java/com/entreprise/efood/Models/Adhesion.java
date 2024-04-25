@@ -1,5 +1,7 @@
 package com.entreprise.efood.Models;
 
+import com.entreprise.efood.utils.AppConstant;
+
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,7 +14,7 @@ import jakarta.persistence.Table;
 
 
 @Entity
-@Table(name = "adhesions")
+@Table(name = "adhesions",schema = AppConstant.SCHEMA_RESTAURANT)
 public class Adhesion {
     @Id
     @Column(name = "id")

@@ -7,6 +7,8 @@ import jakarta.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.entreprise.efood.utils.AppConstant;
+
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,7 +19,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 
 @Entity
-@Table(name = "restaurants")
+@Table(name = "restaurants",schema = AppConstant.SCHEMA_RESTAURANT)
 public class Restaurant {
     @Id
     @Column(name = "code")
