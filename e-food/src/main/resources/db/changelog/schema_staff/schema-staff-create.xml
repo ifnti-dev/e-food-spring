@@ -5,12 +5,12 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
     
-    <property name="schema_name" value="staf"/>
+    <property name="schema_name" value="staff"/>
 
-    <!-- START parameters ENTITY-->
+    <!-- START roles ENTITY-->
     <changeSet author="soka(generated)" id="ROLE-CREATE-UID001">
         <createTable schemaName="${schema_name}" tableName="roles">
-            <column name="id" type="VARCHAR(100)">
+            <column name="id" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
             <column name="libelle" type="VARCHAR(100)">
@@ -26,13 +26,12 @@
         <addPrimaryKey schemaName="${schema_name}" columnNames="id" constraintName="id_pk" tableName="roles"/>
     </changeSet>
 
-   <!-- parameters ENTITY END-->
 
 
-    <!-- START parameters ENTITY-->
+    <!-- START persmisson ENTITY-->
     <changeSet author="soka(generated)" id="PERMISSION-CREATE-UID001">
         <createTable schemaName="${schema_name}" tableName="permissions">
-            <column name="id" type="VARCHAR(100)">
+            <column name="id" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
             <column name="libelle" type="VARCHAR(100)">
@@ -46,15 +45,19 @@
         <addPrimaryKey schemaName="${schema_name}" columnNames="id" constraintName="id_pk" tableName="permissions"/>
     </changeSet>
 
-   <!-- parameters ENTITY END-->
 
     
-    <!-- START parameters ENTITY-->
+    <!-- START employers ENTITY-->
     <changeSet author="soka(generated)" id="EMPLOYER-CREATE-UID001">
         <createTable schemaName="${schema_name}" tableName="employees">
             <column name="employees_id" type="VARCHAR(100)">
                 <constraints nullable="false"/>
             </column>
+
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+
              <column name="statut" type="VARCHAR(100)">
                 <constraints nullable="false"/>
              </column>
@@ -64,13 +67,13 @@
     <changeSet author="soka(generated)" id="EMPLOYER-CREATE-UID001">
         <addPrimaryKey schemaName="${schema_name}" columnNames="employees_id" constraintName="employees_id_pk" tableName="employees"/>
     </changeSet>
-    <!-- parameters ENTITY END-->
+   
 
 
-    <!-- START parameters ENTITY-->
+    <!-- START personnes ENTITY-->
     <changeSet author="soka(generated)" id="PERSONNE-CREATE-UID001">
         <createTable schemaName="${schema_name}" tableName="personnes">
-            <column name="id" type="VARCHAR(100)">
+            <column name="id" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
             <column name="nom" type="VARCHAR(50)">
@@ -98,4 +101,38 @@
         <addPrimaryKey schemaName="${schema_name}" columnNames="id" constraintName="id_pk" tableName="personnes"/>
     </changeSet>
 
-    <!-- parameters ENTITY END-->
+
+    <!-- Table Client  -->
+
+
+<changeSet author="Roland" id="CLIENTS-CREATE-UID001">
+        <createTable schemaName="${schema_name}" tableName="clients">
+            <column name="client_id" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="favoris" type="VARCHAR []"/>
+            <column name="nom" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            <column/>
+            <column name="prenom" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            <column/>
+            <column name="telephone" type="VARCHAR">
+                <constraints nullable="false" unique="true"/>
+            <column/>
+            <column name="email" type="VARCHAR(20)">
+                <constraints unique="true"/>
+            <column/>
+            <column name="ville" type="VARCHAR(20)"/>
+            <column name="adresse" type="VARCHAR(50)"/>
+            <column name="profile" type="VARCHAR(100)"/>
+
+        </createTable>
+</changeSet>
+
+<changeSet author="Roland" id="PAIEMENTS-PRIMARYKEY-UID001">
+        <addPrimaryKey schemaName="${schema_name}" columnNames="client_id" constraintName="clients-code_pk" tableName="clients"/>
+</changeSet>
+
+</databaseChangeLog>
+

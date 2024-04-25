@@ -2,16 +2,21 @@ package com.entreprise.efood.Models;
 
 import java.util.List;
 
+import com.entreprise.efood.utils.AppConstant;
+
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "employees")
+@Table(name = "employees",schema = AppConstant.SCHEMA_STAFF)
 public class Employee extends Personne{
     
     @Basic
@@ -26,7 +31,14 @@ public class Employee extends Personne{
     @JoinColumn(name = "role_id")
     private Role role;
 
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     
+
+  
 
     public Employee() {
     }
@@ -40,6 +52,10 @@ public class Employee extends Personne{
         this.restaurant = restaurant;
         this.role = role;
         this.livraisons = livraisons;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public Employee(String nom, String prenom, String telephone, String email, String ville, String addresse,

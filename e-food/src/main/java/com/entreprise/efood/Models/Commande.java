@@ -3,6 +3,8 @@ package com.entreprise.efood.Models;
 
 import java.util.List;
 
+import com.entreprise.efood.utils.AppConstant;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,7 +19,7 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 @Entity
-@Table(name = "commandes")
+@Table(name = "commandes",schema = AppConstant.SCHEMA_COMMAND)
 public class Commande {
     @Id
     @Column(name = "code")

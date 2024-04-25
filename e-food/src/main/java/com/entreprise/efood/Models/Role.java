@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.hibernate.annotations.ManyToAny;
 
+import com.entreprise.efood.utils.AppConstant;
+
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,7 +19,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "roles")
+@Table(name = "roles",schema = AppConstant.SCHEMA_STAFF)
 public class Role {
 
     @Id
