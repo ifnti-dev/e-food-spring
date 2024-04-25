@@ -12,7 +12,7 @@
 
     <changeSet  author="fayssol"  id="RESTAURANT-CREATE-UID001">
        <createTable schemaName="${schema_name}" tableName="restaurants">
-            <column name="id" type="VARCHAR(100)">
+            <column name="code" type="VARCHAR(100)">
                 <constraints nullable="false"/>
             </column>
             <column name="nom" type="VARCHAR(30)">
@@ -28,8 +28,13 @@
             <column name="heure_fermeture" type="CHAR(2)">
                 <constraints nullable="false" />
             </column>
-            <!-- jour ouverture -->
-            <column name="coordonnee_gps_x" type="VARCHAR(30)"/>
+            <column name="jour_ouverture" type="VARCHAR(10) []">
+                <constraints nullable="false" />
+            </column>
+            <column name="coordonnee_gps_x" type="VARCHAR(50)"/>
+            <column name="coordonnee_gps_y" type="VARCHAR(50)"/>
+            <column name="etat" type="VARCHAR(30)"/>
+            <!-- les OneToMany -->
             
         </createTable>
   </changeSet>
