@@ -43,7 +43,7 @@ public class Evenement {
     public Evenement() {
     }
 
-    public Evenement(Long id, String titre, String description, String date_debut, String date_fin) {
+    public Evenement(String id, String titre, String description, String date_debut, String date_fin) {
         this.id = id;
         this.titre = titre;
         this.description = description;
@@ -51,7 +51,7 @@ public class Evenement {
         this.date_fin = date_fin;
     }
 
-    public Evenement(Long id, String titre, String description, String date_debut, String date_fin,
+    public Evenement(String id, String titre, String description, String date_debut, String date_fin,
             Restaurant restaurant) {
         this.id = id;
         this.titre = titre;
@@ -65,7 +65,7 @@ public class Evenement {
     @Column(name = "date_fin")
     private String date_fin;
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

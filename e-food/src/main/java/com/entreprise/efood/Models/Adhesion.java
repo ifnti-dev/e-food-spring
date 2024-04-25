@@ -32,7 +32,7 @@ public class Adhesion {
     public Adhesion() {
     }
 
-    public Adhesion(Long id, String avis, Restaurant restaurant) {
+    public Adhesion(String id, String avis, Restaurant restaurant) {
         this.id = id;
         this.avis = avis;
         this.restaurant = restaurant;

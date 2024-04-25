@@ -81,7 +81,7 @@ public class Restaurant {
         this.employees = employees;
     }
 
-    public Restaurant(Long id, String nom, String adresse, String telephone, String heure_ouverture,
+    public Restaurant(String id, String nom, String adresse, String telephone, String heure_ouverture,
             String heure_fermeture, ArrayList<String> jour_ouverture, String coordonnee_gps_x, String coordonnee_gps_y,
             String etat, List<Evenement> evenements, List<Adhesion> adhesions, List<Publicite> publicites,
             List<Menu> menus, List<Employee> employees) {
@@ -102,11 +102,11 @@ public class Restaurant {
         this.employees = employees;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

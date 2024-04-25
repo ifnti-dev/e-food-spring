@@ -37,7 +37,7 @@ public class Publicite {
     @OneToMany(mappedBy = "publicite")
     private List<Image> images;
 
-    public Publicite(Long id, String titre, String description, Restaurant restaurant, List<Image> images) {
+    public Publicite(String id, String titre, String description, Restaurant restaurant, List<Image> images) {
         this.id = id;
         this.titre = titre;
         this.description = description;
@@ -45,7 +45,7 @@ public class Publicite {
         this.images = images;
     }
 
-    public Publicite(Long id, String titre, String description, Restaurant restaurant) {
+    public Publicite(String id, String titre, String description, Restaurant restaurant) {
         this.id = id;
         this.titre = titre;
         this.description = description;
@@ -56,7 +56,7 @@ public class Publicite {
     }
     
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -76,7 +76,7 @@ public class Publicite {
         this.images = images;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
