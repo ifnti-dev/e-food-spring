@@ -17,7 +17,7 @@ public class Adhesion {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
     @Basic
     @Column(name = "avis", nullable = false)
@@ -43,7 +43,7 @@ public class Adhesion {
     }
 
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
@@ -56,7 +56,7 @@ public class Adhesion {
     }
 
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

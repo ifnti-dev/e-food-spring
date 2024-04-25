@@ -24,7 +24,7 @@ public class Evenement {
     @Column(name = "code")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "event_id_seq")
     @SequenceGenerator(name = "event_id_seq", sequenceName = "event_id_seq",allocationSize = 10)
-    private Long id;
+    private String id;
   
     
 
@@ -89,7 +89,7 @@ public class Evenement {
         this.restaurant = restaurant;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 

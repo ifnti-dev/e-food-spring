@@ -20,7 +20,7 @@ public class Publicite {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
   
     @Basic
     @Column(name = "titre",length = 30, nullable = false)

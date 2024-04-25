@@ -23,7 +23,7 @@ public class Restaurant {
     @Column(name = "code")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "restaurant_id_seq")
     @SequenceGenerator(name = "restaurant_id_seq", sequenceName = "restaurant_id_seq",allocationSize = 100)
-    private Long id;
+    private String id;
     
     @Basic
     @Column(name = "nom", length = 30, nullable = false)
@@ -50,11 +50,11 @@ public class Restaurant {
     private ArrayList<String> jour_ouverture;
 
     @Basic
-    @Column(name = "coordonnee_gps_x")
+    @Column(name = "coordonnee_gps_x",length = 50)
     private String coordonnee_gps_x;
 
     @Basic
-    @Column(name = "coordonnee_gps_y")
+    @Column(name = "coordonnee_gps_y",length = 50)
     private String coordonnee_gps_y;
 
     @Basic
