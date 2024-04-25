@@ -43,11 +43,17 @@
             stripComments="true"/>
     </changeSet>
 
-    <include file="db/changelog/schema_command/schema-command-create.xml" relativeToChangelogFile="false"/>
 
-    <!-- <include file="db/changelog/schema_menu/schema-menu-create.xml" relativeToChangelogFile="false"/> -->
 
-    <!-- <includeAll path="db/changelog/schema_menu/"/> -->
+    <includeAll path="db/changelog/schema_staff/"/>
+
+    <includeAll path="db/changelog/schema_restaurant/"/>
+
+
+    <includeAll path="db/changelog/schema_command/"/>
+    
+
+    <includeAll path="db/changelog/schema_menu/"/>
     
     <changeSet author="liquibase-docs" id="import-data-1.0.7">
         <sqlFile 

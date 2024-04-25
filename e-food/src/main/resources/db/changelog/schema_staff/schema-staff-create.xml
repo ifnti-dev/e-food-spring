@@ -22,8 +22,8 @@
         </createTable>
     </changeSet>
     
-    <changeSet author="soka(generated)" id="ROLE-CREATE-UID001">
-        <addPrimaryKey schemaName="${schema_name}" columnNames="id" constraintName="id_pk" tableName="roles"/>
+    <changeSet author="soka(generated)" id="ROLE-PRIMARY-KEY-UID001">
+        <addPrimaryKey schemaName="${schema_name}" columnNames="id" constraintName="role_id_pk" tableName="roles"/>
     </changeSet>
 
 
@@ -41,8 +41,8 @@
         </createTable>
     </changeSet>
     
-    <changeSet author="soka(generated)" id="PERMISSION-CREATE-UID001">
-        <addPrimaryKey schemaName="${schema_name}" columnNames="id" constraintName="id_pk" tableName="permissions"/>
+    <changeSet author="soka(generated)" id="PERMISSION-PRIMARY-KEY-UID001">
+        <addPrimaryKey schemaName="${schema_name}" columnNames="id" constraintName="permission_id_pk" tableName="permissions"/>
     </changeSet>
 
 
@@ -50,12 +50,10 @@
     <!-- START employers ENTITY-->
     <changeSet author="soka(generated)" id="EMPLOYER-CREATE-UID001">
         <createTable schemaName="${schema_name}" tableName="employees">
-            <column name="employees_id" type="VARCHAR(100)">
-                <constraints nullable="false"/>
-            </column>
+            
 
             <column name="id" type="BIGINT">
-                <constraints nullable="false" primaryKey="true"/>
+                <constraints nullable="false"/>
             </column>
 
              <column name="statut" type="VARCHAR(100)">
@@ -64,14 +62,14 @@
         </createTable>
     </changeSet>
     
-    <changeSet author="soka(generated)" id="EMPLOYER-CREATE-UID001">
-        <addPrimaryKey schemaName="${schema_name}" columnNames="employees_id" constraintName="employees_id_pk" tableName="employees"/>
+    <changeSet author="soka(generated)" id="EMPLOYER-PRIMARY-KEY-UID001">
+        <addPrimaryKey schemaName="${schema_name}" columnNames="id" constraintName="employee_id_pk" tableName="employees"/>
     </changeSet>
    
 
 
     <!-- START personnes ENTITY-->
-    <changeSet author="soka(generated)" id="PERSONNE-CREATE-UID001">
+    <!-- <changeSet author="soka(generated)" id="PERSONNE-CREATE-UID001">
         <createTable schemaName="${schema_name}" tableName="personnes">
             <column name="id" type="BIGINT">
                 <constraints nullable="false"/>
@@ -97,9 +95,9 @@
         </createTable>
     </changeSet>
     
-    <changeSet author="soka(generated)" id="PERSONNE-CREATE-UID001">
-        <addPrimaryKey schemaName="${schema_name}" columnNames="id" constraintName="id_pk" tableName="personnes"/>
-    </changeSet>
+    <changeSet author="soka(generated)" id="PERSONNE-PRIMARY-KEY-UID001">
+        <addPrimaryKey schemaName="${schema_name}" columnNames="id" constraintName="personne_id_pk" tableName="personnes"/>
+    </changeSet> -->
 
 
     <!-- Table Client  -->
@@ -107,22 +105,22 @@
 
 <changeSet author="Roland" id="CLIENTS-CREATE-UID001">
         <createTable schemaName="${schema_name}" tableName="clients">
-            <column name="client_id" type="VARCHAR(100)">
+            <column name="id" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
             <column name="favoris" type="VARCHAR []"/>
             <column name="nom" type="VARCHAR(20)">
                 <constraints nullable="false"/>
-            <column/>
+            </column>
             <column name="prenom" type="VARCHAR(20)">
                 <constraints nullable="false"/>
-            <column/>
+            </column>
             <column name="telephone" type="VARCHAR">
                 <constraints nullable="false" unique="true"/>
-            <column/>
+            </column>
             <column name="email" type="VARCHAR(20)">
                 <constraints unique="true"/>
-            <column/>
+            </column>
             <column name="ville" type="VARCHAR(20)"/>
             <column name="adresse" type="VARCHAR(50)"/>
             <column name="profile" type="VARCHAR(100)"/>
@@ -130,8 +128,8 @@
         </createTable>
 </changeSet>
 
-<changeSet author="Roland" id="PAIEMENTS-PRIMARYKEY-UID001">
-        <addPrimaryKey schemaName="${schema_name}" columnNames="client_id" constraintName="clients-code_pk" tableName="clients"/>
+<changeSet author="Roland" id="CLIENTS-PRIMARYKEY-UID001">
+        <addPrimaryKey schemaName="${schema_name}" columnNames="id" constraintName="clients-code_pk" tableName="clients"/>
 </changeSet>
 
 </databaseChangeLog>

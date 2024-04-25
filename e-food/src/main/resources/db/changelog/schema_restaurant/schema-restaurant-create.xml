@@ -85,7 +85,7 @@
     <!-- adhesion table -->
     <changeSet  author="fayssol"  id="ADHESION-CREATE-UID001">
          <createTable schemaName="${schema_name}" tableName="adhesions">
-            <column name="id" type="VARCHAR(100)">
+            <column name="id" type="BIGINT">
                <constraints primaryKey="true" />
             </column>
             <column name="avis" type="VARCHAR(30)">

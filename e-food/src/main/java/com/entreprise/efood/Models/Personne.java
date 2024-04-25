@@ -20,9 +20,8 @@ import jakarta.persistence.Table;
  * @author david
  */
 
-@MappedSuperclass
-@Entity
-@Table(name = "personnes",schema = AppConstant.SCHEMA_STAFF)
+@MappedSuperclass()
+// @Table(name = "personnes",schema = AppConstant.SCHEMA_STAFF)
 public abstract class Personne {
   
     @Id

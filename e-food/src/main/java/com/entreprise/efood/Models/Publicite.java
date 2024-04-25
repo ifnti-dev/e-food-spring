@@ -22,7 +22,7 @@ public class Publicite {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
   
     @Basic
     @Column(name = "titre",length = 30, nullable = false)
@@ -39,7 +39,7 @@ public class Publicite {
     @OneToMany(mappedBy = "publicite")
     private List<Image> images;
 
-    public Publicite(String id, String titre, String description, Restaurant restaurant, List<Image> images) {
+    public Publicite(Long id, String titre, String description, Restaurant restaurant, List<Image> images) {
         this.id = id;
         this.titre = titre;
         this.description = description;
@@ -47,7 +47,7 @@ public class Publicite {
         this.images = images;
     }
 
-    public Publicite(String id, String titre, String description, Restaurant restaurant) {
+    public Publicite(Long id, String titre, String description, Restaurant restaurant) {
         this.id = id;
         this.titre = titre;
         this.description = description;
@@ -58,7 +58,7 @@ public class Publicite {
     }
     
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -78,7 +78,7 @@ public class Publicite {
         this.images = images;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
