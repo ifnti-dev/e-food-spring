@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" 
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" 
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    
+    <property name="schema_name" value="menu"/>
+    
+    <!-- START parameters ENTITY-->
+    <changeSet author="eklou(generated)" id="MENU-CREATE-UID001">
+        <createTable schemaName="${schema_name}" tableName="menus">
+            
+            <column name="code" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="nom" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            
+            <column name="prix" type="FLOAT">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="temps_preparation" type="VARCHAR(5)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="created_at" type="TIMESTAMP WITH TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+ 
+            <column name="updated_at" type="TIMESTAMP WITH TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+                           
+            <column name="image" type="VARCHAR []"/>
+
+            <column name="restaurant_id" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+              
+        </createTable>
+
+    </changeSet>
+
+    <changeSet author="eklou(generated)" id="MENU-PRIMARYKEY-UID001">
+        <addPrimaryKey schemaName="${schema_name}" columnNames="code" constraintName="menu-id_pk" tableName="menus"/>
+    </changeSet>
+    
+
+    <!-- <CREATE COMPOSANT TABLE/> -->
+     <changeSet author="eklou(generated)" id="COMPOSANT-CREATE-UID002">
+        <createTable schemaName="${schema_name}" tableName="composants">
+            
+            <column name="code" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="nom" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            
+            <column name="prix" type="FLOAT">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="created_at" type="TIMESTAMP WITH TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            
+            <column name="updated_at" type="TIMESTAMP WITH TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+                           
+            <column name="composition" type="VARCHAR []"/>
+
+            
+        </createTable>
+
+    </changeSet>
+
+    <!-- <addPrimaryKey on Composant table> -->
+
+    <changeSet author="eklou(generated)" id="COMPOSANT-PRIMARYKEY-UID001">
+        <addPrimaryKey schemaName="${schema_name}" columnNames="code" constraintName="composant-id_pk" tableName="composants"/>
+    </changeSet>
+
+
+     <changeSet author="eklou(generated)" id="MENU_COMMANDE-CREATE-UID003">
+        <createTable schemaName="${schema_name}" tableName="menu_commandes">
+            
+            <column name="commandes_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="quantite" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            
+            <column name="menus_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="created_at" type="TIMESTAMP WITH TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            
+            <column name="updated_at" type="TIMESTAMP WITH TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+                           
+            <column name="preference" type="VARCHAR []"/>
+
+            
+        </createTable>
+
+    </changeSet>
+
+
+
+
+    <changeSet author="eklou(generated)" id="IMAGE-CREATE-UID004">
+        <createTable schemaName="${schema_name}" tableName="images">
+            
+            <column name="id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="url" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+
+              <column name="menu_id" type="BIGINT">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="publicite_id" type="BIGINT">
+                <constraints nullable="true"/>
+            </column>
+
+
+            
+        </createTable>
+
+    </changeSet>
+
+
+     <!-- <addPrimaryKey on Composant table> -->
+
+    <changeSet author="eklou(generated)" id="IMAGE-PRIMARYKEY-UID001">
+        <addPrimaryKey schemaName="${schema_name}" columnNames="id" constraintName="image-id_pk" tableName="images"/>
+    </changeSet>
+
+    
+    </databaseChangeLog>
