@@ -11,12 +11,12 @@
         <sqlFile 
             encoding="utf8"
             endDelimiter="\nGO"
-            path="db/changelog/schema_menu.sql"
+            path="db/changelog/schema/schema.sql"
             splitStatements="true"
             stripComments="true"/>
     </changeSet>
 
-    <changeSet author="liquibase-docs" id="schema-1.0.1">
+    <!-- <changeSet author="liquibase-docs" id="schema-1.0.1">
         <sqlFile 
             encoding="utf8"
             endDelimiter="\nGO"
@@ -41,7 +41,7 @@
             path="db/changelog/schema_restaurant.sql"
             splitStatements="true"
             stripComments="true"/>
-    </changeSet>
+    </changeSet> -->
 
 
 
