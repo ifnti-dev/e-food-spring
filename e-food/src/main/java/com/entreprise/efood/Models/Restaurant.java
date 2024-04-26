@@ -3,7 +3,7 @@ package com.entreprise.efood.Models;
 
 import jakarta.persistence.Table;
 
-
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +30,10 @@ public class Restaurant {
     private String nom;
 
     @Basic
+    @Column(name = "ville", length = 30, nullable = false)
+    private String ville;
+
+    @Basic
     @Column(name = "adresse")
     private String adresse;
 
@@ -39,11 +43,11 @@ public class Restaurant {
 
     @Basic
     @Column(name = "heure_ouverture", nullable = false)
-    private String heure_ouverture;
+    private LocalTime heure_ouverture;
 
     @Basic
     @Column(name = "heure_fermeture", nullable = false)
-    private String heure_fermeture;
+    private LocalTime heure_fermeture;
 
     @Basic
     @Column(name = "jour_ouverture", nullable = false)
@@ -51,11 +55,11 @@ public class Restaurant {
 
     @Basic
     @Column(name = "coordonnee_gps_x")
-    private String coordonnee_gps_x;
+    private double coordonnee_gps_x;
 
     @Basic
     @Column(name = "coordonnee_gps_y")
-    private String coordonnee_gps_y;
+    private double coordonnee_gps_y;
 
     @Basic
     @Column(length = 30, nullable = false)
@@ -81,8 +85,8 @@ public class Restaurant {
         this.employees = employees;
     }
 
-    public Restaurant(Long id, String nom, String adresse, String telephone, String heure_ouverture,
-            String heure_fermeture, ArrayList<String> jour_ouverture, String coordonnee_gps_x, String coordonnee_gps_y,
+    public Restaurant(Long id, String nom, String adresse, String telephone, LocalTime heure_ouverture,
+    LocalTime heure_fermeture, ArrayList<String> jour_ouverture, double coordonnee_gps_x, double coordonnee_gps_y,
             String etat, List<Evenement> evenements, List<Adhesion> adhesions, List<Publicite> publicites,
             List<Menu> menus, List<Employee> employees) {
         this.id = id;
@@ -135,19 +139,19 @@ public class Restaurant {
         this.telephone = telephone;
     }
 
-    public String getHeure_ouverture() {
+    public LocalTime getHeure_ouverture() {
         return heure_ouverture;
     }
 
-    public void setHeure_ouverture(String heure_ouverture) {
+    public void setHeure_ouverture(LocalTime heure_ouverture) {
         this.heure_ouverture = heure_ouverture;
     }
 
-    public String getHeure_fermeture() {
+    public LocalTime getHeure_fermeture() {
         return heure_fermeture;
     }
 
-    public void setHeure_fermeture(String heure_fermeture) {
+    public void setHeure_fermeture(LocalTime heure_fermeture) {
         this.heure_fermeture = heure_fermeture;
     }
 
@@ -159,19 +163,19 @@ public class Restaurant {
         this.jour_ouverture = jour_ouverture;
     }
 
-    public String getCoordonnee_gps_x() {
+    public double getCoordonnee_gps_x() {
         return coordonnee_gps_x;
     }
 
-    public void setCoordonnee_gps_x(String coordonnee_gps_x) {
+    public void setCoordonnee_gps_x(double coordonnee_gps_x) {
         this.coordonnee_gps_x = coordonnee_gps_x;
     }
 
-    public String getCoordonnee_gps_y() {
+    public double getCoordonnee_gps_y() {
         return coordonnee_gps_y;
     }
 
-    public void setCoordonnee_gps_y(String coordonnee_gps_y) {
+    public void setCoordonnee_gps_y(double coordonnee_gps_y) {
         this.coordonnee_gps_y = coordonnee_gps_y;
 
     }

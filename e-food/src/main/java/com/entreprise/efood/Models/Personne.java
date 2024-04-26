@@ -50,8 +50,9 @@ public abstract class Personne {
     @Basic
     @Column( name = "adresse")
     private String adresse;
-    
-    //private String profile;
+
+    @Column(name = "profile")
+    private String profile;
      
     
     
@@ -61,6 +62,21 @@ public abstract class Personne {
     }
     
     
+    
+    public Personne(Long id, String nom, String prenom, String telephone, String email, String ville, String adresse,
+            String profile) {
+        this.id = id;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.telephone = telephone;
+        this.email = email;
+        this.ville = ville;
+        this.adresse = adresse;
+        this.profile = profile;
+    }
+
+
+
     public Personne(String nom, String prenom, String telephone, String email, String ville, String addresse) {
        this.nom = nom;
        this.prenom = prenom;
@@ -71,7 +87,45 @@ public abstract class Personne {
       
 
    }
-     public Long getPersone_id() {
+
+   
+     public Long getId() {
+        return id;
+    }
+
+
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+
+
+    public String getAdresse() {
+        return adresse;
+    }
+
+
+
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
+    }
+
+
+
+    public String getProfile() {
+        return profile;
+    }
+
+
+
+    public void setProfile(String profile) {
+        this.profile = profile;
+    }
+
+
+
+    public Long getPersone_id() {
         return id;
     }
 
