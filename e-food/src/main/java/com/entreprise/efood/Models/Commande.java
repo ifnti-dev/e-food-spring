@@ -38,6 +38,29 @@ public class Commande {
     @Column(name = "montant")
     private double montant;
 
+    @OneToOne
+    @JoinColumn(name = "paiement_id")
+    private Paiement paiement;
+
+    @OneToOne
+    @JoinColumn(name = "livraison_id")
+    private Paiement Livraison;
+
+    @ManyToOne
+    @JoinColumn(name = "client_id")
+    private Client client;
+
+    @OneToMany(mappedBy = "commande")
+    private List<MenuCommande> menuCommandes;
+
+    public List<MenuCommande> getMenuCommandes() {
+        return menuCommandes;
+    }
+
+    public void setMenuCommandes(List<MenuCommande> menuCommandes) {
+        this.menuCommandes = menuCommandes;
+    }
+
 
     public Commande(Long id, String date_commande, String etat, double montant, Client client) {
         this.id = id;
@@ -111,27 +134,6 @@ public class Commande {
 
 
 
-    @OneToOne
-    @JoinColumn(name = "paiement_id")
-    private Paiement paiement;
 
-    @OneToOne
-    @JoinColumn(name = "livraison_id")
-    private Paiement Livraison;
-
-    @ManyToOne
-    @JoinColumn(name = "client_id")
-    private Client client;
-
-    @OneToMany(mappedBy = "commande")
-    private List<MenuCommande> menuCommandes;
-
-    public List<MenuCommande> getMenuCommandes() {
-        return menuCommandes;
-    }
-
-    public void setMenuCommandes(List<MenuCommande> menuCommandes) {
-        this.menuCommandes = menuCommandes;
-    }
 
 }

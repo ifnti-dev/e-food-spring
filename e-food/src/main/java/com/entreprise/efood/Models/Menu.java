@@ -30,7 +30,7 @@ public class Menu {
     @Column(name = "code")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "menu_id_seq")
     @SequenceGenerator(name = "menu_id_seq", sequenceName = "menu_id_seq",allocationSize = 50)
-    private String id;
+    private Long id;
 
     @Basic
     @Column(name = "nom",length = 30, nullable = false)
@@ -71,7 +71,7 @@ public class Menu {
         this.restaurant = restaurant;
     }
 
-    public Menu(String id, String nom, double prix, String temps_preparation, String statut) {
+    public Menu(Long id, String nom, double prix, String temps_preparation, String statut) {
         this.id = id;
         this.nom = nom;
         this.prix = prix;
@@ -79,7 +79,7 @@ public class Menu {
         this.statut = statut;
     }
 
-    public Menu(String id, String nom, double prix, String temps_preparation, String statut, List<Image> images,
+    public Menu(Long id, String nom, double prix, String temps_preparation, String statut, List<Image> images,
             Restaurant restaurant) {
         this.id = id;
         this.nom = nom;
@@ -116,7 +116,7 @@ public class Menu {
         this.restaurant = restaurant;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 

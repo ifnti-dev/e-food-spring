@@ -16,7 +16,9 @@
             stripComments="true"/>
     </changeSet>
 
+    
 
+  <include file="db/changelog/schema_command/schema-command-create.xml"/>
 
     <include file="db/changelog/schema_staff/schema-staff-create.xml"/>
 
@@ -24,7 +26,7 @@
 
     <include file="db/changelog/schema_menu/schema-menu-create.xml"/>
 
-    <include file="db/changelog/schema_command/schema-command-create.xml"/>
+  
 
 
     <!-- <include file="db/changelog/seeders/image-create.xml"/> -->
