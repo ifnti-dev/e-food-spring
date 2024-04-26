@@ -36,7 +36,7 @@ public class Paiement {
     private String statut;
 
     
-    @Column(length = 30, nullable = false)
+    @Column(name = "date_livraison")
     private Date date;
 
     public Paiement(Long id, double montant, double prix_livraison, String type_paiement, String numero_paiement,
