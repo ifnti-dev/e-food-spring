@@ -35,7 +35,7 @@
                 <constraints nullable="false"/>
             </column>
                            
-            <column name="image" type="VARCHAR []"/>
+            <column name="image" type="VARCHAR() []"/>
 
             <column name="restaurant_id" type="VARCHAR(100)">
                 <constraints nullable="false"/>
@@ -54,7 +54,7 @@
      <changeSet author="eklou(generated)" id="COMPOSANT-CREATE-UID002">
         <createTable schemaName="${schema_name}" tableName="composants">
             
-            <column name="code" type="VARCHAR(100)">
+            <column name="code" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
 
@@ -74,7 +74,7 @@
                 <constraints nullable="false"/>
             </column>
                            
-            <column name="composition" type="VARCHAR []"/>
+            <column name="composition" type="VARCHAR() []"/>
 
             
         </createTable>
@@ -111,7 +111,7 @@
                 <constraints nullable="false"/>
             </column>
                            
-            <column name="preference" type="VARCHAR []"/>
+            <column name="preference" type="VARCHAR() []"/>
 
             
         </createTable>
@@ -145,6 +145,23 @@
         </createTable>
 
     </changeSet>
+
+    <changeSet author="eklou(generated)" id="MENU-COMPOSANT-CREATE-UID004">
+        <createTable schemaName="${schema_name}" tableName="menu_composant">
+            
+            <column name="menu_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="composant_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+
+    </changeSet>
+
+
 
 
      <!-- <addPrimaryKey on Composant table> -->

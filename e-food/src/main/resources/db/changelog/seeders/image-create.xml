@@ -6,29 +6,15 @@
    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd 
    http://www.liquibase.org/xml/ns/dbchangelog 
    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
-    
-    <changeSet author="liquibase-docs" id="schema-1.0.0">
+
+    <changeSet author="liquibase-docs" id="import-data-1.0.7" runOrder="last">
         <sqlFile 
             encoding="utf8"
             endDelimiter="\nGO"
-            path="db/changelog/schema/schema.sql"
+            path="db/changelog/seeders/image_seed.sql"
             splitStatements="true"
             stripComments="true"/>
     </changeSet>
 
 
-
-    <include file="db/changelog/schema_staff/schema-staff-create.xml"/>
-
-    <include file="db/changelog/schema_restaurant/schema-restaurant-create.xml"/>
-
-    <include file="db/changelog/schema_menu/schema-menu-create.xml"/>
-
-    <include file="db/changelog/schema_command/schema-command-create.xml"/>
-
-
-    <!-- <include file="db/changelog/seeders/image-create.xml"/> -->
-    
-
-</databaseChangeLog>
-
+    </databaseChangeLog>
