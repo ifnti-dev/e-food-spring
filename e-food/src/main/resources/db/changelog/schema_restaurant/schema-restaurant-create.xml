@@ -38,11 +38,10 @@
             <column name="coordonnee_gps_x" type="VARCHAR(50)"/>
             <column name="coordonnee_gps_y" type="VARCHAR(50)"/>
             <column name="etat" type="VARCHAR(30)"/>
-            <!-- les OneToMany -->
+            <!-- add foreignkey after -->
             
         </createTable>
   </changeSet>
-
 
 
 <!-- evenements table -->
@@ -59,7 +58,10 @@
             </column>
             <column name="date_debut" type="DATE"/>
              <column name="date_fin" type="DATE"/>
-             <!-- Les  ManyToOne-->
+             <!-- add foreignkey after -->
+             <column name="restaurant_id" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
          </createTable>
     </changeSet>
 
@@ -78,7 +80,10 @@
                 <constraints nullable="false" />
             </column>
             <column name="description" type="VARCHAR(100)"/>
-          <!-- les OneToMany -->
+         <!-- add foreignkey after -->
+             <column name="restaurant_id" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
          </createTable>
     </changeSet>
 
@@ -92,10 +97,18 @@
                 <constraints nullable="false" />
             </column>
             
-          <!-- les ManyToOne -->
+          <!-- add foreignkey after -->
+          <column name="restaurant_id" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
          </createTable>
     </changeSet>
 
 
-    
+    <!-- fk -->
+   
+
+
+
+
 </databaseChangeLog>
