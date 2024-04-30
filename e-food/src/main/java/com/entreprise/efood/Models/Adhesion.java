@@ -1,5 +1,7 @@
 package com.entreprise.efood.Models;
 
+import com.entreprise.efood.utils.AppConstant;
+
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,12 +14,12 @@ import jakarta.persistence.Table;
 
 
 @Entity
-@Table(name = "adhesions")
+@Table(name = "adhesions",schema = AppConstant.SCHEMA_RESTAURANT)
 public class Adhesion {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
 
     @Basic
     @Column(name = "avis", nullable = false)
@@ -32,7 +34,7 @@ public class Adhesion {
     public Adhesion() {
     }
 
-    public Adhesion(String id, String avis, Restaurant restaurant) {
+    public Adhesion(Long id, String avis, Restaurant restaurant) {
         this.id = id;
         this.avis = avis;
         this.restaurant = restaurant;
@@ -43,7 +45,7 @@ public class Adhesion {
     }
 
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
@@ -56,7 +58,7 @@ public class Adhesion {
     }
 
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -25,7 +25,7 @@ public class Composant {
     @Id
     @Column(name = "code")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
   
     @Basic
     @Column(name ="nom", nullable = false)
@@ -52,7 +52,7 @@ public class Composant {
 
     
 
-    public Composant(String id, String nom, double prix, ArrayList<String> composition, List<Menu> menus) {
+    public Composant(Long id, String nom, double prix, ArrayList<String> composition, List<Menu> menus) {
         this.id = id;
         this.nom = nom;
         this.prix = prix;
@@ -67,7 +67,7 @@ public class Composant {
     public Composant() {
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 

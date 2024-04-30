@@ -1,5 +1,7 @@
 package com.entreprise.efood.Models;
 
+import com.entreprise.efood.utils.AppConstant;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,7 +11,7 @@ import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "paiements")
+@Table(name = "paiements",schema = AppConstant.SCHEMA_COMMAND)
 public class Paiement {
     @Id
     @Column(name = "code")

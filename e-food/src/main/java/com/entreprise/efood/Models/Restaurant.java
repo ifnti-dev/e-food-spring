@@ -7,6 +7,8 @@ import jakarta.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.entreprise.efood.utils.AppConstant;
+
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,13 +19,13 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 
 @Entity
-@Table(name = "restaurants")
+@Table(name = "restaurants",schema = AppConstant.SCHEMA_RESTAURANT)
 public class Restaurant {
     @Id
     @Column(name = "code")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "restaurant_id_seq")
     @SequenceGenerator(name = "restaurant_id_seq", sequenceName = "restaurant_id_seq",allocationSize = 100)
-    private String id;
+    private Long id;
     
     @Basic
     @Column(name = "nom", length = 30, nullable = false)
@@ -81,7 +83,7 @@ public class Restaurant {
         this.employees = employees;
     }
 
-    public Restaurant(String id, String nom, String adresse, String telephone, String heure_ouverture,
+    public Restaurant(Long id, String nom, String adresse, String telephone, String heure_ouverture,
             String heure_fermeture, ArrayList<String> jour_ouverture, String coordonnee_gps_x, String coordonnee_gps_y,
             String etat, List<Evenement> evenements, List<Adhesion> adhesions, List<Publicite> publicites,
             List<Menu> menus, List<Employee> employees) {
@@ -102,11 +104,11 @@ public class Restaurant {
         this.employees = employees;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

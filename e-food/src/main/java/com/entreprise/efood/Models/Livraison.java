@@ -2,6 +2,8 @@ package com.entreprise.efood.Models;
 
 import java.util.List;
 
+import com.entreprise.efood.utils.AppConstant;
+
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,7 +15,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "Livraison")
+@Table(name = "Livraison",schema = AppConstant.SCHEMA_COMMAND)
 public class Livraison {
     @Id
     @Column(name = "id")

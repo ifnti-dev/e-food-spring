@@ -2,6 +2,8 @@ package com.entreprise.efood.Models;
 
 import org.hibernate.annotations.ManyToAny;
 
+import com.entreprise.efood.utils.AppConstant;
+
 import jakarta.persistence.Basic;
 
 import jakarta.persistence.Column;
@@ -18,13 +20,13 @@ import jakarta.persistence.TemporalType;
 
 
 @Entity
-@Table(name = "evenements")
+@Table(name = "evenements",schema = AppConstant.SCHEMA_RESTAURANT)
 public class Evenement {
     @Id
     @Column(name = "code")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "event_id_seq")
     @SequenceGenerator(name = "event_id_seq", sequenceName = "event_id_seq",allocationSize = 10)
-    private String id;
+    private Long id;
   
     
 
@@ -33,7 +35,7 @@ public class Evenement {
     private String titre;
 
     @Basic
-    @Column(name = "description",length = 30, nullable = false)
+    @Column(name = "description",nullable = false)
     private String description;
 
     @Temporal(TemporalType.DATE)
@@ -43,7 +45,7 @@ public class Evenement {
     public Evenement() {
     }
 
-    public Evenement(String id, String titre, String description, String date_debut, String date_fin) {
+    public Evenement(Long id, String titre, String description, String date_debut, String date_fin) {
         this.id = id;
         this.titre = titre;
         this.description = description;
@@ -51,7 +53,7 @@ public class Evenement {
         this.date_fin = date_fin;
     }
 
-    public Evenement(String id, String titre, String description, String date_debut, String date_fin,
+    public Evenement(Long id, String titre, String description, String date_debut, String date_fin,
             Restaurant restaurant) {
         this.id = id;
         this.titre = titre;
@@ -65,7 +67,7 @@ public class Evenement {
     @Column(name = "date_fin")
     private String date_fin;
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -89,7 +91,7 @@ public class Evenement {
         this.restaurant = restaurant;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
