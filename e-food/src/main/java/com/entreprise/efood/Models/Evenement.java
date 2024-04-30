@@ -26,7 +26,7 @@ public class Evenement {
     @Column(name = "code")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "event_id_seq")
     @SequenceGenerator(name = "event_id_seq", sequenceName = "event_id_seq",allocationSize = 10)
-    private String id;
+    private Long id;
   
     
 
@@ -45,7 +45,7 @@ public class Evenement {
     public Evenement() {
     }
 
-    public Evenement(String id, String titre, String description, String date_debut, String date_fin) {
+    public Evenement(Long id, String titre, String description, String date_debut, String date_fin) {
         this.id = id;
         this.titre = titre;
         this.description = description;
@@ -53,7 +53,7 @@ public class Evenement {
         this.date_fin = date_fin;
     }
 
-    public Evenement(String id, String titre, String description, String date_debut, String date_fin,
+    public Evenement(Long id, String titre, String description, String date_debut, String date_fin,
             Restaurant restaurant) {
         this.id = id;
         this.titre = titre;
@@ -67,7 +67,7 @@ public class Evenement {
     @Column(name = "date_fin")
     private String date_fin;
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -91,7 +91,7 @@ public class Evenement {
         this.restaurant = restaurant;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
