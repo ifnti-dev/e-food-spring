@@ -13,11 +13,19 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.MappedSuperclass;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  *
- * @author david
+ * @author roland
  */
+@NoArgsConstructor
+@AllArgsConstructor
+@Setter
+@Getter
 
 @MappedSuperclass
 public abstract class Personne {
@@ -50,92 +58,9 @@ public abstract class Personne {
     @Basic
     @Column( name = "adresse")
     private String adresse;
-    
-    //private String profile;
-     
-    
-    
-
-    public Personne() {
-        
-    }
-    
-    
-    public Personne(String nom, String prenom, String telephone, String email, String ville, String addresse) {
-       this.nom = nom;
-       this.prenom = prenom;
-       this.telephone = telephone;
-       this.email = email;
-       this.ville = ville;
-       this.adresse = addresse;
-      
-
-   }
-     public Long getPersone_id() {
-        return id;
-    }
-
-    public void setPersone_id(Long pers_id) {
-        this.id = pers_id;
-    }
-     
-   public String getNom(){
-       return this.nom;
-   }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public String getPrenom() {
-        return prenom;
-    }
-
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
-    }
-    
-    public String getTelephone() {
-        return telephone;
-    }
-
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-    
-    public String getVille() {
-        return ville;
-    }
-
-    public void setVille(String ville) {
-        this.ville = ville;
-    }
-
-    public String getAddresse() {
-        return adresse;
-    }
-
-    public void setAddresse(String addresse) {
-        this.adresse = addresse;
-    }
-
-   /* public String getProfile() {
-        return profile;
-    }*/
 
     @Override
     public String toString() {
         return super.toString(); 
     }
-
-    
-    
 }

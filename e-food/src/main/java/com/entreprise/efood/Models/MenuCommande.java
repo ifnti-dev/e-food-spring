@@ -16,82 +16,36 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 
 @Entity
 @Table(name = "menu_commandes",schema = AppConstant.SCHEMA_MENU)
 public class MenuCommande {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @CreatedDate
     @Column(name = "created_at")
     private Instant createdAt=Instant.now();
-
-   
     
     @LastModifiedDate
     @Column(name = "updated_at")
     private Instant updatedAt=Instant.now();
 
-    
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    
     @ManyToOne
     @JoinColumn(name = "commandes_id")
     private Commande commande;
     
-    public MenuCommande() {
-    }
-
-    public MenuCommande(Long id, Commande commande, Menu menu, int quantite, ArrayList<String> preference) {
-        this.id = id;
-        this.commande = commande;
-        this.menu = menu;
-        this.quantite = quantite;
-        this.preference = preference;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Commande getCommande() {
-        return commande;
-    }
-
-    public void setCommande(Commande commande) {
-        this.commande = commande;
-    }
-
-    public Menu getMenu() {
-        return menu;
-    }
-
-    public void setMenu(Menu menu) {
-        this.menu = menu;
-    }
-
-    public int getQuantite() {
-        return quantite;
-    }
-
-    public void setQuantite(int quantite) {
-        this.quantite = quantite;
-    }
-
-    public ArrayList<String> getPreference() {
-        return preference;
-    }
-
-    public void setPreference(ArrayList<String> preference) {
-        this.preference = preference;
-    }
-
     @ManyToOne
     @JoinColumn(name = "menus_id")
     private Menu menu;

@@ -2,7 +2,6 @@ package com.entreprise.efood.Models;
 
 import java.util.List;
 
-import org.hibernate.annotations.ManyToAny;
 
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;

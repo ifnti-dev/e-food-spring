@@ -10,7 +10,15 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Setter
+@Getter
 
 @Entity
 @Table(name = "permissions")
@@ -27,44 +35,5 @@ public class Permission {
 
     @ManyToMany(mappedBy = "permissions")
     private List<Role> roles;
-
-    public Permission(Long id, String libelle, List<Role> roles) {
-        this.id = id;
-        this.libelle = libelle;
-        this.roles = roles;
-    }
-
-    public Permission(Long id, String libelle) {
-        this.id = id;
-        this.libelle = libelle;
-    }
-
-    public Permission() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getLibelle() {
-        return libelle;
-    }
-
-    public void setLibelle(String libelle) {
-        this.libelle = libelle;
-    }
-
-    public List<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
-    }
-
-    
+   
 }
