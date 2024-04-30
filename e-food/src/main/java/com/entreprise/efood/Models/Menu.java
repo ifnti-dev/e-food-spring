@@ -68,7 +68,7 @@ public class Menu {
     @OneToMany(mappedBy = "menu")
     private List<MenuCommande> menuCommandes;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany()
     @JoinTable( name = "menu_composant",
     joinColumns = @JoinColumn(name= "menu_id",referencedColumnName = "code"),
     inverseJoinColumns=@JoinColumn( name ="composant_id",referencedColumnName = "code"),

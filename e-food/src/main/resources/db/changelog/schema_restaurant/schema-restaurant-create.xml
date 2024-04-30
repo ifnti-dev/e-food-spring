@@ -12,10 +12,11 @@
 
 
 
+
 <!--  restaurant table-->
     <changeSet  author="fayssol"  id="RESTAURANT-CREATE-UID001">
        <createTable schemaName="${schema_name}" tableName="restaurants">
-            <column name="code" type="VARCHAR(100)">
+            <column name="code" type="BIGINT">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="nom" type="VARCHAR(30)">
@@ -106,7 +107,33 @@
 
 
     <!-- fk -->
-   
+   <!-- adding for model evenement -->
+ <changeSet author="fayssol" id="EVENT-FOREIGNKEY-RESTO001">
+        <addForeignKeyConstraint baseTableSchemaName="${schema_name}" baseColumnNames="restaurant_id" 
+                                 baseTableName="evenements" constraintName="evenements_resto_fk" deferrable="false" 
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="code"
+                                 referencedTableName="restaurants" referencedTableSchemaName="${schema_name}"/>
+    </changeSet>
+
+    <!-- adding for modal pub -->
+    <changeSet author="fayssol" id="PUB-FOREIGNKEY-RESTO001">
+        <addForeignKeyConstraint baseTableSchemaName="${schema_name}" baseColumnNames="restaurant_id" 
+                                 baseTableName="publicites" constraintName="publicites_resto_fk" deferrable="false" 
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="code"
+                                 referencedTableName="restaurants" referencedTableSchemaName="${schema_name}"/>
+    </changeSet>
+     
+    <!-- adding for model adhesion -->
+
+     <changeSet author="fayssol" id="ADHESION-FOREIGNKEY-RESTO001">
+        <addForeignKeyConstraint baseTableSchemaName="${schema_name}" baseColumnNames="restaurant_id" 
+                                 baseTableName="adhesions" constraintName="adhesions_resto_fk" deferrable="false" 
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="code"
+                                 referencedTableName="restaurants" referencedTableSchemaName="${schema_name}"/>
+    </changeSet>
+
+
+    
 
 
 

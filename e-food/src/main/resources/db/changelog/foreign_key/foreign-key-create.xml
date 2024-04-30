@@ -135,6 +135,11 @@
         <addForeignKeyConstraint baseTableSchemaName="${schema_name_command}" baseColumnNames="commande_id" baseTableName="paiements" constraintName="paiement_commandes_fk" deferrable="false" 
         initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="code" referencedTableName="commandes" referencedTableSchemaName="${schema_name_command}"/>
 </changeSet>
+
+
+
+
+
     
 
 

@@ -95,6 +95,25 @@
 
 
 
+ <!-- Roland addForeignKeyConstraint -->
+    <changeSet author="Roland" id="LIVRAISONS-FORENGKEY--UID001">
+        <addForeignKeyConstraint baseTableSchemaName="${schema_name}" baseColumnNames="commande_id" baseTableName="livraisons" constraintName="livraison_commandes_fk" deferrable="false" 
+        initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="code" referencedTableName="livraisons" referencedTableSchemaName="${schema_name}"/>
+</changeSet>
+
+
+
+
+<changeSet author="Roland" id="PAIEMENTS-FORENGKEY--UID001">
+        <addForeignKeyConstraint baseTableSchemaName="${schema_name}" baseColumnNames="commande_id" baseTableName="paiements" constraintName="paiement_commandes_fk" deferrable="false" 
+        initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="code" referencedTableName="commandes" referencedTableSchemaName="${schema_name}"/>
+</changeSet>
+
+<changeSet author="Roland" id="COMMANDES-FORENGKEY--UID001">
+        <addForeignKeyConstraint baseTableSchemaName="${schema_name}" baseColumnNames="client_id" baseTableName="commandes" constraintName="commande_client_fk" deferrable="false" 
+        initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="clients" referencedTableSchemaName="staff"/>
+</changeSet>
+
 
 </databaseChangeLog>
     
