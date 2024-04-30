@@ -64,6 +64,18 @@ public class Menu {
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
+
+    @OneToMany(mappedBy = "menu")
+    private List<MenuCommande> menuCommandes;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable( name = "menu_composant",
+    joinColumns = @JoinColumn(name= "menu_id",referencedColumnName = "code"),
+    inverseJoinColumns=@JoinColumn( name ="composant_id",referencedColumnName = "code"),
+    schema = AppConstant.SCHEMA_MENU
+    )
+    private List<Composant> composants;
+
     public Menu() {
     }
 
@@ -177,14 +189,7 @@ public class Menu {
         return restaurant;
     }
     
-    @OneToMany(mappedBy = "menu")
-    private List<MenuCommande> menuCommandes;
-
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable( name = "menu_composant",
-    joinColumns = @JoinColumn(name= "menu_id",referencedColumnName = "code"),
-    inverseJoinColumns=@JoinColumn( name ="composant_id",referencedColumnName = "code"))
-    private List<Composant> composants;
+   
     
 }
 
