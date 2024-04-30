@@ -9,8 +9,6 @@
         http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
 
 <property name="schema_name" value="restaurant"/>
-<property name="schema_menu" value="menu"/>
-<property name="schema_staff" value="staff"/>
 
 
 
@@ -40,7 +38,7 @@
             <column name="coordonnee_gps_x" type="VARCHAR(50)"/>
             <column name="coordonnee_gps_y" type="VARCHAR(50)"/>
             <column name="etat" type="VARCHAR(30)"/>
-            <!-- les OneToMany -->
+            <!-- add foreignkey after -->
             
         </createTable>
   </changeSet>
@@ -60,7 +58,10 @@
             </column>
             <column name="date_debut" type="DATE"/>
              <column name="date_fin" type="DATE"/>
-             <!-- Les  ManyToOne-->
+             <!-- add foreignkey after -->
+             <column name="restaurant_id" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
          </createTable>
     </changeSet>
 
@@ -79,7 +80,10 @@
                 <constraints nullable="false" />
             </column>
             <column name="description" type="VARCHAR(100)"/>
-          <!-- les OneToMany -->
+         <!-- add foreignkey after -->
+             <column name="restaurant_id" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
          </createTable>
     </changeSet>
 
@@ -93,81 +97,18 @@
                 <constraints nullable="false" />
             </column>
             
-          <!-- les ManyToOne -->
+          <!-- add foreignkey after -->
+          <column name="restaurant_id" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
          </createTable>
     </changeSet>
 
 
+    <!-- fk -->
+   
 
 
 
-
-<!-- les relations etrangères -->
-
-<!-- pour le model restaurant -->
-
-  <changeSet author="fayssol" id="RESTAURANT-FOREIGNKEY-EVENT001">
-        <addForeignKeyConstraint baseTableSchemaName="${schema_name}" baseColumnNames="evenements" 
-                                 baseTableName="restaurants" constraintName="restaurants_event_fk" deferrable="false" 
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="restaurant_id"
-                                 referencedTableName="evenements" referencedTableSchemaName="${schema_name}"/>
-    </changeSet>
-    <changeSet author="fayssol" id="RESTAURANT-FOREIGNKEY-ADHESION001">
-        <addForeignKeyConstraint baseTableSchemaName="${schema_name}" baseColumnNames="adhesions" 
-                                 baseTableName="restaurants" constraintName="restaurants_adhesion_fk" deferrable="false" 
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="restaurant_id"
-                                 referencedTableName="adhesions" referencedTableSchemaName="${schema_name}"/>
-    </changeSet>
-
-    <changeSet author="fayssol" id="RESTAURANT-FOREIGNKEY-PUB001">
-        <addForeignKeyConstraint baseTableSchemaName="${schema_name}" baseColumnNames="publicites" 
-                                 baseTableName="restaurants" constraintName="restaurants_pub_fk" deferrable="false" 
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="restaurant_id"
-                                 referencedTableName="publicites" referencedTableSchemaName="${schema_name}"/>
-    </changeSet>
-
-    <changeSet author="fayssol" id="RESTAURANT-FOREIGNKEY-MENU001">
-        <addForeignKeyConstraint baseTableSchemaName="${schema_name}" baseColumnNames="menus" 
-                                 baseTableName="restaurants" constraintName="restaurants_menu_fk" deferrable="false" 
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="restaurant_id"
-                                 referencedTableName="menus" referencedTableSchemaName="${schema_menu}"/>
-    </changeSet>
-     <changeSet author="fayssol" id="RESTAURANT-FOREIGNKEY-EMPL001">
-        <addForeignKeyConstraint baseTableSchemaName="${schema_name}" baseColumnNames="employees" 
-                                 baseTableName="restaurants" constraintName="restaurants_empl_fk" deferrable="false" 
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="restaurant_id"
-                                 referencedTableName="employees" referencedTableSchemaName="${schema_staff}"/>
-    </changeSet>
-    
-<!-- pour le model evenement -->
- <changeSet author="fayssol" id="EVENT-FOREIGNKEY-RESTO001">
-        <addForeignKeyConstraint baseTableSchemaName="${schema_name}" baseColumnNames="restaurant_id" 
-                                 baseTableName="evenements" constraintName="evenements_event_fk" deferrable="false" 
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="evenements"
-                                 referencedTableName="restaurants" referencedTableSchemaName="${schema_name}"/>
-    </changeSet>
-
-    <!-- pour le modal pub -->
-    <changeSet author="fayssol" id="PUB-FOREIGNKEY-RESTO001">
-        <addForeignKeyConstraint baseTableSchemaName="${schema_name}" baseColumnNames="restaurant_id" 
-                                 baseTableName="publicites" constraintName="publicites_resto_fk" deferrable="false" 
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="publicites"
-                                 referencedTableName="restaurants" referencedTableSchemaName="${schema_name}"/>
-    </changeSet>
-     <changeSet author="fayssol" id="PUB-FOREIGNKEY-IMGSO001">
-        <addForeignKeyConstraint baseTableSchemaName="${schema_name}" baseColumnNames="images" 
-                                 baseTableName="publicites" constraintName="publicites_imgs_fk" deferrable="false" 
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="publicite_id"
-                                 referencedTableName="images" referencedTableSchemaName="${schema_menu}"/>
-    </changeSet>
-
-    <!-- pour le model adhesion -->
-
-     <changeSet author="fayssol" id="ADHESION-FOREIGNKEY-RESTO001">
-        <addForeignKeyConstraint baseTableSchemaName="${schema_name}" baseColumnNames="restaurant_id" 
-                                 baseTableName="adhesions" constraintName="adhesions_resto_fk" deferrable="false" 
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="code"
-                                 referencedTableName="restaurants" referencedTableSchemaName="${schema_name}"/>
-    </changeSet>
 
 </databaseChangeLog>
