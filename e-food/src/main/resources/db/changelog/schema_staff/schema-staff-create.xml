@@ -1,11 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" 
-                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" 
-                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+        http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
 
-    
     <property name="schema_name" value="staff"/>
+    <property name="schema_name_restaurant" value="restaurant"/>
 
     <!-- START roles ENTITY-->
     <changeSet author="soka(generated)" id="ROLE-CREATE-UID001">
@@ -18,22 +22,33 @@
              </column>
             <column name="role" type="VARCHAR(100)">
                  <constraints nullable="false"/>
-             </column>
+            </column>
         </createTable>
     </changeSet>
     
     <changeSet author="soka(generated)" id="ROLE-PRIMARY-KEY-UID001">
         <addPrimaryKey schemaName="${schema_name}" columnNames="id" constraintName="role_id_pk" tableName="roles"/>
     </changeSet>
+    <changeSet author="soka(generated)" id="ROLE-PERMISSION-FORENGKEY-UID001">
+        <addForeignKeyConstraint baseTableSchemaName="${schema_name}" baseColumnNames="permission_id" 
+                                 baseTableName="role_permission" constraintName="role_permission_for_key" deferrable="false" 
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id"
+                                 referencedTableName="permissions" referencedTableSchemaName="${schema_name}"/>
+    </changeSet>
+
 
 
 
     <!-- START persmisson ENTITY-->
     <changeSet author="soka(generated)" id="PERMISSION-CREATE-UID001">
         <createTable schemaName="${schema_name}" tableName="permissions">
+
+
             <column name="id" type="BIGINT">
                 <constraints nullable="false"/>
+
             </column>
+
             <column name="libelle" type="VARCHAR(100)">
                  <constraints nullable="false"/>
              </column>
@@ -44,14 +59,18 @@
     <changeSet author="soka(generated)" id="PERMISSION-PRIMARY-KEY-UID001">
         <addPrimaryKey schemaName="${schema_name}" columnNames="id" constraintName="permission_id_pk" tableName="permissions"/>
     </changeSet>
-
+    <changeSet author="soka(generated)" id="PERMISSION-ROLE-FORENGKEY-UID001">
+        <addForeignKeyConstraint baseTableSchemaName="${schema_name}" baseColumnNames="role_id" 
+                                 baseTableName="role_permission" constraintName="permission_role_for_key" deferrable="false" 
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id"
+                                 referencedTableName="roles" referencedTableSchemaName="${schema_name}"/>
+    </changeSet>
 
     
     <!-- START employers ENTITY-->
     <changeSet author="soka(generated)" id="EMPLOYER-CREATE-UID001">
         <createTable schemaName="${schema_name}" tableName="employees">
             
-
             <column name="id" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
@@ -66,38 +85,24 @@
         <addPrimaryKey schemaName="${schema_name}" columnNames="id" constraintName="employee_id_pk" tableName="employees"/>
     </changeSet>
    
+   <changeSet author="soka(generated)" id="EMPLOYER-CREATE-FORENGKEY-UID001">
+        <addForeignKeyConstraint baseTableSchemaName="${schema_name}" baseColumnNames="role_id" 
+                                 baseTableName="employees" constraintName="employer_role_forg_key" deferrable="false" 
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id"
+                                 referencedTableName="roles" referencedTableSchemaName="${schema_name}"/>
+    </changeSet>
 
-    <!-- Table Client  -->
+
+    <changeSet author="soka(generated)" id="RESTAURANT-EMPLOYER-FORENGKEY-UID001">
+        <addForeignKeyConstraint baseTableSchemaName="${schema_name}" baseColumnNames="restaurant_id" 
+                                 baseTableName="employees" constraintName="restaurant_employer_forg_key" deferrable="false" 
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="code"
+                                 referencedTableName="restaurants" referencedTableSchemaName="${schema_name_restaurant}"/>
+    </changeSet>
 
 
-<changeSet author="Roland" id="CLIENTS-CREATE-UID001">
-        <createTable schemaName="${schema_name}" tableName="clients">
-            <column name="id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="favoris" type="VARCHAR []"/>
-            <column name="nom" type="VARCHAR(20)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="prenom" type="VARCHAR(20)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="telephone" type="VARCHAR">
-                <constraints nullable="false" unique="true"/>
-            </column>
-            <column name="email" type="VARCHAR(20)">
-                <constraints unique="true"/>
-            </column>
-            <column name="ville" type="VARCHAR(20)"/>
-            <column name="adresse" type="VARCHAR(50)"/>
-            <column name="profile" type="VARCHAR(100)"/>
 
-        </createTable>
-</changeSet>
 
-<changeSet author="Roland" id="CLIENTS-PRIMARYKEY-UID001">
-        <addPrimaryKey schemaName="${schema_name}" columnNames="id" constraintName="clients-code_pk" tableName="clients"/>
-</changeSet>
 
 </databaseChangeLog>
 
