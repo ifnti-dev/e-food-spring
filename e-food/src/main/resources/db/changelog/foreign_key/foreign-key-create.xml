@@ -38,6 +38,7 @@
     </changeSet>
 
 
+
     <changeSet author="eklou(generated)" id="MENU-STATE-FORENGKEY-UID002">
         <addForeignKeyConstraint baseTableSchemaName="${schema_name_menu}" baseColumnNames="menu_id" 
                                  baseTableName="menu_composant" constraintName="menu_comp_state_value_forg_key" deferrable="false" 

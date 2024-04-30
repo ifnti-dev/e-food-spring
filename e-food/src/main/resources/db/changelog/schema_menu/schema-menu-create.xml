@@ -6,7 +6,7 @@
 
     
     <property name="schema_name" value="menu"/>
-
+    <property name="schema_name_command" value="command"/>
     
     <!-- START parameters ENTITY-->
     <changeSet author="eklou(generated)" id="MENU-CREATE-UID001">
@@ -175,8 +175,6 @@
 
 
 
-   
-
-
-    
+    <!-- Relations -->
+  
     </databaseChangeLog>

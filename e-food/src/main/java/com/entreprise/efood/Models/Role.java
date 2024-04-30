@@ -39,7 +39,8 @@ public class Role {
     @ManyToMany
     @JoinTable( name = "role_permission",
     joinColumns = @JoinColumn(name= "permission_id",referencedColumnName = "id"),
-    inverseJoinColumns=@JoinColumn( name ="role_id",referencedColumnName = "id"))
+    inverseJoinColumns=@JoinColumn( name ="role_id",referencedColumnName = "id"),
+    schema = AppConstant.SCHEMA_STAFF)
     private List<Permission> permissions;
 
     public Role(Long id, String libelle, List<Employee> employees, List<Permission> permissions) {
