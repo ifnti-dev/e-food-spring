@@ -35,10 +35,6 @@
         <addPrimaryKey schemaName="${schema_name}" columnNames="code" constraintName="commandes-code_pk" tableName="commandes"/>
 </changeSet>
 
-<changeSet author="Roland" id="COMMANDES-FORENGKEY--UID001">
-        <addForeignKeyConstraint baseTableSchemaName="${schema_name}" baseColumnNames="client_id" baseTableName="commandes" constraintName="commande_client_fk" deferrable="false" 
-        initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="clients" referencedTableSchemaName="${schema_name_staff}"/>
-</changeSet>
 
 
 
@@ -63,10 +59,6 @@
 
 <changeSet author="Roland" id="LIVRAISONS-PRIMARYKEY-UID001">
         <addPrimaryKey schemaName="${schema_name}" columnNames="code" constraintName="livraison-code_pk" tableName="livraisons"/>
-</changeSet>
-<changeSet author="Roland" id="LIVRAISONS-FORENGKEY--UID001">
-        <addForeignKeyConstraint baseTableSchemaName="${schema_name}" baseColumnNames="commande_id" baseTableName="livraisons" constraintName="livraison_commandes_fk" deferrable="false" 
-        initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="code" referencedTableName="livraisons" referencedTableSchemaName="${schema_name}"/>
 </changeSet>
 
 
@@ -100,10 +92,8 @@
 <changeSet author="Roland" id="PAIEMENTS-PRIMARYKEY-UID001">
         <addPrimaryKey schemaName="${schema_name}" columnNames="code" constraintName="paiement-code_pk" tableName="paiements"/>
 </changeSet>
-<changeSet author="Roland" id="PAIEMENTS-FORENGKEY--UID001">
-        <addForeignKeyConstraint baseTableSchemaName="${schema_name}" baseColumnNames="commande_id" baseTableName="paiements" constraintName="paiement_commandes_fk" deferrable="false" 
-        initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="code" referencedTableName="commandes" referencedTableSchemaName="${schema_name}"/>
-</changeSet>
+
+
 
 
 </databaseChangeLog>

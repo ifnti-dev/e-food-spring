@@ -6,7 +6,7 @@
 
     
     <property name="schema_name" value="menu"/>
-    <property name="schema_name_command" value="command"/>
+
     
     <!-- START parameters ENTITY-->
     <changeSet author="eklou(generated)" id="MENU-CREATE-UID001">
@@ -175,40 +175,7 @@
 
 
 
-    <!-- Relations -->
-  
-<!-- Menu command and menus association -->
-     
-    <changeSet author="eklou(generated)" id="MENU-STATE-FORENGKEY-UID001">
-        <addForeignKeyConstraint baseTableSchemaName="${schema_name}" baseColumnNames="menus_id" 
-                                 baseTableName="menu_commandes" constraintName="menu_state_value_forg_key" deferrable="false" 
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="code"
-                                 referencedTableName="menus" referencedTableSchemaName="${schema_name}" />
-    </changeSet>
-
-
-    <changeSet author="eklou(generated)" id="COMMAND-STATE-FORENGKEY-UID001">
-        <addForeignKeyConstraint baseTableSchemaName="${schema_name}" baseColumnNames="commandes_id" 
-                                 baseTableName="menu_commandes" constraintName="command_state_value_forg_key" deferrable="false" 
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="code"
-                                  referencedTableSchemaName="${schema_name_command}" referencedTableName="commandes"/>
-    </changeSet>
-
-
-    <changeSet author="eklou(generated)" id="MENU-STATE-FORENGKEY-UID002">
-        <addForeignKeyConstraint baseTableSchemaName="${schema_name}" baseColumnNames="menu_id" 
-                                 baseTableName="menu_composant" constraintName="menu_comp_state_value_forg_key" deferrable="false" 
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="code"
-                                 referencedTableName="menus" referencedTableSchemaName="${schema_name}" />
-    </changeSet>
-
-
-    <changeSet author="eklou(generated)" id="COMPOSANT-STATE-FORENGKEY-UID001">
-        <addForeignKeyConstraint baseTableSchemaName="${schema_name}" baseColumnNames="composant_id" 
-                                 baseTableName="menu_composant" constraintName="composant_state_value_forg_key" deferrable="false" 
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="code"
-                                  referencedTableSchemaName="${schema_name}" referencedTableName="composants"/>
-    </changeSet>
+   
 
 
     

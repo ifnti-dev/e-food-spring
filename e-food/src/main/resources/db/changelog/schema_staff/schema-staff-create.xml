@@ -29,12 +29,7 @@
     <changeSet author="soka(generated)" id="ROLE-PRIMARY-KEY-UID001">
         <addPrimaryKey schemaName="${schema_name}" columnNames="id" constraintName="role_id_pk" tableName="roles"/>
     </changeSet>
-    <changeSet author="soka(generated)" id="ROLE-PERMISSION-FORENGKEY-UID001">
-        <addForeignKeyConstraint baseTableSchemaName="${schema_name}" baseColumnNames="permission_id" 
-                                 baseTableName="role_permission" constraintName="role_permission_for_key" deferrable="false" 
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id"
-                                 referencedTableName="permissions" referencedTableSchemaName="${schema_name}"/>
-    </changeSet>
+  
 
 
 
@@ -59,13 +54,7 @@
     <changeSet author="soka(generated)" id="PERMISSION-PRIMARY-KEY-UID001">
         <addPrimaryKey schemaName="${schema_name}" columnNames="id" constraintName="permission_id_pk" tableName="permissions"/>
     </changeSet>
-    <changeSet author="soka(generated)" id="PERMISSION-ROLE-FORENGKEY-UID001">
-        <addForeignKeyConstraint baseTableSchemaName="${schema_name}" baseColumnNames="role_id" 
-                                 baseTableName="role_permission" constraintName="permission_role_for_key" deferrable="false" 
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id"
-                                 referencedTableName="roles" referencedTableSchemaName="${schema_name}"/>
-    </changeSet>
-
+    
     
     <!-- START employers ENTITY-->
     <changeSet author="soka(generated)" id="EMPLOYER-CREATE-UID001">
@@ -84,21 +73,8 @@
     <changeSet author="soka(generated)" id="EMPLOYER-PRIMARY-KEY-UID001">
         <addPrimaryKey schemaName="${schema_name}" columnNames="id" constraintName="employee_id_pk" tableName="employees"/>
     </changeSet>
-   
-   <changeSet author="soka(generated)" id="EMPLOYER-CREATE-FORENGKEY-UID001">
-        <addForeignKeyConstraint baseTableSchemaName="${schema_name}" baseColumnNames="role_id" 
-                                 baseTableName="employees" constraintName="employer_role_forg_key" deferrable="false" 
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id"
-                                 referencedTableName="roles" referencedTableSchemaName="${schema_name}"/>
-    </changeSet>
 
 
-    <changeSet author="soka(generated)" id="RESTAURANT-EMPLOYER-FORENGKEY-UID001">
-        <addForeignKeyConstraint baseTableSchemaName="${schema_name}" baseColumnNames="restaurant_id" 
-                                 baseTableName="employees" constraintName="restaurant_employer_forg_key" deferrable="false" 
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="code"
-                                 referencedTableName="restaurants" referencedTableSchemaName="${schema_name_restaurant}"/>
-    </changeSet>
 
 
 
