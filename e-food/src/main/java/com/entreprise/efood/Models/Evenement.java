@@ -4,6 +4,8 @@ import java.sql.Date;
 
 import org.hibernate.annotations.ManyToAny;
 
+import com.entreprise.efood.utils.AppConstant;
+
 import jakarta.persistence.Basic;
 
 import jakarta.persistence.Column;
@@ -20,7 +22,7 @@ import jakarta.persistence.TemporalType;
 
 
 @Entity
-@Table(name = "evenements")
+@Table(name = "evenements",schema = AppConstant.SCHEMA_RESTAURANT)
 public class Evenement {
     @Id
     @Column(name = "code")
@@ -35,7 +37,7 @@ public class Evenement {
     private String titre;
 
     @Basic
-    @Column(name = "description",length = 30, nullable = false)
+    @Column(name = "description",nullable = false)
     private String description;
 
     @Temporal(TemporalType.TIMESTAMP)

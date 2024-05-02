@@ -2,6 +2,12 @@ package com.entreprise.efood.Models;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.time.Instant;
+
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
+import com.entreprise.efood.utils.AppConstant;
 
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
@@ -13,7 +19,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "composants")
+@Table(name = "composants",schema = AppConstant.SCHEMA_MENU)
 public class Composant {
 
     @Id
@@ -33,6 +39,16 @@ public class Composant {
 
     @ManyToMany(mappedBy = "composants")
     private List<Menu> menus;
+
+    @CreatedDate
+    @Column(name = "created_at")
+    private Instant createdAt=Instant.now();
+
+   
+    
+    @LastModifiedDate
+    @Column(name = "updated_at")
+    private Instant updatedAt=Instant.now();
 
     
 
@@ -55,10 +71,6 @@ public class Composant {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getNom() {
         return nom;
     }
@@ -66,6 +78,17 @@ public class Composant {
     public void setNom(String nom) {
         this.nom = nom;
     }
+
+    public Instant getCreatedAt() {
+        return createdAt;
+    }
+
+    
+
+    public Instant getUpdatedAt() {
+        return updatedAt;
+    }
+
 
     public double getPrix() {
         return prix;

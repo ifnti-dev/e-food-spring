@@ -7,6 +7,8 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.entreprise.efood.utils.AppConstant;
+
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,7 +19,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 
 @Entity
-@Table(name = "restaurants")
+@Table(name = "restaurants",schema = AppConstant.SCHEMA_RESTAURANT)
 public class Restaurant {
     @Id
     @Column(name = "code")
@@ -50,12 +52,12 @@ public class Restaurant {
     private ArrayList<String> jour_ouverture;
 
     @Basic
-    @Column(name = "coordonnee_gps_x")
-    private double coordonnee_gps_x;
+    @Column(name = "coordonnee_gps_x",length = 50)
+    private String coordonnee_gps_x;
 
     @Basic
-    @Column(name = "coordonnee_gps_y")
-    private double coordonnee_gps_y;
+    @Column(name = "coordonnee_gps_y",length = 50)
+    private String coordonnee_gps_y;
 
     @Basic
     @Column(length = 30, nullable = false)

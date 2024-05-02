@@ -4,6 +4,7 @@ package com.entreprise.efood.Models;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.entreprise.efood.utils.AppConstant;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -19,7 +20,7 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 @Entity
-@Table(name = "commandes")
+@Table(name = "commandes",schema = AppConstant.SCHEMA_COMMAND)
 public class Commande {
     @Id
     @Column(name = "code")
@@ -37,6 +38,29 @@ public class Commande {
 
     @Column(name = "montant")
     private double montant;
+
+    @OneToOne
+    @JoinColumn(name = "paiement_id")
+    private Paiement paiement;
+
+    @OneToOne
+    @JoinColumn(name = "livraison_id")
+    private Paiement Livraison;
+
+    @ManyToOne
+    @JoinColumn(name = "client_id")
+    private Client client;
+
+    @OneToMany(mappedBy = "commande")
+    private List<MenuCommande> menuCommandes;
+
+    public List<MenuCommande> getMenuCommandes() {
+        return menuCommandes;
+    }
+
+    public void setMenuCommandes(List<MenuCommande> menuCommandes) {
+        this.menuCommandes = menuCommandes;
+    }
 
 
     public Commande(Long id, LocalDate date_commande, String etat, double montant, Client client) {
@@ -111,27 +135,6 @@ public class Commande {
 
 
 
-    @OneToOne
-    @JoinColumn(name = "paiement_id")
-    private Paiement paiement;
 
-    @OneToOne
-    @JoinColumn(name = "livraison_id")
-    private Paiement Livraison;
-
-    @ManyToOne
-    @JoinColumn(name = "client_id")
-    private Client client;
-
-    @OneToMany(mappedBy = "commande")
-    private List<MenuCommande> menuCommandes;
-
-    public List<MenuCommande> getMenuCommandes() {
-        return menuCommandes;
-    }
-
-    public void setMenuCommandes(List<MenuCommande> menuCommandes) {
-        this.menuCommandes = menuCommandes;
-    }
 
 }

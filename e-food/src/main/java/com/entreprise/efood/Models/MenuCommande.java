@@ -1,6 +1,12 @@
 package com.entreprise.efood.Models;
 
 import java.util.ArrayList;
+import java.time.Instant;
+
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
+import com.entreprise.efood.utils.AppConstant;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,16 +18,20 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "menu_commandes")
+@Table(name = "menu_commandes",schema = AppConstant.SCHEMA_MENU)
 public class MenuCommande {
 
-    public MenuCommande(Long id, Commande commande, Menu menu, double quantite, ArrayList<String> preference) {
-        this.id = id;
-        this.commande = commande;
-        this.menu = menu;
-        this.quantite = quantite;
-        this.preference = preference;
-    }
+    @CreatedDate
+    @Column(name = "created_at")
+    private Instant createdAt=Instant.now();
+
+   
+    
+    @LastModifiedDate
+    @Column(name = "updated_at")
+    private Instant updatedAt=Instant.now();
+
+    
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,8 +40,29 @@ public class MenuCommande {
     @ManyToOne
     @JoinColumn(name = "commandes_id")
     private Commande commande;
+
+
+    @ManyToOne
+    @JoinColumn(name = "menus_id")
+    private Menu menu;
+
+      
+
+    @Column(name = "quantite")
+    private int quantite;
+
+    @Column(name = "preference")
+    private ArrayList<String> preference;
     
     public MenuCommande() {
+    }
+
+    public MenuCommande(Long id, Commande commande, Menu menu, int quantite, ArrayList<String> preference) {
+        this.id = id;
+        this.commande = commande;
+        this.menu = menu;
+        this.quantite = quantite;
+        this.preference = preference;
     }
 
     public Long getId() {
@@ -58,11 +89,11 @@ public class MenuCommande {
         this.menu = menu;
     }
 
-    public double getQuantite() {
+    public int getQuantite() {
         return quantite;
     }
 
-    public void setQuantite(double quantite) {
+    public void setQuantite(int quantite) {
         this.quantite = quantite;
     }
 
@@ -74,15 +105,7 @@ public class MenuCommande {
         this.preference = preference;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "menus_id")
-    private Menu menu;
 
-    @Column(name = "quantite")
-    private double quantite;
-
-    @Column(name = "preference")
-    private ArrayList<String> preference;
 
 
 }
