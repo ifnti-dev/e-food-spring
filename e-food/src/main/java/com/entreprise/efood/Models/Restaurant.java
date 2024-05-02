@@ -53,11 +53,11 @@ public class Restaurant {
 
     @Basic
     @Column(name = "coordonnee_gps_x",length = 50)
-    private String coordonnee_gps_x;
+    private double coordonnee_gps_x;
 
     @Basic
     @Column(name = "coordonnee_gps_y",length = 50)
-    private String coordonnee_gps_y;
+    private double coordonnee_gps_y;
 
     @Basic
     @Column(length = 30, nullable = false)

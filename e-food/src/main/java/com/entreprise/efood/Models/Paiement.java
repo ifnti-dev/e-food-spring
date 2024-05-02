@@ -1,8 +1,6 @@
 package com.entreprise.efood.Models;
 
-import java.util.Date;
-
-import com.entreprise.efood.utils.AppConstant;
+import java.sql.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,7 +11,7 @@ import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "paiements",schema = AppConstant.SCHEMA_COMMAND)
+@Table(name = "paiements")
 public class Paiement {
     @Id
     @Column(name = "code")
