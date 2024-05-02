@@ -14,6 +14,16 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Setter
+@Getter
 
 @Entity
 @Table(name = "publicites",schema = AppConstant.SCHEMA_RESTAURANT)
@@ -38,70 +48,5 @@ public class Publicite {
 
     @OneToMany(mappedBy = "publicite")
     private List<Image> images;
-
-    public Publicite(Long id, String titre, String description, Restaurant restaurant, List<Image> images) {
-        this.id = id;
-        this.titre = titre;
-        this.description = description;
-        this.restaurant = restaurant;
-        this.images = images;
-    }
-
-    public Publicite(Long id, String titre, String description, Restaurant restaurant) {
-        this.id = id;
-        this.titre = titre;
-        this.description = description;
-        this.restaurant = restaurant;
-    }
-
-    public Publicite() {
-    }
-    
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setTitre(String titre) {
-        this.titre = titre;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setRestaurant(Restaurant restaurant) {
-        this.restaurant = restaurant;
-    }
-
-    public void setImages(List<Image> images) {
-        this.images = images;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getTitre() {
-        return titre;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public Restaurant getRestaurant() {
-        return restaurant;
-    }
-
-    public List<Image> getImages() {
-        return images;
-    }
-
-    
-
-
-
-    
 
 }
