@@ -1,6 +1,7 @@
 package com.entreprise.efood.Models;
 
 
+import java.time.LocalDate;
 import java.util.List;
 
 import com.entreprise.efood.utils.AppConstant;
@@ -18,6 +19,16 @@ import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+
 @Entity
 @Table(name = "commandes",schema = AppConstant.SCHEMA_COMMAND)
 public class Commande {
@@ -29,9 +40,9 @@ public class Commande {
 
     @Temporal(TemporalType.DATE)
     @Column(name = "date_commande")
-    private String date_commande;
+    private LocalDate date_commande;
 
-    @Column(name = "etat"   /*l'etat de la commande: traité/encours/en attente"*/)
+    @Column(name = "etat")
     private String etat;
     
 
@@ -52,88 +63,5 @@ public class Commande {
 
     @OneToMany(mappedBy = "commande")
     private List<MenuCommande> menuCommandes;
-
-    public List<MenuCommande> getMenuCommandes() {
-        return menuCommandes;
-    }
-
-    public void setMenuCommandes(List<MenuCommande> menuCommandes) {
-        this.menuCommandes = menuCommandes;
-    }
-
-
-    public Commande(Long id, String date_commande, String etat, double montant, Client client) {
-        this.id = id;
-        this.date_commande = date_commande;
-        this.etat = etat;
-        this.montant = montant;
-        this.client = client;
-    }
-
-    public Commande() {
-    }
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getDate_commande() {
-        return date_commande;
-    }
-
-    public void setDate_commande(String date_commande) {
-        this.date_commande = date_commande;
-    }
-
-    public String getEtat() {
-        return etat;
-    }
-
-    public void setEtat(String etat) {
-        this.etat = etat;
-    }
-
-    public double getMontant() {
-        return montant;
-    }
-
-    public void setMontant(double montant) {
-        this.montant = montant;
-    }
-
-    public Paiement getPaiement() {
-        return paiement;
-    }
-
-    public void setPaiement(Paiement paiement) {
-        this.paiement = paiement;
-    }
-
-    public Paiement getLivraison() {
-        return Livraison;
-    }
-
-    public void setLivraison(Paiement livraison) {
-        Livraison = livraison;
-    }
-
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
-
-    
-
-
-
-
 
 }

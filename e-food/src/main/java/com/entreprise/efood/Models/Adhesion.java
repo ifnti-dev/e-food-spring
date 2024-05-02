@@ -11,10 +11,18 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 @Entity
-@Table(name = "adhesions",schema = AppConstant.SCHEMA_RESTAURANT)
+@Table(name = "adhesions")
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Adhesion {
     @Id
     @Column(name = "id")
@@ -28,53 +36,6 @@ public class Adhesion {
     @ManyToOne
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
-
-    
-
-    public Adhesion() {
-    }
-
-    public Adhesion(Long id, String avis, Restaurant restaurant) {
-        this.id = id;
-        this.avis = avis;
-        this.restaurant = restaurant;
-    }
-
-    public Adhesion(Restaurant restaurant) {
-        this.restaurant = restaurant;
-    }
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getAvis() {
-        return avis;
-    }
-
-    public Restaurant getRestaurant() {
-        return restaurant;
-    }
-
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setAvis(String avis) {
-        this.avis = avis;
-    }
-
-    public void setRestaurant(Restaurant restaurant) {
-        this.restaurant = restaurant;
-    }
-
-
-    
-
-
-
     
 
 }

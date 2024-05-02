@@ -11,6 +11,15 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 
 @Entity
 @Table(name = "images",schema = AppConstant.SCHEMA_MENU)
@@ -32,40 +41,6 @@ public class Image {
     @ManyToOne
     @JoinColumn(name = "publicite_id")
     private Publicite publicite;
-    
-  
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public void setMenu(Menu menu) {
-        this.menu = menu;
-    }
-
-    public void setPublicite(Publicite publicite) {
-        this.publicite = publicite;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public Menu getMenu() {
-        return menu;
-    }
-
-    public Publicite getPublicite() {
-        return publicite;
-    }
-
    
 
 }

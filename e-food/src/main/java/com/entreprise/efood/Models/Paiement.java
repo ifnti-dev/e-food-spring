@@ -1,6 +1,6 @@
 package com.entreprise.efood.Models;
 
-import com.entreprise.efood.utils.AppConstant;
+import java.sql.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,9 +9,18 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Setter
+@Getter
 
 @Entity
-@Table(name = "paiements",schema = AppConstant.SCHEMA_COMMAND)
+@Table(name = "paiements")
 public class Paiement {
     @Id
     @Column(name = "code")
@@ -35,71 +44,9 @@ public class Paiement {
     @Column(name = "statut")
     private String statut;
 
-    public Paiement(Long id, double montant, double prix_livraison, String type_paiement, String numero_paiement,
-            String statut) {
-        this.id = id;
-        this.montant = montant;
-        this.prix_livraison = prix_livraison;
-        this.type_paiement = type_paiement;
-        this.numero_paiement = numero_paiement;
-        this.statut = statut;
-    }
-
-    public Paiement() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public double getMontant() {
-        return montant;
-    }
-
-    public void setMontant(double montant) {
-        this.montant = montant;
-    }
-
-    public double getPrix_livraison() {
-        return prix_livraison;
-    }
-
-    public void setPrix_livraison(double prix_livraison) {
-        this.prix_livraison = prix_livraison;
-    }
-
-    public String getType_paiement() {
-        return type_paiement;
-    }
-
-    public void setType_paiement(String type_paiement) {
-        this.type_paiement = type_paiement;
-    }
-
-    public String getNumero_paiement() {
-        return numero_paiement;
-    }
-
-    public void setNumero_paiement(String numero_paiement) {
-        this.numero_paiement = numero_paiement;
-    }
-
-    public String getStatut() {
-        return statut;
-    }
-
-    public void setStatut(String statut) {
-        this.statut = statut;
-    }
-
-
-
-
-
+    
+    @Column(name = "date_livraison")
+    private Date date;
 
     
 
