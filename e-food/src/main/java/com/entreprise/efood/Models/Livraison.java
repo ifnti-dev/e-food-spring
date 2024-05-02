@@ -30,27 +30,26 @@ public class Livraison {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
   
-    @Basic
     @Column(length = 30, nullable = false)
     private String code;
 
-    @Basic
+    
     @Column(length = 30, nullable = false)
     private String description;
 
-    @Basic
+    
     @Column(length = 30, nullable = false)
     private LocalDate date;
 
-    @Basic
+    
     @Column(length = 30, nullable = false)
     private String statut;
 
-    @Basic
+    
     @Column(length = 30, nullable = false)
     private Long coordonnee_x;
 
-    @Basic
+    
     @Column(length = 30, nullable = false)
     private Long coordonnee_y;
 

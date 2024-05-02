@@ -28,6 +28,11 @@ import lombok.Setter;
 @Table(name = "employees",schema = AppConstant.SCHEMA_STAFF)
 public class Employee extends Personne{
     
+    @Id
+    @Column(name = "employee_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @Basic
     @Column(name = "statut", nullable = false)
     private String statut;

@@ -41,6 +41,10 @@ public class Restaurant {
     private String nom;
 
     @Basic
+    @Column(name = "ville", length = 30, nullable = false)
+    private String ville;
+
+    @Basic
     @Column(name = "adresse")
     private String adresse;
 
