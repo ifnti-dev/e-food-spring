@@ -71,6 +71,14 @@ public class Menu {
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
+    @ManyToMany()
+    @JoinTable( name = "menu_composant",
+    joinColumns = @JoinColumn(name= "menu_id",referencedColumnName = "code"),
+    inverseJoinColumns=@JoinColumn( name ="composant_id",referencedColumnName = "code"),
+    schema = AppConstant.SCHEMA_MENU
+    )
+    private List<Composant> composants;
+
     
    
     

@@ -48,7 +48,7 @@ public class Evenement {
     @Column(name = "description",nullable = false)
     private String description;
 
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     @Column(name = "date_debut")
     private Date date_debut;
 
