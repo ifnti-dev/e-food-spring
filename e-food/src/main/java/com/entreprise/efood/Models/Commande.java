@@ -18,8 +18,19 @@ import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+
 @Entity
 @Table(name = "commandes")
+
 public class Commande {
     @Id
     @Column(name = "code")
@@ -125,13 +136,5 @@ public class Commande {
 
     @OneToMany(mappedBy = "commande")
     private List<MenuCommande> menuCommandes;
-
-    public List<MenuCommande> getMenuCommandes() {
-        return menuCommandes;
-    }
-
-    public void setMenuCommandes(List<MenuCommande> menuCommandes) {
-        this.menuCommandes = menuCommandes;
-    }
 
 }

@@ -1,0 +1,90 @@
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+        http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+
+<property name="schema_name" value="restaurant"/>
+<!--  restaurant table-->
+    <changeSet  author="fayssol"  id="RESTAURANT-CREATE-UID001">
+       <createTable schemaName="${schema_name}" tableName="restaurants">
+            <column name="code" type="VARCHAR(100)">
+                <constraints primaryKey="true" constraintName="resto-pk-constraint"/>
+            </column>
+            <column name="nom" type="VARCHAR(30)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="adresse" type="VARCHAR(30)"/>
+            <column name="ville" type="VARCHAR(30)"/>
+            <column name="telephone" type="VARCHAR(15)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="heure_ouverture" type="CHAR(2)">
+                <constraints nullable="false" />
+            </column>
+            <column name="heure_fermeture" type="CHAR(2)">
+                <constraints nullable="false" />
+            </column>
+            <column name="jour_ouverture" type="VARCHAR(10) []">
+                <constraints nullable="false" />
+            </column>
+            <column name="coordonnee_gps_x" type="VARCHAR(50)"/>
+            <column name="coordonnee_gps_y" type="VARCHAR(50)"/>
+            <column name="etat" type="VARCHAR(30)"/>
+            <!-- les OneToMany -->
+            
+        </createTable>
+  </changeSet>
+
+<!-- evenements table -->
+    <changeSet  author="fayssol"  id="EVENEMENT-CREATE-UID001">
+         <createTable schemaName="${schema_name}" tableName="restaurants">
+            <column name="code" type="VARCHAR(100)"/>
+                 <constraints primaryKey="true" constraintName="event-pk-constraint"/>
+            </column>
+            <column name="titre" type="VARCHAR(30)">
+                <constraints nullable="false" />
+            </column>
+            <column name="description" type="VARCHAR(30)">
+                <constraints nullable="false" />
+            </column>
+            <column name="date_debut" type="DATE"/>
+             <column name="date_fin" type="DATE"/>
+             <!-- Les  ManyToOne-->
+         </createTable>
+    </changeSet>
+
+    <!-- publicite table -->
+    <changeSet  author="fayssol"  id="PUBLICITE-CREATE-UID001">
+         <createTable schemaName="${schema_name}" tableName="publicites">
+            <column name="id" type="VARCHAR(100)">
+               <constraints primaryKey="true" constraintName="pub-pk-constraint"/>
+            </column>
+            <column name="titre" type="VARCHAR(30)">
+                <constraints nullable="false" />
+            </column>
+            <column name="description" type="VARCHAR(100)"/>
+          <!-- les OneToMany -->
+         </createTable>
+    </changeSet>
+
+    <!-- adhesion table -->
+    <changeSet  author="fayssol"  id="ADHESION-CREATE-UID001">
+         <createTable schemaName="${schema_name}" tableName="adhesions">
+            <column name="id" type="VARCHAR(100)">
+               <constraints primaryKey="true" constraintName="adhesion-pk-constraint"/>
+            </column>
+            <column name="avis" type="VARCHAR(30)">
+                <constraints nullable="false" />
+            </column>
+            
+          <!-- les ManyToOne -->
+         </createTable>
+    </changeSet>
+    
+
+</databaseChangeLog>
