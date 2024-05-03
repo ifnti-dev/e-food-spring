@@ -2,10 +2,16 @@ package com.entreprise.efood.Models;
 
 
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.entreprise.efood.utils.AppConstant;
 
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
@@ -16,8 +22,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Setter
+@Getter
+
 @Entity
-@Table(name = "restaurants")
+@Table(name = "restaurants",schema = AppConstant.SCHEMA_RESTAURANT)
 public class Restaurant {
     @Id
     @Column(name = "code")
@@ -54,11 +65,11 @@ public class Restaurant {
     private ArrayList<String> jour_ouverture;
 
     @Basic
-    @Column(name = "coordonnee_gps_x")
+    @Column(name = "coordonnee_gps_x",length = 50)
     private double coordonnee_gps_x;
 
     @Basic
-    @Column(name = "coordonnee_gps_y")
+    @Column(name = "coordonnee_gps_y",length = 50)
     private double coordonnee_gps_y;
 
     @Basic
@@ -80,154 +91,5 @@ public class Restaurant {
 
     @OneToMany(mappedBy = "restaurant")
     private List<Employee> employees;
-
-    public Restaurant(List<Employee> employees) {
-        this.employees = employees;
-    }
-
-    public Restaurant(Long id, String nom, String adresse, String telephone, LocalTime heure_ouverture,
-    LocalTime heure_fermeture, ArrayList<String> jour_ouverture, double coordonnee_gps_x, double coordonnee_gps_y,
-            String etat, List<Evenement> evenements, List<Adhesion> adhesions, List<Publicite> publicites,
-            List<Menu> menus, List<Employee> employees) {
-        this.id = id;
-        this.nom = nom;
-        this.adresse = adresse;
-        this.telephone = telephone;
-        this.heure_ouverture = heure_ouverture;
-        this.heure_fermeture = heure_fermeture;
-        this.jour_ouverture = jour_ouverture;
-        this.coordonnee_gps_x = coordonnee_gps_x;
-        this.coordonnee_gps_y = coordonnee_gps_y;
-        this.etat = etat;
-        this.evenements = evenements;
-        this.adhesions = adhesions;
-        this.publicites = publicites;
-        this.menus = menus;
-        this.employees = employees;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public String getAdresse() {
-        return adresse;
-    }
-
-    public void setAdresse(String adresse) {
-        this.adresse = adresse;
-    }
-
-    public String getTelephone() {
-        return telephone;
-    }
-
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
-    }
-
-    public LocalTime getHeure_ouverture() {
-        return heure_ouverture;
-    }
-
-    public void setHeure_ouverture(LocalTime heure_ouverture) {
-        this.heure_ouverture = heure_ouverture;
-    }
-
-    public LocalTime getHeure_fermeture() {
-        return heure_fermeture;
-    }
-
-    public void setHeure_fermeture(LocalTime heure_fermeture) {
-        this.heure_fermeture = heure_fermeture;
-    }
-
-    public ArrayList<String> getJour_ouverture() {
-        return jour_ouverture;
-    }
-
-    public void setJour_ouverture(ArrayList<String> jour_ouverture) {
-        this.jour_ouverture = jour_ouverture;
-    }
-
-    public double getCoordonnee_gps_x() {
-        return coordonnee_gps_x;
-    }
-
-    public void setCoordonnee_gps_x(double coordonnee_gps_x) {
-        this.coordonnee_gps_x = coordonnee_gps_x;
-    }
-
-    public double getCoordonnee_gps_y() {
-        return coordonnee_gps_y;
-    }
-
-    public void setCoordonnee_gps_y(double coordonnee_gps_y) {
-        this.coordonnee_gps_y = coordonnee_gps_y;
-
-    }
-
-    public String getEtat() {
-        return etat;
-    }
-
-    public void setEtat(String etat) {
-        this.etat = etat;
-    }
-
-
-    public List<Evenement> getEvenements() {
-        return evenements;
-    }
-
-    public void setEvenements(List<Evenement> evenements) {
-        this.evenements = evenements;
-    }
-
-    public List<Adhesion> getAdhesions() {
-        return adhesions;
-    }
-
-    public void setAdhesions(List<Adhesion> adhesions) {
-        this.adhesions = adhesions;
-    }
-
-    public List<Publicite> getPublicites() {
-        return publicites;
-    }
-
-    public void setPublicites(List<Publicite> publicites) {
-        this.publicites = publicites;
-    }
-
-    public List<Menu> getMenus() {
-        return menus;
-    }
-
-    public void setMenus(List<Menu> menus) {
-        this.menus = menus;
-    }
-
-    public List<Employee> getEmployees() {
-        return employees;
-    }
-
-    public void setEmployees(List<Employee> employees) {
-        this.employees = employees;
-    }
-    
 
 }

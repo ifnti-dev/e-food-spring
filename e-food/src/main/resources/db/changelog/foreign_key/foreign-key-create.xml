@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+ <databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+        http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+
+
+    <property name="schema_name_command" value="command"/>
+    <property name="schema_name_restaurant" value="restaurant"/>
+    <property name="schema_name_staff" value="staff"/>
+    <property name="schema_name_menu" value="menu"/>
+
+ <!-- Relations -->
+  
+<!-- Menu command and menus association -->
+
+<!-- EKLOU addForeignKeyConstraint -->
+     
+    <changeSet author="eklou(generated)" id="MENU-STATE-FORENGKEY-UID001">
+        <addForeignKeyConstraint baseTableSchemaName="${schema_name_menu}" baseColumnNames="menus_id" 
+                                 baseTableName="menu_commandes" constraintName="menu_state_value_forg_key" deferrable="false" 
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="code"
+                                 referencedTableName="menus" referencedTableSchemaName="${schema_name_menu}" />
+    </changeSet>
+
+
+    <changeSet author="eklou(generated)" id="COMMAND-STATE-FORENGKEY-UID001">
+        <addForeignKeyConstraint baseTableSchemaName="${schema_name_menu}" baseColumnNames="commandes_id" 
+                                 baseTableName="menu_commandes" constraintName="command_state_value_forg_key" deferrable="false" 
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="code"
+                                  referencedTableSchemaName="${schema_name_command}" referencedTableName="commandes"/>
+    </changeSet>
+
+
+
+    <changeSet author="eklou(generated)" id="MENU-STATE-FORENGKEY-UID002">
+        <addForeignKeyConstraint baseTableSchemaName="${schema_name_menu}" baseColumnNames="menu_id" 
+                                 baseTableName="menu_composant" constraintName="menu_comp_state_value_forg_key" deferrable="false" 
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="code"
+                                 referencedTableName="menus" referencedTableSchemaName="${schema_name_menu}" />
+    </changeSet>
+
+
+    <changeSet author="eklou(generated)" id="COMPOSANT-STATE-FORENGKEY-UID001">
+        <addForeignKeyConstraint baseTableSchemaName="${schema_name_menu}" baseColumnNames="composant_id" 
+                                 baseTableName="menu_composant" constraintName="composant_state_value_forg_key" deferrable="false" 
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="code"
+                                  referencedTableSchemaName="${schema_name_menu}" referencedTableName="composants"/>
+    </changeSet>
+
+
+ <!-- add foreignkey now -->
+<!-- fayssol addForeignKeyConstraint -->
+    
+<!-- adding for model evenement -->
+ <changeSet author="fayssol" id="EVENT-FOREIGNKEY-RESTO001">
+        <addForeignKeyConstraint baseTableSchemaName="${schema_name_restaurant}" baseColumnNames="restaurant_id" 
+                                 baseTableName="evenements" constraintName="evenements_resto_fk" deferrable="false" 
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="code"
+                                 referencedTableName="restaurants" referencedTableSchemaName="${schema_name_restaurant}"/>
+    </changeSet>
+
+    <!-- adding for modal pub -->
+    <changeSet author="fayssol" id="PUB-FOREIGNKEY-RESTO001">
+        <addForeignKeyConstraint baseTableSchemaName="${schema_name_restaurant}" baseColumnNames="restaurant_id" 
+                                 baseTableName="publicites" constraintName="publicites_resto_fk" deferrable="false" 
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="code"
+                                 referencedTableName="restaurants" referencedTableSchemaName="${schema_name_restaurant}"/>
+    </changeSet>
+     
+    <!-- adding for model adhesion -->
+
+     <changeSet author="fayssol" id="ADHESION-FOREIGNKEY-RESTO001">
+        <addForeignKeyConstraint baseTableSchemaName="${schema_name_restaurant}" baseColumnNames="restaurant_id" 
+                                 baseTableName="adhesions" constraintName="adhesions_resto_fk" deferrable="false" 
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="code"
+                                 referencedTableName="restaurants" referencedTableSchemaName="${schema_name_restaurant}"/>
+    </changeSet>
+
+
+    <!-- SOKA addForeignKeyConstraint -->
+
+
+
+    <changeSet author="soka(generated)" id="PERMISSION-ROLE-FORENGKEY-UID001">
+        <addForeignKeyConstraint baseTableSchemaName="${schema_name_staff}" baseColumnNames="role_id" 
+                                 baseTableName="role_permission" constraintName="permission_role_for_key" deferrable="false" 
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id"
+                                 referencedTableName="roles" referencedTableSchemaName="${schema_name_staff}"/>
+    </changeSet>
+
+
+      <changeSet author="soka(generated)" id="ROLE-PERMISSION-FORENGKEY-UID001">
+        <addForeignKeyConstraint baseTableSchemaName="${schema_name_staff}" baseColumnNames="permission_id" 
+                                 baseTableName="role_permission" constraintName="role_permission_for_key" deferrable="false" 
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id"
+                                 referencedTableName="permissions" referencedTableSchemaName="${schema_name_staff}"/>
+    </changeSet>
+   
+   <changeSet author="soka(generated)" id="EMPLOYER-CREATE-FORENGKEY-UID001">
+        <addForeignKeyConstraint baseTableSchemaName="${schema_name_staff}" baseColumnNames="role_id" 
+                                 baseTableName="employees" constraintName="employer_role_forg_key" deferrable="false" 
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id"
+                                 referencedTableName="roles" referencedTableSchemaName="${schema_name_staff}"/>
+    </changeSet>
+
+
+    <changeSet author="soka(generated)" id="RESTAURANT-EMPLOYER-FORENGKEY-UID001">
+        <addForeignKeyConstraint baseTableSchemaName="${schema_name_staff}" baseColumnNames="restaurant_id" 
+                                 baseTableName="employees" constraintName="restaurant_employer_forg_key" deferrable="false" 
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="code"
+                                 referencedTableName="restaurants" referencedTableSchemaName="${schema_name_restaurant}"/>
+    </changeSet>
+
+
+    <!-- Roland addForeignKeyConstraint -->
+    <changeSet author="Roland" id="LIVRAISONS-FORENGKEY--UID001">
+        <addForeignKeyConstraint baseTableSchemaName="${schema_name_command}" baseColumnNames="commande_id" baseTableName="livraisons" constraintName="livraison_commandes_fk" deferrable="false" 
+        initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="code" referencedTableName="livraisons" referencedTableSchemaName="${schema_name_command}"/>
+</changeSet>
+
+
+<changeSet author="Roland" id="COMMANDES-FORENGKEY--UID001">
+        <addForeignKeyConstraint baseTableSchemaName="${schema_name_command}" baseColumnNames="client_id" baseTableName="commandes" constraintName="commande_client_fk" deferrable="false" 
+        initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="clients" referencedTableSchemaName="${schema_name_staff}"/>
+</changeSet>
+
+<changeSet author="Roland" id="PAIEMENTS-FORENGKEY--UID001">
+        <addForeignKeyConstraint baseTableSchemaName="${schema_name_command}" baseColumnNames="commande_id" baseTableName="paiements" constraintName="paiement_commandes_fk" deferrable="false" 
+        initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="code" referencedTableName="commandes" referencedTableSchemaName="${schema_name_command}"/>
+</changeSet>
+
+
+
+
+
+    
+
+
+
+</databaseChangeLog>
