@@ -1,5 +1,11 @@
 package com.entreprise.efood.repository;
 
-public class EvenementRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.entreprise.efood.Models.Evenement;
+
+public interface EvenementRepository extends JpaRepository<Evenement, Long>{
+
+    
 
 }

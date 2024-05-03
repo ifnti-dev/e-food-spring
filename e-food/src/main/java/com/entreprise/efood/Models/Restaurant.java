@@ -92,4 +92,12 @@ public class Restaurant {
     @OneToMany(mappedBy = "restaurant")
     private List<Employee> employees;
 
+    public Restaurant(Long id) {
+        this.id = id;
+    }
+
+
+
+    
+
 }
