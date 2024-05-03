@@ -19,8 +19,8 @@ public class JsonEventRestaurantEvent implements EventService {
 
     @Override
     public List<EventDTO> getEventsByRestaurant(String id) {
-        // TODO Auto-generated method stub
-        return null;
+        Long id_resto = Long.parseLong(id);
+        return evenementRepository.getEventsByRestaurant(id_resto);
     }
 
     @Override

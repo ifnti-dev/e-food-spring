@@ -2,9 +2,7 @@ package com.entreprise.efood.dtos;
 
 import java.sql.Date;
 import java.text.ParseException;
-import java.time.LocalDate;
 
-import com.entreprise.efood.Models.Restaurant;
 import com.entreprise.efood.utils.FormatDate;
 
 import lombok.Getter;
@@ -29,8 +27,17 @@ public class EventDTO {
         this.titre = titre;
     }
 
+
+    public EventDTO(Long id_restaurant, String description, Date date_debut, Date date_fin, String titre) throws ParseException {
+        this.id_restaurant = id_restaurant;
+        this.description = description;
+        this.date_debut = date_debut;
+        this.date_fin = date_fin;
+        this.titre = titre;
+    }
+
     public EventDTO(){
-        
+
     }
 
 

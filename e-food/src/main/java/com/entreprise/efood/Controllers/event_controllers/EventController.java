@@ -10,7 +10,11 @@ import com.entreprise.efood.utils.AppConstant;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+
+import java.util.List;
+
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
@@ -34,9 +38,9 @@ public class EventController {
         return event;
     }
 
-    @GetMapping(value="/{id}")
-    public String getMethodName(@RequestParam String param) {
-        return new String("dfdfdf");
+    @GetMapping(value="/{restaurant_id}")
+    public List<EventDTO> getMethodName(@PathVariable("restaurant_id") String restaurant_id) {
+        return eventService.getEventsByRestaurant(restaurant_id);
     }
     
    
