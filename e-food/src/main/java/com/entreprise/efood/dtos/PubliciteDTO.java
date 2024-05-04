@@ -2,6 +2,8 @@ package com.entreprise.efood.dtos;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 // import com.entreprise.efood.Models.Image;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,5 +19,7 @@ public class PubliciteDTO {
     private String titre;
     private String description;
     private Long restaurantId;
+
+    // @JsonIgnore
     private List<Long> imagesIds;
 }

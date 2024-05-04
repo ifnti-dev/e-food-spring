@@ -1,5 +1,6 @@
 package com.entreprise.efood.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 // import java.util.stream.Collectors;
@@ -9,8 +10,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.entreprise.efood.dtos.PubliciteDTO;
+import com.entreprise.efood.Models.Image;
 // import com.entreprise.efood.Models.Image;
 import com.entreprise.efood.Models.Publicite;
+import com.entreprise.efood.Models.Restaurant;
 import com.entreprise.efood.repository.PubliciteRepository;
 
 @Service
@@ -42,11 +45,27 @@ public class PubliciteService {
 
     private Publicite convertToEntity(PubliciteDTO dto) {
         Publicite publicite = new Publicite();
+        // resto id
+        Restaurant restaurant = new Restaurant();
+        restaurant.setId(dto.getRestaurantId());
+        // Liste des images
+        List<Long> imagesID = dto.getImagesIds();
+        List<Image> images = new ArrayList<>();
+
+        for (Long id : imagesID) {
+            Image img = new Image();
+            img.setId(id);
+            images.add(img);
+        }
+        
+
+        
         publicite.setId(dto.getId());
         publicite.setTitre(dto.getTitre());
         publicite.setDescription(dto.getDescription());
-        // Set restaurant
-        // Set images
+        publicite.setRestaurant(restaurant);
+        publicite.setImages(images);
+        
         return publicite;
     }
 

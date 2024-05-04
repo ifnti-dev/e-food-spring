@@ -3,6 +3,7 @@ package com.entreprise.efood.Models;
 import java.util.List;
 
 import com.entreprise.efood.utils.AppConstant;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
@@ -46,6 +47,7 @@ public class Publicite {
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
+    // @JsonIgnore
     @OneToMany(mappedBy = "publicite")
     private List<Image> images;
 
