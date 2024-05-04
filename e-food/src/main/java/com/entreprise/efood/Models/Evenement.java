@@ -1,6 +1,10 @@
 package com.entreprise.efood.Models;
 
+import java.sql.Date;
+
 import org.hibernate.annotations.ManyToAny;
+
+import com.entreprise.efood.utils.AppConstant;
 
 import jakarta.persistence.Basic;
 
@@ -15,10 +19,18 @@ import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 
 @Entity
-@Table(name = "evenements")
+@Table(name = "evenements",schema = AppConstant.SCHEMA_RESTAURANT)
 public class Evenement {
     @Id
     @Column(name = "code")
@@ -33,89 +45,17 @@ public class Evenement {
     private String titre;
 
     @Basic
-    @Column(name = "description",length = 30, nullable = false)
+    @Column(name = "description",nullable = false)
     private String description;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "date_debut")
-    private String date_debut;
+    private Date date_debut;
 
-    public Evenement() {
-    }
-
-    public Evenement(Long id, String titre, String description, String date_debut, String date_fin) {
-        this.id = id;
-        this.titre = titre;
-        this.description = description;
-        this.date_debut = date_debut;
-        this.date_fin = date_fin;
-    }
-
-    public Evenement(Long id, String titre, String description, String date_debut, String date_fin,
-            Restaurant restaurant) {
-        this.id = id;
-        this.titre = titre;
-        this.description = description;
-        this.date_debut = date_debut;
-        this.date_fin = date_fin;
-        this.restaurant = restaurant;
-    }
-
+    
     @Temporal(TemporalType.DATE)
     @Column(name = "date_fin")
-    private String date_fin;
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setTitre(String titre) {
-        this.titre = titre;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setDate_debut(String date_debut) {
-        this.date_debut = date_debut;
-    }
-
-    public void setDate_fin(String date_fin) {
-        this.date_fin = date_fin;
-    }
-
-    public void setRestaurant(Restaurant restaurant) {
-        this.restaurant = restaurant;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-
-    public String getTitre() {
-        return titre;
-    }
-
-
-    public String getDescription() {
-        return description;
-    }
-
-
-    public String getDate_debut() {
-        return date_debut;
-    }
-
-
-    public String getDate_fin() {
-        return date_fin;
-    }
-
-    public Restaurant getRestaurant() {
-        return restaurant;
-    }
+    private Date date_fin;
 
     @ManyToOne
     @JoinColumn(name = "restaurant_id")
