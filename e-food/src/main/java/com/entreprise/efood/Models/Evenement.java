@@ -1,8 +1,9 @@
 package com.entreprise.efood.Models;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-import org.hibernate.annotations.ManyToAny;
+
 
 import com.entreprise.efood.utils.AppConstant;
 
@@ -31,7 +32,11 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "evenements",schema = AppConstant.SCHEMA_RESTAURANT)
-public class Evenement {
+public class Evenement implements Serializable {
+
+
+    private static final long serialVersionUID = -7941769011539363185L;
+
     @Id
     @Column(name = "code")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "event_id_seq")

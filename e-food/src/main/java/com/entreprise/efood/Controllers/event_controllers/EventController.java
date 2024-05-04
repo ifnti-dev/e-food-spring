@@ -13,9 +13,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PutMapping;
+
+
+
 
 
 
@@ -39,9 +45,25 @@ public class EventController {
     }
 
     @GetMapping(value="/{restaurant_id}")
-    public List<EventDTO> getMethodName(@PathVariable("restaurant_id") String restaurant_id) {
+    public List<EventDTO> getRestaurantEvents(@PathVariable("restaurant_id") String restaurant_id) {
         return eventService.getEventsByRestaurant(restaurant_id);
     }
+
+    @DeleteMapping(value="/",produces = MediaType.APPLICATION_JSON_VALUE)
+    public EventDTO requestDeleteEvent(@RequestBody EventDTO event) {
+
+        eventService.deleteEvent(event);
+        return event;
+    }
+
+    @PutMapping(value = "/",produces = MediaType.APPLICATION_JSON_VALUE)
+    public EventDTO updateRestaurantEvent(@RequestBody EventDTO event) {
+        //TODO: process PUT request
+        eventService.updateEvent(event);
+        
+        return event;
+    }
+    
     
    
     

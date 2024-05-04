@@ -41,5 +41,37 @@ public class JsonEventRestaurantEvent implements EventService {
 
 
     }
+
+    @Override
+    public Evenement deleteEvent(EventDTO eventDTO) {
+        
+         Evenement eventDeleted = new Evenement();
+
+         eventDeleted.setId(eventDTO.getCode());
+        
+        evenementRepository.deleteEventByCodeAndRestaurantId(eventDTO.getCode(),eventDTO.getId_restaurant());
+
+        // evenementRepository.deleteById(eventDeleted.getId());
+
+        return eventDeleted;
+    }
+
+    @Override
+    public void updateEvent(EventDTO eventDTO) {
+        // TODO Auto-generated method stub
+        Evenement eventUpdated = new Evenement();
+
+        Restaurant restaurant = new Restaurant(eventDTO.getId_restaurant());
+
+
+        eventUpdated.setId(eventDTO.getCode());
+        eventUpdated.setDate_debut(eventDTO.getDate_debut());
+        eventUpdated.setDate_fin(eventDTO.getDate_fin());
+        eventUpdated.setTitre(eventDTO.getTitre());
+        eventUpdated.setDescription(eventDTO.getDescription());
+        eventUpdated.setRestaurant(restaurant);
+
+        evenementRepository.save(eventUpdated);
+    }
     
 }
