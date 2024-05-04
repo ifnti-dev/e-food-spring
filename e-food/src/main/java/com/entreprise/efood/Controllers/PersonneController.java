@@ -20,9 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Controller
 public class PersonneController {
+    
     private final   PersonneRepository pesonneRepository ;
 
-    @Autowired
     public PersonneController(PersonneRepository pesonneRepository) {
         this.pesonneRepository = pesonneRepository;
     }

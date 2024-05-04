@@ -28,12 +28,12 @@
 
     <include file="db/changelog/schema_menu/schema-menu-create.xml"/>
 
-
+<!-- 
     <include file="db/changelog/seeders/restaurants/restaurant-create.xml"/>
 
     <include file="db/changelog/seeders/publicites/publicite-create.xml"/>
     
-    <include file="db/changelog/seeders/evenements/evenement-create.xml"/>
+    <include file="db/changelog/seeders/evenements/evenement-create.xml"/> -->
     
 
 </databaseChangeLog>

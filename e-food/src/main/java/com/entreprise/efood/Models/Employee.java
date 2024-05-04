@@ -26,7 +26,7 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "employees",schema = AppConstant.SCHEMA_STAFF)
-public class Employee extends Personne{
+public class Employee {
     
     @Id
     @Column(name = "employee_id")

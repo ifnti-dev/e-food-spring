@@ -19,13 +19,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "clients")
+@Table(name = "clients", schema = AppConstant.SCHEMA_STAFF)
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class Client extends Personne {
+public class Client {
 
     @Id
     @Column(name = "client_id")
