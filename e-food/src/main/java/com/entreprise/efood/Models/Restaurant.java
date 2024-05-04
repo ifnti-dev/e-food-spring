@@ -54,11 +54,11 @@ public class Restaurant {
 
     @Basic
     @Column(name = "heure_ouverture", nullable = false)
-    private LocalTime heure_ouverture;
+    private String heure_ouverture;
 
     @Basic
     @Column(name = "heure_fermeture", nullable = false)
-    private LocalTime heure_fermeture;
+    private String heure_fermeture;
 
     @Basic
     @Column(name = "jour_ouverture", nullable = false)
