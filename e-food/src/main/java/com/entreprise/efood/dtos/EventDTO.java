@@ -7,6 +7,7 @@ import com.entreprise.efood.utils.FormatDate;
 
 import lombok.Getter;
 import lombok.Setter;
+
 @Setter
 @Getter
 public class EventDTO {
@@ -15,11 +16,12 @@ public class EventDTO {
     private String description;
     private Date date_debut;
     private Date date_fin;
-
+    private Long code;
     private String titre;
 
-    
-    public EventDTO(Long id_restaurant, String description, String date_debut, String date_fin, String titre) throws ParseException {
+    // ce constructeur me permet de créer un event d'un restaurant
+    public EventDTO(Long id_restaurant, String description, String date_debut, String date_fin, String titre)
+            throws ParseException {
         this.id_restaurant = id_restaurant;
         this.description = description;
         this.date_debut = FormatDate.formatStringToDate(date_debut);
@@ -27,21 +29,19 @@ public class EventDTO {
         this.titre = titre;
     }
 
-
-    public EventDTO(Long id_restaurant, String description, Date date_debut, Date date_fin, String titre) throws ParseException {
+    // Celui-ci pour la lecture des events d'un restaurant
+    public EventDTO(Long id_restaurant, String description, Date date_debut, Date date_fin, String titre, Long code)
+            throws ParseException {
         this.id_restaurant = id_restaurant;
         this.description = description;
         this.date_debut = date_debut;
         this.date_fin = date_fin;
         this.titre = titre;
+        this.code = code;
     }
 
-    public EventDTO(){
+    public EventDTO() {
 
     }
-
-
-
-
 
 }
