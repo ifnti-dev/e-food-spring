@@ -1,6 +1,8 @@
 package com.entreprise.efood.Models;
 import java.time.LocalDate;
 
+import com.entreprise.efood.utils.AppConstant;
+
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -21,7 +23,7 @@ import lombok.Setter;
 @NoArgsConstructor
 
 @Entity
-@Table(name = "Livraison")
+@Table(name = "Livraison",schema = AppConstant.SCHEMA_COMMAND)
 public class Livraison {
     @Id
     @Column(name = "id")

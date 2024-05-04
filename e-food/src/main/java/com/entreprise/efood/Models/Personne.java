@@ -4,14 +4,14 @@
  */
 package com.entreprise.efood.Models;
 
+import com.entreprise.efood.utils.AppConstant;
+
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
 import jakarta.persistence.MappedSuperclass;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,7 +27,8 @@ import lombok.Setter;
 @Setter
 @Getter
 
-@MappedSuperclass
+@MappedSuperclass()
+// @Table(name = "personnes",schema = AppConstant.SCHEMA_STAFF)
 public abstract class Personne {
   
     @Id

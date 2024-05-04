@@ -9,11 +9,15 @@
         http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
 
 <property name="schema_name" value="restaurant"/>
+
+
+
+
 <!--  restaurant table-->
     <changeSet  author="fayssol"  id="RESTAURANT-CREATE-UID001">
        <createTable schemaName="${schema_name}" tableName="restaurants">
-            <column name="code" type="VARCHAR(100)">
-                <constraints primaryKey="true" constraintName="resto-pk-constraint"/>
+            <column name="code" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="nom" type="VARCHAR(30)">
                 <constraints nullable="false"/>
@@ -35,56 +39,103 @@
             <column name="coordonnee_gps_x" type="VARCHAR(50)"/>
             <column name="coordonnee_gps_y" type="VARCHAR(50)"/>
             <column name="etat" type="VARCHAR(30)"/>
-            <!-- les OneToMany -->
+            <!-- add foreignkey after -->
             
         </createTable>
   </changeSet>
 
+
 <!-- evenements table -->
     <changeSet  author="fayssol"  id="EVENEMENT-CREATE-UID001">
-         <createTable schemaName="${schema_name}" tableName="restaurants">
-            <column name="code" type="VARCHAR(100)"/>
-                 <constraints primaryKey="true" constraintName="event-pk-constraint"/>
+         <createTable schemaName="${schema_name}" tableName="evenements">
+            <column name="code" type="BIGINT">
+                 <constraints nullable="false"/>
             </column>
             <column name="titre" type="VARCHAR(30)">
                 <constraints nullable="false" />
             </column>
-            <column name="description" type="VARCHAR(30)">
+            <column name="description" type="TEXT">
                 <constraints nullable="false" />
             </column>
             <column name="date_debut" type="DATE"/>
              <column name="date_fin" type="DATE"/>
-             <!-- Les  ManyToOne-->
+             <!-- add foreignkey after -->
+             <column name="restaurant_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
          </createTable>
+    </changeSet>
+
+
+       <changeSet author="fayssol" id="EVENEMENT-PRIMARYKEY-UID001">
+        <addPrimaryKey schemaName="${schema_name}" columnNames="code" constraintName="evenement-id_pk" tableName="evenements"/>
     </changeSet>
 
     <!-- publicite table -->
     <changeSet  author="fayssol"  id="PUBLICITE-CREATE-UID001">
          <createTable schemaName="${schema_name}" tableName="publicites">
-            <column name="id" type="VARCHAR(100)">
-               <constraints primaryKey="true" constraintName="pub-pk-constraint"/>
+            <column name="id" type="BIGINT">
+               <constraints primaryKey="true"/>
             </column>
             <column name="titre" type="VARCHAR(30)">
                 <constraints nullable="false" />
             </column>
             <column name="description" type="VARCHAR(100)"/>
-          <!-- les OneToMany -->
+         <!-- add foreignkey after -->
+             <column name="restaurant_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
          </createTable>
     </changeSet>
 
     <!-- adhesion table -->
     <changeSet  author="fayssol"  id="ADHESION-CREATE-UID001">
          <createTable schemaName="${schema_name}" tableName="adhesions">
-            <column name="id" type="VARCHAR(100)">
-               <constraints primaryKey="true" constraintName="adhesion-pk-constraint"/>
+            <column name="id" type="BIGINT">
+               <constraints primaryKey="true" />
             </column>
             <column name="avis" type="VARCHAR(30)">
                 <constraints nullable="false" />
             </column>
             
-          <!-- les ManyToOne -->
+          <!-- add foreignkey after -->
+          <column name="restaurant_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
          </createTable>
     </changeSet>
+
+
+    <!-- fk -->
+   <!-- adding for model evenement -->
+ <changeSet author="fayssol" id="EVENT-FOREIGNKEY-RESTO001">
+        <addForeignKeyConstraint baseTableSchemaName="${schema_name}" baseColumnNames="restaurant_id" 
+                                 baseTableName="evenements" constraintName="evenements_resto_fk" deferrable="false" 
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="code"
+                                 referencedTableName="restaurants" referencedTableSchemaName="${schema_name}"/>
+    </changeSet>
+
+    <!-- adding for modal pub -->
+    <changeSet author="fayssol" id="PUB-FOREIGNKEY-RESTO001">
+        <addForeignKeyConstraint baseTableSchemaName="${schema_name}" baseColumnNames="restaurant_id" 
+                                 baseTableName="publicites" constraintName="publicites_resto_fk" deferrable="false" 
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="code"
+                                 referencedTableName="restaurants" referencedTableSchemaName="${schema_name}"/>
+    </changeSet>
+     
+    <!-- adding for model adhesion -->
+
+     <changeSet author="fayssol" id="ADHESION-FOREIGNKEY-RESTO001">
+        <addForeignKeyConstraint baseTableSchemaName="${schema_name}" baseColumnNames="restaurant_id" 
+                                 baseTableName="adhesions" constraintName="adhesions_resto_fk" deferrable="false" 
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="code"
+                                 referencedTableName="restaurants" referencedTableSchemaName="${schema_name}"/>
+    </changeSet>
+
+
     
+
+
+
 
 </databaseChangeLog>

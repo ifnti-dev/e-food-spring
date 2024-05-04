@@ -2,6 +2,8 @@ package com.entreprise.efood.Models;
 
 import java.util.List;
 
+import com.entreprise.efood.utils.AppConstant;
+
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -23,7 +25,7 @@ import lombok.Setter;
 @NoArgsConstructor
 
 @Entity
-@Table(name = "employees")
+@Table(name = "employees",schema = AppConstant.SCHEMA_STAFF)
 public class Employee extends Personne{
     
     @Id

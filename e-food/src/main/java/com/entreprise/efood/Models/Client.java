@@ -3,6 +3,8 @@ package com.entreprise.efood.Models;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.entreprise.efood.utils.AppConstant;
+
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -32,7 +34,7 @@ public class Client extends Personne {
     
     @Basic
     @Column(name = "favoris")
-    private ArrayList<Restaurant> favoris;
+    private ArrayList<String> favoris;
 
     @OneToMany(mappedBy = "client")
     private List<Commande> commandes;

@@ -45,4 +45,9 @@ public class Paiement {
     private String statut;
 
     
+    @Column(name = "date_livraison")
+    private Date date;
+
+    
+
 }

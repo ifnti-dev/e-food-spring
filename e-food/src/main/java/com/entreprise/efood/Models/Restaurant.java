@@ -7,8 +7,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.entreprise.efood.utils.AppConstant;
 
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
@@ -25,13 +28,13 @@ import jakarta.persistence.SequenceGenerator;
 @Getter
 
 @Entity
-@Table(name = "restaurants")
+@Table(name = "restaurants",schema = AppConstant.SCHEMA_RESTAURANT)
 public class Restaurant {
     @Id
     @Column(name = "code")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "restaurant_id_seq")
     @SequenceGenerator(name = "restaurant_id_seq", sequenceName = "restaurant_id_seq",allocationSize = 100)
-    private String id;
+    private Long id;
     
     @Basic
     @Column(name = "nom", length = 30, nullable = false)
@@ -63,11 +66,11 @@ public class Restaurant {
 
     @Basic
     @Column(name = "coordonnee_gps_x",length = 50)
-    private String coordonnee_gps_x;
+    private double coordonnee_gps_x;
 
     @Basic
     @Column(name = "coordonnee_gps_y",length = 50)
-    private String coordonnee_gps_y;
+    private double coordonnee_gps_y;
 
     @Basic
     @Column(length = 30, nullable = false)

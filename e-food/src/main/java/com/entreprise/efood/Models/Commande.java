@@ -4,6 +4,7 @@ package com.entreprise.efood.Models;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.entreprise.efood.utils.AppConstant;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -29,8 +30,7 @@ import lombok.Setter;
 @NoArgsConstructor
 
 @Entity
-@Table(name = "commandes")
-
+@Table(name = "commandes",schema = AppConstant.SCHEMA_COMMAND)
 public class Commande {
     @Id
     @Column(name = "code")
@@ -48,79 +48,6 @@ public class Commande {
 
     @Column(name = "montant")
     private double montant;
-
-
-    public Commande(Long id, LocalDate date_commande, String etat, double montant, Client client) {
-        this.id = id;
-        this.date_commande = date_commande;
-        this.etat = etat;
-        this.montant = montant;
-        this.client = client;
-    }
-
-    public Commande() {
-    }
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public LocalDate getDate_commande() {
-        return date_commande;
-    }
-
-    public void setDate_commande(LocalDate date_commande) {
-        this.date_commande = date_commande;
-    }
-
-    public String getEtat() {
-        return etat;
-    }
-
-    public void setEtat(String etat) {
-        this.etat = etat;
-    }
-
-    public double getMontant() {
-        return montant;
-    }
-
-    public void setMontant(double montant) {
-        this.montant = montant;
-    }
-
-    public Paiement getPaiement() {
-        return paiement;
-    }
-
-    public void setPaiement(Paiement paiement) {
-        this.paiement = paiement;
-    }
-
-    public Paiement getLivraison() {
-        return Livraison;
-    }
-
-    public void setLivraison(Paiement livraison) {
-        Livraison = livraison;
-    }
-
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
-
-    
-
-
 
     @OneToOne
     @JoinColumn(name = "paiement_id")

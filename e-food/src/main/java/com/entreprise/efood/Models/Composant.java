@@ -34,7 +34,7 @@ public class Composant {
     @Id
     @Column(name = "code")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
   
     @Basic
     @Column(name ="nom", nullable = false)

@@ -2,6 +2,8 @@ package com.entreprise.efood.Models;
 
 import java.util.List;
 
+import com.entreprise.efood.utils.AppConstant;
+
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -24,13 +26,13 @@ import lombok.Setter;
 @Getter
 
 @Entity
-@Table(name = "publicites")
+@Table(name = "publicites",schema = AppConstant.SCHEMA_RESTAURANT)
 
 public class Publicite {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
   
     @Basic
     @Column(name = "titre",length = 30, nullable = false)

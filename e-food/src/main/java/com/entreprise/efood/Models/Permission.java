@@ -2,6 +2,8 @@ package com.entreprise.efood.Models;
 
 import java.util.List;
 
+import com.entreprise.efood.utils.AppConstant;
+
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -21,7 +23,7 @@ import lombok.Setter;
 @Getter
 
 @Entity
-@Table(name = "permissions")
+@Table(name = "permissions",schema = AppConstant.SCHEMA_STAFF)
 public class Permission {
 
     @Id

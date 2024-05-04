@@ -1,5 +1,7 @@
 package com.entreprise.efood.Models;
 
+import com.entreprise.efood.utils.AppConstant;
+
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -25,7 +27,7 @@ public class Adhesion {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
 
     @Basic
     @Column(name = "avis", nullable = false)

@@ -39,7 +39,7 @@ public class Menu {
     @Column(name = "code")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "menu_id_seq")
     @SequenceGenerator(name = "menu_id_seq", sequenceName = "menu_id_seq",allocationSize = 50)
-    private String id;
+    private Long id;
 
     @Basic
     @Column(name = "nom",length = 30, nullable = false)
@@ -71,15 +71,16 @@ public class Menu {
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
-    
-    @OneToMany(mappedBy = "menu")
-    private List<MenuCommande> menuCommandes;
-
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany()
     @JoinTable( name = "menu_composant",
     joinColumns = @JoinColumn(name= "menu_id",referencedColumnName = "code"),
-    inverseJoinColumns=@JoinColumn( name ="composant_id",referencedColumnName = "code"))
+    inverseJoinColumns=@JoinColumn( name ="composant_id",referencedColumnName = "code"),
+    schema = AppConstant.SCHEMA_MENU
+    )
     private List<Composant> composants;
+
+    
+   
     
 }
 
