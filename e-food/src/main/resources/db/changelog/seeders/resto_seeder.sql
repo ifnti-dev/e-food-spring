@@ -1,5 +1,5 @@
 INSERT INTO restaurant.restaurants(code, nom, adresse, ville, telephone, heure_ouverture, heure_fermeture, jour_ouverture, coordonnee_gps_x, coordonnee_gps_y , etat) 
-VALUES (1,'resto1', 'kara', 'kara', '14136541', '12', '14', ARRAY['lu', 'jh', 'jh'], 12, 12, 'active');
+VALUES (1,'resto1', 'kara', 'kara', '14136541', '12', '14', '[lu, jh, jh]', 12, 12, 'active');
 
 INSERT INTO restaurant.restaurants(code, nom, adresse, ville, telephone, heure_ouverture, heure_fermeture, jour_ouverture, coordonnee_gps_x, coordonnee_gps_y , etat) 
 VALUES (2,'resto1', 'kara', 'kara', '14136541', '12', '14', ARRAY['lu', 'jh', 'jh'], 12, 12, 'active');

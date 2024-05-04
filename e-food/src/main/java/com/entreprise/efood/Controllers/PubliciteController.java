@@ -88,7 +88,9 @@ public class PubliciteController {
         dto.setId(publicite.getId());
         dto.setTitre(publicite.getTitre());
         dto.setDescription(publicite.getDescription());
-        dto.setRestaurantId(publicite.getRestaurant().getId());
+        // A revoir
+        // dto.setRestaurantId(publicite.getRestaurant().getId());
+
         dto.setImagesIds(publicite.getImages().stream().map(Image::getId).collect(Collectors.toList()));
         return dto;
     }  

@@ -1,9 +1,10 @@
 package com.entreprise.efood.Models;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.entreprise.efood.utils.AppConstant;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+// import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
@@ -29,7 +30,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "publicites",schema = AppConstant.SCHEMA_RESTAURANT)
 
-public class Publicite {
+public class Publicite implements Serializable {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,6 +50,7 @@ public class Publicite {
 
     // @JsonIgnore
     @OneToMany(mappedBy = "publicite")
+   
     private List<Image> images;
 
 }

@@ -52,19 +52,21 @@ public class PubliciteService {
         List<Long> imagesID = dto.getImagesIds();
         List<Image> images = new ArrayList<>();
 
-        for (Long id : imagesID) {
-            Image img = new Image();
-            img.setId(id);
-            images.add(img);
-        }
-        
+        if(imagesID != null){
+            for (Long id : imagesID) {
+                Image img = new Image();
+                img.setId(id);
+                images.add(img);
+            }
+            publicite.setImages(images);
 
-        
+        }
+
         publicite.setId(dto.getId());
         publicite.setTitre(dto.getTitre());
         publicite.setDescription(dto.getDescription());
         publicite.setRestaurant(restaurant);
-        publicite.setImages(images);
+        
         
         return publicite;
     }

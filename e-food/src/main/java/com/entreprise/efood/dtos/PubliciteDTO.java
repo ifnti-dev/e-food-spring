@@ -2,7 +2,7 @@ package com.entreprise.efood.dtos;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+// import com.fasterxml.jackson.annotation.JsonIgnore;
 
 // import com.entreprise.efood.Models.Image;
 import lombok.AllArgsConstructor;

@@ -1,5 +1,8 @@
 package com.entreprise.efood.Models;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 import com.entreprise.efood.utils.AppConstant;
 
 import jakarta.persistence.Basic;
