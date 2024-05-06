@@ -15,4 +15,6 @@ public interface ComposantesService {
 
     public ResponseEntity<String> addComponsant(ComposantDTO composantDTO);
 
+    public ResponseEntity<String> updateComposant(ComposantDTO composantDTO, String id);
+
 }
