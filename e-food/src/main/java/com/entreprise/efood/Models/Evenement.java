@@ -55,7 +55,7 @@ public class Evenement {
     
     @Temporal(TemporalType.DATE)
     @Column(name = "date_fin")
-    private Date date_fin;
+    private String date_fin;
 
     @ManyToOne
     @JoinColumn(name = "restaurant_id")
