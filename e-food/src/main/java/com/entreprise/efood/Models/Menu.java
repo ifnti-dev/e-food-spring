@@ -67,9 +67,9 @@ public class Menu {
     @Column(name = "updated_at")
     private Instant updatedAt = Instant.now();
 
-    // @ManyToOne
-    // @JoinColumn(name = "restaurant_id")
-    // private Restaurant restaurant;
+    @ManyToOne
+    @JoinColumn(name = "restaurant_id")
+    private Restaurant restaurant;
 
     @ManyToMany()
     @JoinTable(name = "menu_composant", joinColumns = @JoinColumn(name = "menu_id", referencedColumnName = "code"), inverseJoinColumns = @JoinColumn(name = "composant_id", referencedColumnName = "code"), schema = AppConstant.SCHEMA_MENU)
