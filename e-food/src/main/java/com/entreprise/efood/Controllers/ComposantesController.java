@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
 @RequestMapping(path = AppConstant.COMPOSANTES_CONTROLLER_BASE_URL)
@@ -41,7 +43,7 @@ public class ComposantesController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<String> postMethodName(@RequestBody() ComposantDTO ComposantDTO) {
+    public ResponseEntity<String> createComposante(@RequestBody() ComposantDTO ComposantDTO) {
         try {
             return composantesServiceImpl.addComponsant(ComposantDTO);
         } catch (Exception e) {
@@ -49,6 +51,16 @@ public class ComposantesController {
         }
         return new ResponseEntity<String>("Erreur interne du serveur", HttpStatus.INTERNAL_SERVER_ERROR);
 
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<String> updateComposante(@PathVariable String id, @RequestBody() ComposantDTO composantDTO) {
+        try {
+            return composantesServiceImpl.updateComposant(composantDTO, id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<String>("Erreur interne du serveur", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
 }
