@@ -52,13 +52,13 @@
 //     @Column(name = "telephone",length = 30, nullable = false, unique =true)
 //     private String telephone;
 
-//     @Basic
-//     @Column(name = "heure_ouverture", nullable = false)
-//     private LocalTime heure_ouverture;
+    @Basic
+    @Column(name = "heure_ouverture", nullable = false)
+    private String heure_ouverture;
 
-//     @Basic
-//     @Column(name = "heure_fermeture", nullable = false)
-//     private LocalTime heure_fermeture;
+    @Basic
+    @Column(name = "heure_fermeture", nullable = false)
+    private String heure_fermeture;
 
 //     @Basic
 //     @Column(name = "jour_ouverture", nullable = false)
