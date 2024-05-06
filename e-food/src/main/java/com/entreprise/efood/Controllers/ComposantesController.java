@@ -16,6 +16,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping(path = AppConstant.COMPOSANTES_CONTROLLER_BASE_URL)
@@ -36,6 +38,17 @@ public class ComposantesController {
         Map<String, List<ComposantDTO>> composantes = new HashMap<>();
         composantes.put("composantes", new ArrayList<>());
         return new ResponseEntity<Map<String, List<ComposantDTO>>>(composantes, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @PostMapping("/add")
+    public ResponseEntity<String> postMethodName(@RequestBody() ComposantDTO ComposantDTO) {
+        try {
+            return composantesServiceImpl.addComponsant(ComposantDTO);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<String>("Erreur interne du serveur", HttpStatus.INTERNAL_SERVER_ERROR);
+
     }
 
 }

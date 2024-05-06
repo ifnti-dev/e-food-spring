@@ -38,11 +38,11 @@ public class Menu {
     @Id
     @Column(name = "code")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "menu_id_seq")
-    @SequenceGenerator(name = "menu_id_seq", sequenceName = "menu_id_seq",allocationSize = 50)
+    @SequenceGenerator(name = "menu_id_seq", sequenceName = "menu_id_seq", allocationSize = 50)
     private Long id;
 
     @Basic
-    @Column(name = "nom",length = 30, nullable = false)
+    @Column(name = "nom", length = 30, nullable = false)
     private String nom;
 
     @Column(name = "prix", nullable = false)
@@ -61,28 +61,18 @@ public class Menu {
 
     @CreatedDate
     @Column(name = "created_at")
-    private Instant createdAt=Instant.now();
+    private Instant createdAt = Instant.now();
 
     @LastModifiedDate
     @Column(name = "updated_at")
-    private Instant updatedAt=Instant.now();
+    private Instant updatedAt = Instant.now();
 
     @ManyToOne
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
     @ManyToMany()
-    @JoinTable( name = "menu_composant",
-    joinColumns = @JoinColumn(name= "menu_id",referencedColumnName = "code"),
-    inverseJoinColumns=@JoinColumn( name ="composant_id",referencedColumnName = "code"),
-    schema = AppConstant.SCHEMA_MENU
-    )
+    @JoinTable(name = "menu_composant", joinColumns = @JoinColumn(name = "menu_id", referencedColumnName = "code"), inverseJoinColumns = @JoinColumn(name = "composant_id", referencedColumnName = "code"), schema = AppConstant.SCHEMA_MENU)
     private List<Composant> composants;
 
-    
-   
-    
 }
-
-
-
