@@ -38,9 +38,9 @@ public class Image {
     @JoinColumn(name = "menu_id")
     private Menu menu;
 
-    @ManyToOne
-    @JoinColumn(name = "publicite_id")
-    private Publicite publicite;
+    // @ManyToOne
+    // @JoinColumn(name = "publicite_id")
+    // private Publicite publicite;
    
 
 }

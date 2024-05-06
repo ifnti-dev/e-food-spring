@@ -1,65 +1,65 @@
-package com.entreprise.efood.Models;
+// package com.entreprise.efood.Models;
 
-import java.sql.Date;
+// import java.sql.Date;
 
-import org.hibernate.annotations.ManyToAny;
+// import org.hibernate.annotations.ManyToAny;
 
-import com.entreprise.efood.utils.AppConstant;
+// import com.entreprise.efood.utils.AppConstant;
 
-import jakarta.persistence.Basic;
+// import jakarta.persistence.Basic;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.SequenceGenerator;
-import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+// import jakarta.persistence.Column;
+// import jakarta.persistence.Entity;
+// import jakarta.persistence.GeneratedValue;
+// import jakarta.persistence.GenerationType;
+// import jakarta.persistence.Id;
+// import jakarta.persistence.JoinColumn;
+// import jakarta.persistence.ManyToOne;
+// import jakarta.persistence.SequenceGenerator;
+// import jakarta.persistence.Table;
+// import jakarta.persistence.Temporal;
+// import jakarta.persistence.TemporalType;
+// import lombok.AllArgsConstructor;
+// import lombok.Getter;
+// import lombok.NoArgsConstructor;
+// import lombok.Setter;
 
-@Setter
-@Getter
-@AllArgsConstructor
-@NoArgsConstructor
+// @Setter
+// @Getter
+// @AllArgsConstructor
+// @NoArgsConstructor
 
-@Entity
-@Table(name = "evenements",schema = AppConstant.SCHEMA_RESTAURANT)
-public class Evenement {
-    @Id
-    @Column(name = "code")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "event_id_seq")
-    @SequenceGenerator(name = "event_id_seq", sequenceName = "event_id_seq",allocationSize = 10)
-    private Long id;
+// @Entity
+// @Table(name = "evenements",schema = AppConstant.SCHEMA_RESTAURANT)
+// public class Evenement {
+//     @Id
+//     @Column(name = "code")
+//     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "event_id_seq")
+//     @SequenceGenerator(name = "event_id_seq", sequenceName = "event_id_seq",allocationSize = 10)
+//     private Long id;
   
     
 
-    @Basic
-    @Column(name = "titre",length=30, nullable = false)
-    private String titre;
+//     @Basic
+//     @Column(name = "titre",length=30, nullable = false)
+//     private String titre;
 
-    @Basic
-    @Column(name = "description",nullable = false)
-    private String description;
+//     @Basic
+//     @Column(name = "description",nullable = false)
+//     private String description;
 
-    @Temporal(TemporalType.DATE)
-    @Column(name = "date_debut")
-    private Date date_debut;
-
-    
-    @Temporal(TemporalType.DATE)
-    @Column(name = "date_fin")
-    private String date_fin;
-
-    @ManyToOne
-    @JoinColumn(name = "restaurant_id")
-    private Restaurant restaurant;
+//     @Temporal(TemporalType.DATE)
+//     @Column(name = "date_debut")
+//     private Date date_debut;
 
     
-}
+//     @Temporal(TemporalType.DATE)
+//     @Column(name = "date_fin")
+//     private String date_fin;
+
+//     @ManyToOne
+//     @JoinColumn(name = "restaurant_id")
+//     private Restaurant restaurant;
+
+    
+// }
