@@ -59,19 +59,21 @@ public class JsonEventRestaurantEvent implements EventService {
     @Override
     public void updateEvent(EventDTO eventDTO) {
         // TODO Auto-generated method stub
-        Evenement eventUpdated = new Evenement();
+        // Evenement eventUpdated = new Evenement();
 
-        Restaurant restaurant = new Restaurant(eventDTO.getId_restaurant());
+        // Restaurant restaurant = new Restaurant(eventDTO.getId_restaurant());
 
 
-        eventUpdated.setId(eventDTO.getCode());
-        eventUpdated.setDate_debut(eventDTO.getDate_debut());
-        eventUpdated.setDate_fin(eventDTO.getDate_fin());
-        eventUpdated.setTitre(eventDTO.getTitre());
-        eventUpdated.setDescription(eventDTO.getDescription());
-        eventUpdated.setRestaurant(restaurant);
+        // eventUpdated.setId(eventDTO.getCode());
+        // eventUpdated.setDate_debut(eventDTO.getDate_debut());
+        // eventUpdated.setDate_fin(eventDTO.getDate_fin());
+        // eventUpdated.setTitre(eventDTO.getTitre());
+        // eventUpdated.setDescription(eventDTO.getDescription());
+        // eventUpdated.setRestaurant(restaurant);
 
-        evenementRepository.save(eventUpdated);
+        // evenementRepository.save(eventUpdated);
+
+        evenementRepository.updateEventByCodeAndRestaurantId(eventDTO.getTitre(),eventDTO.getDate_fin(),eventDTO.getDate_debut(),eventDTO.getDescription(),eventDTO.getCode(),eventDTO.getId_restaurant());
     }
     
 }

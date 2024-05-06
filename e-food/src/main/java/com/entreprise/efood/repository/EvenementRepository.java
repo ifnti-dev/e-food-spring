@@ -1,5 +1,6 @@
 package com.entreprise.efood.repository;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -18,10 +19,10 @@ public interface EvenementRepository extends JpaRepository<Evenement, Long> {
     @Query("SELECT new com.entreprise.efood.dtos.EventDTO(event.restaurant.id,event.description,event.date_debut,event.date_fin,event.titre,event.id) FROM Evenement event Where event.restaurant.id=:restaurant_id")
     public List<EventDTO> getEventsByRestaurant(@Param("restaurant_id") Long restaurant_id);
 
-    // @Query("DELETE FROM Evenement event WHERE event.id=:code AND
-    // event.restaurant.id=:restaurant_id")
-    // public void deleteEventByCodeAndRestaurantId(@Param("code") Long code,
-    // @Param("restaurant_id") Long restaurant_id);
+    @Transactional
+    @Modifying
+    @Query("UPDATE Evenement event SET event.titre=:titre,event.description=:description, event.date_fin=:date_fin,event.date_debut=:date_debut WHERE event.id=:code AND event.restaurant.id=:restaurant_id")
+    public void updateEventByCodeAndRestaurantId(@Param("titre") String titre,@Param("date_fin") Date date_fin,@Param("date_debut") Date date_debut,@Param("description") String description,@Param("code") Long code,@Param("restaurant_id") Long restaurant_id);
     
     @Modifying
     @Transactional

@@ -6,20 +6,25 @@ import java.text.ParseException;
 
 import com.entreprise.efood.utils.FormatDate;
 
+import groovyjarjarantlr4.v4.runtime.misc.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
 @Setter
 @Getter
-public class EventDTO implements Serializable {
+public class EventDTO {
 
-    private static final long serialVersionUID = -7941769011539363185L;
-
+    @NotNull
     private Long id_restaurant;
+    @NotNull
     private String description;
+    @NotNull()
     private Date date_debut;
+    @NotNull
     private Date date_fin;
+    @NotNull
     private Long code;
+    @NotNull
     private String titre;
 
     // ce constructeur me permet de créer un event d'un restaurant

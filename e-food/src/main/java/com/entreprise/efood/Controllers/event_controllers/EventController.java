@@ -17,7 +17,6 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PutMapping;
 
 
@@ -59,6 +58,7 @@ public class EventController {
     @PutMapping(value = "/",produces = MediaType.APPLICATION_JSON_VALUE)
     public EventDTO updateRestaurantEvent(@RequestBody EventDTO event) {
         //TODO: process PUT request
+        // eventService.updateEvent(event);
         eventService.updateEvent(event);
         
         return event;

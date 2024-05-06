@@ -35,7 +35,7 @@ import lombok.Setter;
 public class Evenement implements Serializable {
 
 
-    private static final long serialVersionUID = -7941769011539363185L;
+    private static final long serialVersionUID = 1L;
 
     @Id
     @Column(name = "code")
