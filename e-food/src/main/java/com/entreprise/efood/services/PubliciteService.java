@@ -26,8 +26,8 @@ public class PubliciteService {
         this.repo = repository;
     }
 
-    public List<Publicite> findAll() {
-        return repo.findAll();
+    public List<PubliciteDTO> findAll() {
+        return repo.findAllPub();
     }
 
     public Publicite saveOne(PubliciteDTO pubDto) {
@@ -43,7 +43,7 @@ public class PubliciteService {
         return repo.findById(id);
     }
 
-    private Publicite convertToEntity(PubliciteDTO dto) {
+    public Publicite convertToEntity(PubliciteDTO dto) {
         Publicite publicite = new Publicite();
         // resto id
         Restaurant restaurant = new Restaurant();

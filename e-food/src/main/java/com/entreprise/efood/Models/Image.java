@@ -1,5 +1,7 @@
 package com.entreprise.efood.Models;
 
+import java.io.Serializable;
+
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
@@ -26,7 +28,7 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "images",schema = AppConstant.SCHEMA_MENU)
-public class Image {
+public class Image implements Serializable{
     
     @Id
     @Column(name = "id")

@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.entreprise.efood.utils.AppConstant;
-// import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
@@ -20,6 +20,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+
+
 
 
 @NoArgsConstructor
@@ -48,9 +51,13 @@ public class Publicite implements Serializable {
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
-    // @JsonIgnore
+  @JsonIgnore
     @OneToMany(mappedBy = "publicite")
    
     private List<Image> images;
+
+
+
+    
 
 }

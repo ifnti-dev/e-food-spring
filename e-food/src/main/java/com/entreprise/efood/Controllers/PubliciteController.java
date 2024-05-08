@@ -1,5 +1,6 @@
 package com.entreprise.efood.Controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,7 +12,9 @@ import org.springframework.web.bind.annotation.*;
 import com.entreprise.efood.dtos.PubliciteDTO;
 import com.entreprise.efood.Models.Image;
 import com.entreprise.efood.Models.Publicite;
+import com.entreprise.efood.Models.Restaurant;
 import com.entreprise.efood.services.PubliciteService;
+
 
 @RestController
 @RequestMapping("/api/v1/publicites")
@@ -20,15 +23,33 @@ public class PubliciteController {
     @Autowired
     private PubliciteService publiciteService;
 
+     /**
+    * Read - Récuperer toutes les publicites d'un restaurant
+    * @return - Une liste d'objets de Publicité concernant un restaurant
+    */
+    
+    @GetMapping("/restaurant/{id}")
+    public ResponseEntity<List<Publicite>> getPublicitesByRestaurant(@PathVariable Long id) {
+        List<PubliciteDTO> publiciteDTOs = publiciteService.findAll();
+        List<Publicite> publicites = publiciteDTOs.stream().map(this::convertToEntity).collect(Collectors.toList());
+        return ResponseEntity.ok(publicites);
+    }
+    
+
     /**
     * Read - Récuperer toutes les publicites
     * @return - Une liste d'objets de Publicité
     */
     @GetMapping
-    public ResponseEntity<List<PubliciteDTO>> getPublicites() {
-        List<Publicite> publicites = publiciteService.findAll();
-        List<PubliciteDTO> publiciteDTOs = publicites.stream().map(this::convertToDto).collect(Collectors.toList());
-        return ResponseEntity.ok(publiciteDTOs);
+    // public ResponseEntity<List<PubliciteDTO>> getPublicites() {
+    //     List<Publicite> publicites = publiciteService.findAll();
+    //     List<PubliciteDTO> publiciteDTOs = publicites.stream().map(this::convertToDto).collect(Collectors.toList());
+    //     return ResponseEntity.ok(publiciteDTOs);
+    // }
+    public ResponseEntity<List<Publicite>> getPublicites() {
+        List<PubliciteDTO> publicitesDTO = publiciteService.findAll();
+        List<Publicite> publicites = publicitesDTO.stream().map(this::convertToEntity).collect(Collectors.toList());
+        return ResponseEntity.ok(publicites);
     }
 
     /**
@@ -94,13 +115,34 @@ public class PubliciteController {
         dto.setImagesIds(publicite.getImages().stream().map(Image::getId).collect(Collectors.toList()));
         return dto;
     }  
+     private Publicite convertToEntity(PubliciteDTO dto) {
+        Publicite publicite = new Publicite();
+        // resto id
+        Restaurant restaurant = new Restaurant();
+        restaurant.setId(dto.getRestaurantId());
+        // Liste des images
+        List<Long> imagesID = dto.getImagesIds();
+        List<Image> images = new ArrayList<>();
+
+        if(imagesID != null){
+            for (Long id : imagesID) {
+                Image img = new Image();
+                img.setId(id);
+                images.add(img);
+            }
+            publicite.setImages(images);
+
+        }
+
+        publicite.setId(dto.getId());
+        publicite.setTitre(dto.getTitre());
+        publicite.setDescription(dto.getDescription());
+        publicite.setRestaurant(restaurant);
+        
+        
+        return publicite;
+    }
 }
-
-
-
-
-
-
 
 
 
