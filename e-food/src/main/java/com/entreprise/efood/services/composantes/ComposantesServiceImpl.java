@@ -13,6 +13,10 @@ import org.springframework.stereotype.Service;
 import com.entreprise.efood.Models.Composant;
 import com.entreprise.efood.dtos.ComposantDTO;
 import com.entreprise.efood.repository.ComposantRepository;
+import com.entreprise.efood.utils.exceptions.composantExceptions.InvalidNameValueForComposant;
+import com.entreprise.efood.utils.exceptions.composantExceptions.InvalidPriceValueForComposant;
+import com.entreprise.efood.utils.validators.ComposantValidators;
+import com.entreprise.efood.mappers.ComposantMapper;
 
 import jakarta.persistence.EntityNotFoundException;
 
@@ -46,20 +50,31 @@ public class ComposantesServiceImpl implements ComposantesService {
      * cette méthode permet de créer une composante de menu
      * elle retourne une réponse Http contenant un message et un code de la reponse
      */
-    public ResponseEntity<String> addComponsant(ComposantDTO composantDTO) {
+    public ResponseEntity<Map<String, String>> addComponsant(ComposantDTO composantDTO) {
+        Map<String, String> message = new HashMap<>();
         try {
             Composant composant = new Composant();
-            composant.setNom(composantDTO.getNom());
-            composant.setPrix(composantDTO.getPrix());
-            composant.setComposition(composantDTO.getComposition());
-            composantRepository.save(composant);
-            return new ResponseEntity<String>("Composante de menu créée avec succès", HttpStatus.OK);
+            if (ComposantValidators.validateComposantEntry(composantDTO)) {
+                composant = ComposantMapper.maptoComposant(composantDTO, composant);
+                composantRepository.save(composant);
+
+                message.put("message", "Compsante de menu crée avec succès");
+                return new ResponseEntity<Map<String, String>>(message, HttpStatus.CREATED);
+            }
+        } catch (InvalidPriceValueForComposant e) {
+            message.put("message", "Erreur lors de la création de la composante de menu : le prix donné est négatif");
+            return new ResponseEntity<Map<String, String>>(message, HttpStatus.INTERNAL_SERVER_ERROR);
+
+        } catch (InvalidNameValueForComposant e) {
+            message.put("message",
+                    "Erreur lors de la création de la composante de menu : le nom de la composante n'a pas été renseigné");
+            return new ResponseEntity<Map<String, String>>(message, HttpStatus.INTERNAL_SERVER_ERROR);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new ResponseEntity<String>("Erreur lors de la création de la composante de menu",
-                HttpStatus.INTERNAL_SERVER_ERROR);
+        message.put("message", "Erreur lors de la création de la composante de menu");
+        return new ResponseEntity<Map<String, String>>(message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @Override
@@ -67,23 +82,58 @@ public class ComposantesServiceImpl implements ComposantesService {
      * cette methode permet de modifier une composante
      * elle retourne une réponse HTTP contenant un message et le code de la reponse
      */
-    public ResponseEntity<String> updateComposant(ComposantDTO composantDTO, String id) {
+    public ResponseEntity<Map<String, String>> updateComposant(ComposantDTO composantDTO, String id) {
+        Map<String, String> message = new HashMap<>();
         try {
             Composant composant = composantRepository.getById(Long.parseLong(id));
             if (composant != null) {
-                composant.setNom(composantDTO.getNom());
-                composant.setPrix(composantDTO.getPrix());
-                composant.setComposition(composantDTO.getComposition());
-                composantRepository.save(composant);
-                return new ResponseEntity<String>("Composante de menu mise à jour avec succès", HttpStatus.OK);
+                if (ComposantValidators.validateComposantEntry(composantDTO)) {
+                    composant = ComposantMapper.maptoComposant(composantDTO, composant);
+                    composantRepository.save(composant);
+                    message.put("message", "Compsante de menu crée avec succès");
+                    return new ResponseEntity<Map<String, String>>(message, HttpStatus.CREATED);
+                }
             }
 
         } catch (EntityNotFoundException e) {
-            return new ResponseEntity<String>("Composante de menu introuvable", HttpStatus.NOT_FOUND);
+            message.put("message", "Composante de menu introuvable");
+            return new ResponseEntity<Map<String, String>>(message, HttpStatus.NOT_FOUND);
+        } catch (InvalidPriceValueForComposant e) {
+            message.put("message", "Erreur lors de la création de la composante de menu : le prix donné est négatif");
+            return new ResponseEntity<Map<String, String>>(message, HttpStatus.INTERNAL_SERVER_ERROR);
+
+        } catch (InvalidNameValueForComposant e) {
+            message.put("message",
+                    "Erreur lors de la création de la composante de menu : le nom de la composante n'a pas été renseigné");
+            return new ResponseEntity<Map<String, String>>(message, HttpStatus.INTERNAL_SERVER_ERROR);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new ResponseEntity<String>("Erreur interne du serveur", HttpStatus.INTERNAL_SERVER_ERROR);
+        message.put("message", "Erreur lors de la création de la composante de menu");
+        return new ResponseEntity<Map<String, String>>(message, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @Override
+    public ResponseEntity<Map<String, String>> deleteComposant(String id) {
+        Map<String, String> message = new HashMap<>();
+        try {
+            System.out.println(id);
+            Composant composant = composantRepository.getById(Long.parseLong(id));
+            if (composant != null) {
+                composantRepository.delete(composant);
+                message.put("message", "Composante de menu supprimée");
+                return new ResponseEntity<Map<String, String>>(message, HttpStatus.OK);
+            }
+
+        } catch (EntityNotFoundException e) {
+            message.put("message", "Composante de menu introuvable");
+            return new ResponseEntity<Map<String, String>>(message, HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        message.put("message", "Erreur lors de la suppression de la composante de menu");
+        return new ResponseEntity<Map<String, String>>(message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
 }
