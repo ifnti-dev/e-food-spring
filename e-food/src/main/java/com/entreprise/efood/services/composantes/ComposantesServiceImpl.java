@@ -114,4 +114,26 @@ public class ComposantesServiceImpl implements ComposantesService {
         return new ResponseEntity<Map<String, String>>(message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @Override
+    public ResponseEntity<Map<String, String>> deleteComposant(String id) {
+        Map<String, String> message = new HashMap<>();
+        try {
+            System.out.println(id);
+            Composant composant = composantRepository.getById(Long.parseLong(id));
+            if (composant != null) {
+                composantRepository.delete(composant);
+                message.put("message", "Composante de menu supprimée");
+                return new ResponseEntity<Map<String, String>>(message, HttpStatus.OK);
+            }
+
+        } catch (EntityNotFoundException e) {
+            message.put("message", "Composante de menu introuvable");
+            return new ResponseEntity<Map<String, String>>(message, HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        message.put("message", "Erreur lors de la suppression de la composante de menu");
+        return new ResponseEntity<Map<String, String>>(message, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
 }

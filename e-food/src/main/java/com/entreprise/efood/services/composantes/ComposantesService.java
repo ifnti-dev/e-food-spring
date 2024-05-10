@@ -17,4 +17,6 @@ public interface ComposantesService {
 
     public ResponseEntity<Map<String, String>> updateComposant(ComposantDTO composantDTO, String id);
 
+    public ResponseEntity<Map<String, String>> deleteComposant(String id);
+
 }
