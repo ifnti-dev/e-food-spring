@@ -13,8 +13,8 @@ public interface ComposantesService {
     // clé valeur (clée: liste des composantes)
     public ResponseEntity<Map<String, List<ComposantDTO>>> getAllComposants();
 
-    public ResponseEntity<String> addComponsant(ComposantDTO composantDTO);
+    public ResponseEntity<Map<String, String>> addComponsant(ComposantDTO composantDTO);
 
-    public ResponseEntity<String> updateComposant(ComposantDTO composantDTO, String id);
+    public ResponseEntity<Map<String, String>> updateComposant(ComposantDTO composantDTO, String id);
 
 }
