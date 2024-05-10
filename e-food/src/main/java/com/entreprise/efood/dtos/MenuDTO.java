@@ -39,4 +39,15 @@ public class MenuDTO {
 
     private List<Composant> composants;
 
+    public MenuDTO(Long id, String nom, double prix, String temps_preparation, String statut, Restaurant restaurant) {
+        this.id = id;
+        this.nom = nom;
+        this.prix = prix;
+        this.temps_preparation = temps_preparation;
+        this.statut = statut;
+        this.restaurant = restaurant;
+    }
+
+    
+
 }
