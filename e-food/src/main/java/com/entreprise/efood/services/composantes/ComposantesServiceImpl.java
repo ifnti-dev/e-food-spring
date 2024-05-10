@@ -14,6 +14,8 @@ import com.entreprise.efood.Models.Composant;
 import com.entreprise.efood.dtos.ComposantDTO;
 import com.entreprise.efood.repository.ComposantRepository;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @Service
 public class ComposantesServiceImpl implements ComposantesService {
 
@@ -42,12 +44,11 @@ public class ComposantesServiceImpl implements ComposantesService {
     @Override
     /*
      * cette méthode permet de créer une composante de menu
-     * elle retourne une réponse Http contenant un message et un code HTTP
+     * elle retourne une réponse Http contenant un message et un code de la reponse
      */
     public ResponseEntity<String> addComponsant(ComposantDTO composantDTO) {
         try {
             Composant composant = new Composant();
-            composant.setId(composantDTO.getId());
             composant.setNom(composantDTO.getNom());
             composant.setPrix(composantDTO.getPrix());
             composant.setComposition(composantDTO.getComposition());
@@ -59,6 +60,30 @@ public class ComposantesServiceImpl implements ComposantesService {
         }
         return new ResponseEntity<String>("Erreur lors de la création de la composante de menu",
                 HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @Override
+    /*
+     * cette methode permet de modifier une composante
+     * elle retourne une réponse HTTP contenant un message et le code de la reponse
+     */
+    public ResponseEntity<String> updateComposant(ComposantDTO composantDTO, String id) {
+        try {
+            Composant composant = composantRepository.getById(Long.parseLong(id));
+            if (composant != null) {
+                composant.setNom(composantDTO.getNom());
+                composant.setPrix(composantDTO.getPrix());
+                composant.setComposition(composantDTO.getComposition());
+                composantRepository.save(composant);
+                return new ResponseEntity<String>("Composante de menu mise à jour avec succès", HttpStatus.OK);
+            }
+
+        } catch (EntityNotFoundException e) {
+            return new ResponseEntity<String>("Composante de menu introuvable", HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<String>("Erreur interne du serveur", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
 }
