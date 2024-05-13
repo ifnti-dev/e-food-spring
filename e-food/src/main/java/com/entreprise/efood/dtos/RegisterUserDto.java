@@ -16,6 +16,16 @@ public class RegisterUserDto {
     private String password;
     
     private String nom;
+
+    private String prenom;
+
+    private String adresse;
+
+    private String telephone;
+
+    private String ville;
+
+    private String email;
     
     // getters and setters here...
 }

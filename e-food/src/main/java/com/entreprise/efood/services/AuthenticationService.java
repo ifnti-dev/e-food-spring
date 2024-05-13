@@ -3,7 +3,6 @@ package com.entreprise.efood.services;
 import com.entreprise.efood.Models.User;
 import com.entreprise.efood.dtos.LoginUserDto;
 import com.entreprise.efood.dtos.RegisterUserDto;
-import com.entreprise.efood.repository.PersonneRepository;
 import com.entreprise.efood.repository.UserRepository;
 
 import org.springframework.security.authentication.AuthenticationManager;
@@ -34,6 +33,15 @@ public class AuthenticationService {
                 user.setNom(input.getNom());
                 user.setUsername(input.getUsername());
                 user.setPassword(passwordEncoder.encode(input.getPassword()));
+                user.setPrenom(input.getPrenom());
+                user.setEmail(input.getEmail());
+                user.setAdresse(input.getAdresse());
+                user.setTelephone(input.getTelephone());
+                user.setVille(input.getVille());
+
+
+
+
 
         return userRepository.save(user);
     }
