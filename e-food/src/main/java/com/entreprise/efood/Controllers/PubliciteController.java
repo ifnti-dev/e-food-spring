@@ -30,7 +30,7 @@ public class PubliciteController {
     
     @GetMapping("/restaurant/{id}")
     public ResponseEntity<List<Publicite>> getPublicitesByRestaurant(@PathVariable Long id) {
-        List<PubliciteDTO> publiciteDTOs = publiciteService.findAll();
+        List<PubliciteDTO> publiciteDTOs = publiciteService.findAllPubByresto(id);
         List<Publicite> publicites = publiciteDTOs.stream().map(this::convertToEntity).collect(Collectors.toList());
         return ResponseEntity.ok(publicites);
     }
@@ -47,7 +47,7 @@ public class PubliciteController {
     //     return ResponseEntity.ok(publiciteDTOs);
     // }
     public ResponseEntity<List<Publicite>> getPublicites() {
-        List<PubliciteDTO> publicitesDTO = publiciteService.findAll();
+        List<PubliciteDTO> publicitesDTO = publiciteService.findAllbydto();
         List<Publicite> publicites = publicitesDTO.stream().map(this::convertToEntity).collect(Collectors.toList());
         return ResponseEntity.ok(publicites);
     }
@@ -105,14 +105,7 @@ public class PubliciteController {
     }
 
     private PubliciteDTO convertToDto(Publicite publicite) {
-        PubliciteDTO dto = new PubliciteDTO();
-        dto.setId(publicite.getId());
-        dto.setTitre(publicite.getTitre());
-        dto.setDescription(publicite.getDescription());
-        // A revoir
-        // dto.setRestaurantId(publicite.getRestaurant().getId());
-
-        dto.setImagesIds(publicite.getImages().stream().map(Image::getId).collect(Collectors.toList()));
+        PubliciteDTO dto = new PubliciteDTO(publicite);
         return dto;
     }  
      private Publicite convertToEntity(PubliciteDTO dto) {

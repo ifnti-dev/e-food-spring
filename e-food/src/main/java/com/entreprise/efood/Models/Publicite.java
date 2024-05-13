@@ -25,8 +25,7 @@ import lombok.Setter;
 
 
 
-@NoArgsConstructor
-@AllArgsConstructor
+
 @Setter
 @Getter
 
@@ -51,10 +50,25 @@ public class Publicite implements Serializable {
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
-  @JsonIgnore
+  // @JsonIgnore
     @OneToMany(mappedBy = "publicite")
    
     private List<Image> images;
+
+    
+
+  public Publicite() {
+  }
+
+
+
+  public Publicite(Long id, String titre, String description, Restaurant restaurant, List<Image> images) {
+    this.id = id;
+    this.titre = titre;
+    this.description = description;
+    this.restaurant = restaurant;
+    this.images = images;
+  }
 
 
 

@@ -61,7 +61,7 @@ public class Restaurant {
     private String heure_fermeture;
 
     @Basic
-    @Column(name = "jour_ouverture", nullable = false)
+    @Column(name = "jour_ouverture", nullable = true)
     private ArrayList<String> jour_ouverture;
 
     @Basic

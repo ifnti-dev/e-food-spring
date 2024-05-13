@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 // import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 // import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +20,8 @@ import com.entreprise.efood.repository.PubliciteRepository;
 @Service
 @Transactional(readOnly = false)
 public class PubliciteService {
+    
+    @Autowired
     private final PubliciteRepository repo;
 
     // @Autowired
@@ -26,8 +29,12 @@ public class PubliciteService {
         this.repo = repository;
     }
 
-    public List<PubliciteDTO> findAll() {
+    public List<PubliciteDTO> findAllbydto() {
         return repo.findAllPub();
+    }
+
+    public List<PubliciteDTO> findAllPubByresto(final Long id) {
+        return repo.findAllPubByresto(id);
     }
 
     public Publicite saveOne(PubliciteDTO pubDto) {
