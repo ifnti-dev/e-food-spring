@@ -6,7 +6,7 @@ import java.util.List;
 
 import com.entreprise.efood.Models.Image;
 import com.entreprise.efood.Models.Publicite;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 // import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -16,19 +16,15 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 // import lombok.NoArgsConstructor;
 // import lombok.Setter;
 
-
+// @AllArgsConstructor
+// @Getter
+// // @NoArgsConstructor
+// @Setter
 public class PubliciteDTO{
     private Long id;
     private String titre;
     private String description;
     private Long restaurantId;
-
-
-
-
-    
- 
-    // @JsonIgnore
     private List<Long> imagesIds;
 
     
@@ -36,10 +32,17 @@ public class PubliciteDTO{
     public PubliciteDTO() {
     }
 
+    public PubliciteDTO(long id, String titre, String description) {
+        this.id = id;
+        this.titre = titre;
+        this.description = description;
+    }
+
     public PubliciteDTO(Publicite pub){
         List<Long> ids = new ArrayList<>();
 
         if(pub.getImages() != null){
+            System.err.println("NULL");
             for (Image i : pub.getImages()) {
                 Long id =  i.getId();
                 ids.add(id);

@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.entreprise.efood.utils.AppConstant;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
