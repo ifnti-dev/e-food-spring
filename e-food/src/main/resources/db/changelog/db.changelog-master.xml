@@ -27,6 +27,8 @@
 
 
     <include file="db/changelog/schema_menu/schema-menu-create.xml"/>
+    
+    <include file="db/changelog/seeders/permissions/permission-create.xml"/>
 
 <!-- 
     <include file="db/changelog/seeders/restaurants/restaurant-create.xml"/>
