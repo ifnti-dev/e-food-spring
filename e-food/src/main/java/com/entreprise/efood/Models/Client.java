@@ -7,6 +7,7 @@ import com.entreprise.efood.utils.AppConstant;
 
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,8 +25,8 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-
-public class Client {
+@DiscriminatorValue("client")
+public class Client extends User{
 
     @Id
     @Column(name = "client_id")

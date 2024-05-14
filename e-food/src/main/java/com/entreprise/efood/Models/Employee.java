@@ -6,6 +6,7 @@ import com.entreprise.efood.utils.AppConstant;
 
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -25,8 +26,10 @@ import lombok.Setter;
 @NoArgsConstructor
 
 @Entity
+
 @Table(name = "employees",schema = AppConstant.SCHEMA_STAFF)
-public class Employee {
+@DiscriminatorValue("employe")
+public class Employee extends User {
     
     @Id
     @Column(name = "employee_id")

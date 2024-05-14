@@ -9,6 +9,43 @@
 
     <property name="schema_name_restaurant" value="restaurant"/>
 
+
+    <!-- User entity -->
+
+     <changeSet  author="roland"  id="USER-CREATE-UID001">
+       <createTable schemaName="staff" tableName="users">
+            <column name="id" type="double">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="nom" type="VARCHAR(30)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="prenom" type="VARCHAR(30)"/>
+
+            <column name="username" type="VARCHAR(30)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="password" type="VARCHAR(30)"/>
+
+            <column name="telephone" type="VARCHAR(15)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+
+            <column name="email" type="VARCHAR(30)">
+                <constraints nullable="true" unique="true"/>
+            </column>
+
+            <column name="ville" type="VARCHAR(15)"/>
+               
+            
+            
+            <!-- add foreignkey after -->
+            
+        </createTable>
+  </changeSet>
+
+
     <!-- START roles ENTITY-->
     <changeSet author="soka(generated)" id="ROLE-CREATE-UID001">
         <createTable schemaName="${schema_name}" tableName="roles">
@@ -16,9 +53,6 @@
                 <constraints nullable="false"/>
             </column>
             <column name="libelle" type="VARCHAR(100)">
-                 <constraints nullable="false"/>
-             </column>
-            <column name="role" type="VARCHAR(100)">
                  <constraints nullable="false"/>
             </column>
         </createTable>
@@ -66,16 +100,18 @@
                 <constraints nullable="false"/>
              </column>
 
-               <column name="role_id" type="BIGINT">
+            <column name="role_id" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
 
 
-               <column name="restaurant_id" type="BIGINT">
+            <column name="restaurant_id" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
+
 
         </createTable>
+
     </changeSet>
 
 
@@ -177,6 +213,8 @@
                                  initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="code"
                                  referencedTableName="restaurants" referencedTableSchemaName="restaurant"/>
     </changeSet>
+
+     
 
 
 </databaseChangeLog>
