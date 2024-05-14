@@ -1,7 +1,5 @@
 package com.entreprise.efood.services;
 
-
-
 import java.util.List;
 import java.util.Optional;
 
@@ -28,12 +26,12 @@ public class PubliciteService {
         return publicite;
     }
 // supprimer une pub
-public void deleteOne(final Long id) {
-    repo.deleteById(id);
-}    
+    public void deleteOne(final Long id) {
+        repo.deleteById(id);
+    }    
 
 // Trouver une pub donnée
-public Optional<Publicite> getOne(final Long id) {
+    public Optional<Publicite> getOne(final Long id) {
         return repo.findById(id);
     }
 
