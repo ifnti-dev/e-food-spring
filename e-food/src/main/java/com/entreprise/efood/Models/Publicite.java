@@ -26,8 +26,8 @@ import lombok.Setter;
 @Getter
 
 @Entity
-@Table(name = "publicites",schema = AppConstant.SCHEMA_RESTAURANT)
-
+// @Table(name = "publicites",schema = AppConstant.SCHEMA_RESTAURANT)
+@Table(name = "publicites")
 public class Publicite {
     @Id
     @Column(name = "id")

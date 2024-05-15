@@ -30,7 +30,9 @@ import lombok.Setter;
 @NoArgsConstructor
 
 @Entity
-@Table(name = "evenements",schema = AppConstant.SCHEMA_RESTAURANT)
+// @Table(name = "evenements",schema = AppConstant.SCHEMA_RESTAURANT)
+@Table(name = "evenements")
+
 public class Evenement {
     @Id
     @Column(name = "code")

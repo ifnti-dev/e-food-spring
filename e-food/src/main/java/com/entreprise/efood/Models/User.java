@@ -21,6 +21,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
@@ -35,9 +37,10 @@ import lombok.Setter;
 @AllArgsConstructor
 
 @Entity
-@Table(name="users", schema = AppConstant.SCHEMA_STAFF)
-@Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name = "user_type")
+// @Table(name="users", schema = AppConstant.SCHEMA_STAFF)
+@Table(name="users")
+// @Inheritance(strategy = InheritanceType.JOINED)
+// @DiscriminatorColumn(name = "user_type")
 public class User implements UserDetails{
 
     @Id
@@ -82,6 +85,10 @@ public class User implements UserDetails{
     @UpdateTimestamp
     @Column(name = "updated_at")
     private Date updatedAt;
+
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

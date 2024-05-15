@@ -144,7 +144,7 @@
 </changeSet>
 
 <changeSet author="roland" id="USER_EMPLOYE-FORENGKEY-UID001">
-        <addForeignKeyConstraint baseTableSchemaName="${schema_name_staff}" baseColumnNames="user_id" 
+        <addForeignKeyConstraint baseTableSchemaName="${schema_name_staff}" baseColumnNames="user_id"
                                  baseTableName="employees" constraintName="user_employe_for_key" deferrable="false" 
                                  initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id"
                                  referencedTableName="users" referencedTableSchemaName="${schema_name_staff}"/>

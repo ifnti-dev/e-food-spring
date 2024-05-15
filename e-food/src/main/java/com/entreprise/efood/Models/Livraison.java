@@ -23,7 +23,8 @@ import lombok.Setter;
 @NoArgsConstructor
 
 @Entity
-@Table(name = "Livraison",schema = AppConstant.SCHEMA_COMMAND)
+// @Table(name = "Livraison",schema = AppConstant.SCHEMA_COMMAND)
+@Table(name = "Livraison")
 public class Livraison {
     @Id
     @Column(name = "id")

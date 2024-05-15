@@ -12,7 +12,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,13 +22,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "clients", schema = AppConstant.SCHEMA_STAFF)
+// @Table(name = "clients", schema = AppConstant.SCHEMA_STAFF)
+@Table(name = "clients")
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @DiscriminatorValue("client")
-public class Client extends User{
+public class Client {
 
     @Id
     @Column(name = "client_id")
@@ -34,11 +37,15 @@ public class Client extends User{
     private Long id;
     
     @Basic
-    @Column(name = "favoris")
+    @Column(name = "favoris", nullable = true)
     private ArrayList<String> favoris;
 
     @OneToMany(mappedBy = "client")
     private List<Commande> commandes;
+
+    @OneToOne
+    @JoinColumn(name = "user_id", unique = true)
+    private User user;
 
     
 }

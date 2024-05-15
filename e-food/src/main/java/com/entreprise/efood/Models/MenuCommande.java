@@ -27,7 +27,8 @@ import lombok.Setter;
 @NoArgsConstructor
 
 @Entity
-@Table(name = "menu_commandes",schema = AppConstant.SCHEMA_MENU)
+// @Table(name = "menu_commandes",schema = AppConstant.SCHEMA_MENU)
+@Table(name = "menu_commandes")
 public class MenuCommande {
 
     @Id

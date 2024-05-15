@@ -14,6 +14,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,9 +28,11 @@ import lombok.Setter;
 
 @Entity
 
-@Table(name = "employees",schema = AppConstant.SCHEMA_STAFF)
+// @Table(name = "employees",schema = AppConstant.SCHEMA_STAFF)
+@Table(name = "employees")
+
 @DiscriminatorValue("employe")
-public class Employee extends User {
+public class Employee {
     
     @Id
     @Column(name = "employee_id")
@@ -44,10 +47,10 @@ public class Employee extends User {
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
-    @ManyToOne
-    @JoinColumn(name = "role_id")
-    private Role role;
-
     @OneToMany(mappedBy = "employee")
     private List<Livraison> livraisons;
+
+    @OneToOne
+    @JoinColumn(name = "user_id", unique=true )
+    private User user;
 }

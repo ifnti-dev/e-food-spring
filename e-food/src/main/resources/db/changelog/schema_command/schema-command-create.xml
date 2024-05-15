@@ -93,6 +93,8 @@
         <addPrimaryKey schemaName="${schema_name}" columnNames="code" constraintName="paiement-code_pk" tableName="paiements"/>
 </changeSet>
 
+<!-- client -->
+
 <changeSet author="Roland" id="CLIENTS-CREATE-UID001">
         <createTable schemaName="staff" tableName="clients">
             <column name="id" type="BIGINT">
@@ -100,6 +102,10 @@
             </column>
 
             <column name="favoris" type="VARCHAR() []"/>
+
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
 
         </createTable>
 </changeSet>

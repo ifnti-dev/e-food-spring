@@ -33,7 +33,8 @@ import lombok.Setter;
 @NoArgsConstructor
 
 @Entity
-@Table(name = "menus", schema = AppConstant.SCHEMA_MENU)
+// @Table(name = "menus", schema = AppConstant.SCHEMA_MENU)
+@Table(name = "menus")
 public class Menu {
     @Id
     @Column(name = "code")
@@ -74,8 +75,7 @@ public class Menu {
     @ManyToMany()
     @JoinTable( name = "menu_composant",
     joinColumns = @JoinColumn(name= "menu_id",referencedColumnName = "code"),
-    inverseJoinColumns=@JoinColumn( name ="composant_id",referencedColumnName = "code"),
-    schema = AppConstant.SCHEMA_MENU
+    inverseJoinColumns=@JoinColumn( name ="composant_id",referencedColumnName = "code")
     )
     private List<Composant> composants;
 
