@@ -3,6 +3,7 @@ package com.entreprise.efood.seeders;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.entreprise.efood.Models.Permission;
@@ -22,11 +23,14 @@ public class DatabaseSeeder implements CommandLineRunner {
     private final PermissionRepository permissionRepository;
     private final RoleRepository roleRepository;
 
+    private final PasswordEncoder passwordEncoder;
+
     @Autowired
-    public DatabaseSeeder(UserRepository userRepository, RoleRepository roleRepository, PermissionRepository permissionRepository) {
+    public DatabaseSeeder(UserRepository userRepository, RoleRepository roleRepository, PermissionRepository permissionRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.permissionRepository=permissionRepository;
+        this.passwordEncoder=passwordEncoder;
     }
 
     @Override
@@ -80,7 +84,7 @@ public class DatabaseSeeder implements CommandLineRunner {
         user1.setNom("Nom1");
         user1.setPrenom("Prenom1");
         user1.setUsername("user1");
-        user1.setPassword("password1");
+        user1.setPassword(passwordEncoder.encode("password1"));
         user1.setTelephone("0123456789");
         user1.setEmail("user1@example.com");
         user1.setVille("Ville1");
@@ -94,7 +98,7 @@ public class DatabaseSeeder implements CommandLineRunner {
         user2.setNom("Nom2");
         user2.setPrenom("Prenom2");
         user2.setUsername("user2");
-        user2.setPassword("password2");
+        user2.setPassword(passwordEncoder.encode("password2"));
         user2.setTelephone("9876543210");
         user2.setEmail("user2@example.com");
         user2.setVille("Ville2");

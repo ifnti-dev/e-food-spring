@@ -3,6 +3,7 @@ package com.entreprise.efood.Controllers;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +21,7 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
-
+    //@PreAuthorize("isAuthenticated()")
     @GetMapping("/me")
     public ResponseEntity<User> authenticatedUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -29,7 +30,7 @@ public class UserController {
 
         return ResponseEntity.ok(currentUser);
     }
-
+    @PreAuthorize("hasAnyRole('ADMIN', 'SUPER_ADMIN')")
     @GetMapping()
     public ResponseEntity<List <User>> allUsers() {
         List <User> users = userService.allUsers();
