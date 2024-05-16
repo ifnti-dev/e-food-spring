@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @RestController
 @RequestMapping(path = AppConstant.MENUS_CONTROLLER_BASE_URL)
@@ -39,5 +40,19 @@ public class MenuController {
         message.put("menus", new ArrayList<MenuDTO>());
         return new ResponseEntity<Map<String, List<MenuDTO>>>(message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    @GetMapping("/{menu_id}")
+    public ResponseEntity<Map<String, MenuDTO>> showMenu(@PathVariable String menu_id) {
+        Map<String, MenuDTO> message = new HashMap<>();
+        try {
+            return menuServiceImpl.getMenu(Long.parseLong(menu_id));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        message.put("menu", new MenuDTO());
+        return new ResponseEntity<Map<String, MenuDTO>>(message, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    
 
 }
