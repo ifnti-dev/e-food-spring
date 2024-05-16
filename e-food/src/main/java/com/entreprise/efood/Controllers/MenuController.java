@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
@@ -26,11 +27,12 @@ public class MenuController {
     @Autowired
     private MenuServiceImpl menuServiceImpl;
 
-    @GetMapping("/")
-    public ResponseEntity<Map<String, List<MenuDTO>>> getAllMenus() {
+    @GetMapping("/restaurant/{restaurant_id}")
+    public ResponseEntity<Map<String, List<MenuDTO>>> getAllMenus(@PathVariable String restaurant_id) {
         Map<String, List<MenuDTO>> message = new HashMap<>();
         try {
-            return menuServiceImpl.getAllMenus();
+
+            return menuServiceImpl.getAllMenus(Long.parseLong(restaurant_id));
         } catch (Exception e) {
             e.printStackTrace();
         }

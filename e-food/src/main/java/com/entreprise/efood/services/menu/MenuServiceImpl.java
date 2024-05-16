@@ -20,10 +20,10 @@ public class MenuServiceImpl implements MenuService {
     private MenuRepository menuRepository;
 
     @Override
-    public ResponseEntity<Map<String, List<MenuDTO>>> getAllMenus() {
+    public ResponseEntity<Map<String, List<MenuDTO>>> getAllMenus(Long restaurant_id) {
         Map<String, List<MenuDTO>> menus = new HashMap<>();
         try {
-            List<MenuDTO> menuDTOs = menuRepository.getMenus();
+            List<MenuDTO> menuDTOs = menuRepository.getMenus(restaurant_id);
             menus.put("menus", menuDTOs);
             return new ResponseEntity<Map<String, List<MenuDTO>>>(menus, HttpStatus.OK);
 

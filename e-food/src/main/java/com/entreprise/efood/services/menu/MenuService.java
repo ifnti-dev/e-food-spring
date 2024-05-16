@@ -9,5 +9,5 @@ import com.entreprise.efood.dtos.MenuDTO;
 
 public interface MenuService {
 
-    public ResponseEntity<Map<String, List<MenuDTO>>> getAllMenus();
+    public ResponseEntity<Map<String, List<MenuDTO>>> getAllMenus(Long restaurant_id);
 }
