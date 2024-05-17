@@ -10,7 +10,7 @@ public class RoleMapper {
         RoleDTO roleDTO = new RoleDTO();
         roleDTO.setId(role.getId());
         roleDTO.setLibelle(role.getLibelle());
-        roleDTO.setPermissions(role.getPermissions());
+        //roleDTO.setPermissions(role.getPermissions());
         return roleDTO;
     }
 
@@ -18,7 +18,7 @@ public class RoleMapper {
         Role role=new Role();
             role.setId(roleDTO.getId());
             role.setLibelle(roleDTO.getLibelle());
-            role.setPermissions(roleDTO.getPermissions());
+            //role.setPermissions(roleDTO.getPermissions());
             
         return role;
     }

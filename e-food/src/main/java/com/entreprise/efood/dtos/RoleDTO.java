@@ -3,6 +3,7 @@ package com.entreprise.efood.dtos;
 import java.util.List;
 
 import com.entreprise.efood.Models.Permission;
+import com.entreprise.efood.Models.User;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,6 +19,7 @@ public class RoleDTO {
     
     private Long id;
     private String libelle;
-    private List<Permission> permissions;
+    private List<Long> permissions;
+    private List<Long> users;
 
 }

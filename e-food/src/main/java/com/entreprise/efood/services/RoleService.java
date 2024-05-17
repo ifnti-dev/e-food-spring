@@ -9,23 +9,34 @@ import org.springframework.stereotype.Service;
 import com.entreprise.efood.Models.Role;
 import com.entreprise.efood.dtos.RoleDTO;
 import com.entreprise.efood.mapper.RoleMapper;
+import com.entreprise.efood.repository.PermissionRepository;
 import com.entreprise.efood.repository.RoleRepository;
+import com.entreprise.efood.repository.UserRepository;
 
 @Service
 public class RoleService {
     @Autowired
     private RoleRepository roleRepository;
 
+    @Autowired
+    private PermissionRepository permissionRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
+
     public RoleService(RoleRepository roleRepository){
         this.roleRepository=roleRepository;
 
     }
 
-    public RoleDTO createRole(RoleDTO roleDTO){
-        Role role= RoleMapper.maptoRole(roleDTO);
-        Role roleSaved= roleRepository.save(role);
-        return RoleMapper.maptoRoleDto(roleSaved);
-
+    public RoleDTO createRole(RoleDTO roleDTO) {
+        Role role = new Role();
+        role.setLibelle(roleDTO.getLibelle());
+        role.setUsers(userRepository.findAllById(roleDTO.getUsers()));
+        role.setPermissions(permissionRepository.findAllById(roleDTO.getPermissions()));
+        Role savedRole = roleRepository.save(role);
+        return RoleMapper.maptoRoleDto(savedRole);
     }
 
 
@@ -48,7 +59,8 @@ public class RoleService {
         Role role = roleRepository.findById(roleId).orElseThrow();
 
         role.setLibelle(updatedRole.getLibelle());
-        
+        role.setUsers(userRepository.findAllById(updatedRole.getUsers()));
+        role.setPermissions(permissionRepository.findAllById(updatedRole.getPermissions()));
         Role updateRole = roleRepository.save(role);
 
         return RoleMapper.maptoRoleDto(updateRole);
