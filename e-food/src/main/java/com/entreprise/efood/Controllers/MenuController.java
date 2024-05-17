@@ -53,6 +53,17 @@ public class MenuController {
         return new ResponseEntity<Map<String, MenuDTO>>(message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    
+    @PostMapping("/restaurant/{restaurant_id}/add")
+    public ResponseEntity<Map<String, String>> createMenu(@RequestBody() Map<String, Object> requestMap,
+            @PathVariable String restaurant_id) {
+        Map<String, String> message = new HashMap<>();
+        try {
+            return menuServiceImpl.createMenu(requestMap, Long.parseLong(restaurant_id));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        message.put("message", "Erreur interne du serveur");
+        return new ResponseEntity<Map<String, String>>(message, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 
 }

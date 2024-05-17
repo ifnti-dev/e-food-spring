@@ -10,14 +10,37 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.entreprise.efood.Models.Composant;
+import com.entreprise.efood.Models.Menu;
+import com.entreprise.efood.Models.Restaurant;
 import com.entreprise.efood.dtos.MenuDTO;
+import com.entreprise.efood.mappers.MenuMapper;
+import com.entreprise.efood.repository.ComposantRepository;
 import com.entreprise.efood.repository.MenuRepository;
+import com.entreprise.efood.repository.RestaurantRepository;
+import com.entreprise.efood.utils.Converters;
+
+import com.entreprise.efood.utils.exceptions.menuExceptions.InvalidNameValueForMenu;
+import com.entreprise.efood.utils.exceptions.menuExceptions.InvalidPriceValueForMenu;
+import com.entreprise.efood.utils.exceptions.menuExceptions.InvalidStatutValueForMenu;
+import com.entreprise.efood.utils.exceptions.menuExceptions.InvalidTempPreparationValueForMenu;
+import com.entreprise.efood.utils.validators.MenuValidators;
 
 @Service
 public class MenuServiceImpl implements MenuService {
 
     @Autowired
     private MenuRepository menuRepository;
+
+    @Autowired
+    private RestaurantRepository restaurantRepository;
+
+    @Autowired
+    private ComposantRepository composantRepository;
+
+    public List<Composant> getComposantsByIds(Object object) {
+        return composantRepository.findAllById(Converters.convertStringArrayToLongArray(object));
+    }
 
     @Override
     public ResponseEntity<Map<String, List<MenuDTO>>> getAllMenus(Long restaurant_id) {
@@ -48,9 +71,41 @@ public class MenuServiceImpl implements MenuService {
         return new ResponseEntity<Map<String, MenuDTO>>(message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    
+    @Override
+    public ResponseEntity<Map<String, String>> createMenu(Map<String, Object> requestMap, Long restaurant_id) {
+        Map<String, String> message = new HashMap<>();
+        try {
+            if (MenuValidators.validateMenuEntry(requestMap)) {
+                MenuDTO menuDTO = new MenuDTO();
+                Menu menu = new Menu();
+                menuDTO.setNom((String) requestMap.get("nom"));
+                menuDTO.setPrix((Double) requestMap.get("prix"));
+                menuDTO.setStatut((String) requestMap.get("statut"));
+                menuDTO.setTemps_preparation("temps_preparation");
+                Restaurant restaurant = restaurantRepository.getById(restaurant_id);
+                menuDTO.setRestaurant(restaurant);
 
+                List<Composant> composants = getComposantsByIds(requestMap.get("composantes"));
+                menuDTO.setComposants(composants);
 
-    
+                menu = MenuMapper.mapToMenu(menuDTO, menu);
+                menuRepository.save(menu);
+                message.put("message", "Menu créé avec succès");
+                return new ResponseEntity<Map<String, String>>(message, HttpStatus.CREATED);
+
+            }
+
+        } catch (InvalidPriceValueForMenu e) {
+            e.printStackTrace();
+        } catch (InvalidNameValueForMenu e) {
+            e.printStackTrace();
+        } catch (InvalidTempPreparationValueForMenu e) {
+            e.printStackTrace();
+        } catch (InvalidStatutValueForMenu e) {
+            e.printStackTrace();
+        }
+        message.put("message", "Erreur interne du serveur");
+        return new ResponseEntity<Map<String, String>>(message, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 
 }
