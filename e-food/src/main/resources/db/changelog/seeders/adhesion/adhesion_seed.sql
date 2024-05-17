@@ -1,0 +1,6 @@
+-- INSERT INTO restaurant.adhesions(id, avis, restaurant_id)
+-- values 
+-- (10, 'en règle',4)
+-- ON CONFLICT (id) DO UPDATE 
+-- SET avis=EXCLUDED.avis,
+-- restaurant_id=EXCLUDED.restaurant_id;
