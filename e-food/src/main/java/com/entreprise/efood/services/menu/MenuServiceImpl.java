@@ -34,4 +34,23 @@ public class MenuServiceImpl implements MenuService {
         return new ResponseEntity<Map<String, List<MenuDTO>>>(menus, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @Override
+    public ResponseEntity<Map<String, MenuDTO>> getMenu(Long menu_id) {
+        Map<String, MenuDTO> message = new HashMap<>();
+        try {
+            MenuDTO menuDTO = menuRepository.getMenuById(menu_id);
+            message.put("menu", menuDTO);
+            return new ResponseEntity<Map<String, MenuDTO>>(message, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        message.put("menu", new MenuDTO());
+        return new ResponseEntity<Map<String, MenuDTO>>(message, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    
+
+
+    
+
 }
