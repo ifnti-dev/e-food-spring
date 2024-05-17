@@ -13,5 +13,5 @@ public interface MenuService {
 
     public ResponseEntity<Map<String, MenuDTO>> getMenu(Long menu_id);
 
-    
+    public ResponseEntity<Map<String, String>> createMenu(Map<String, Object> requestMap, Long restaurant_id);
 }
