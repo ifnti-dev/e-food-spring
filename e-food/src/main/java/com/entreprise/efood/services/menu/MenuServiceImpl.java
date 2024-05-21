@@ -81,27 +81,63 @@ public class MenuServiceImpl implements MenuService {
                 menuDTO.setNom((String) requestMap.get("nom"));
                 menuDTO.setPrix((Double) requestMap.get("prix"));
                 menuDTO.setStatut((String) requestMap.get("statut"));
-                menuDTO.setTemps_preparation("temps_preparation");
+                menuDTO.setTemps_preparation((String) requestMap.get("temps_preparation"));
                 Restaurant restaurant = restaurantRepository.getById(restaurant_id);
                 menuDTO.setRestaurant(restaurant);
 
                 List<Composant> composants = getComposantsByIds(requestMap.get("composantes"));
                 menuDTO.setComposants(composants);
 
+                // System.out.println(composants.get(0).toString());
+
                 menu = MenuMapper.mapToMenu(menuDTO, menu);
+
+                for (Composant composant : composants) {
+                    List<Menu> menus = composant.getMenus();
+                    menus.add(menu);
+                    composantRepository.save(composant);
+                }
+
                 menuRepository.save(menu);
                 message.put("message", "Menu créé avec succès");
                 return new ResponseEntity<Map<String, String>>(message, HttpStatus.CREATED);
 
             }
 
-        } catch (InvalidPriceValueForMenu e) {
+        } catch (InvalidPriceValueForMenu | InvalidNameValueForMenu | InvalidTempPreparationValueForMenu
+                | InvalidStatutValueForMenu e) {
             e.printStackTrace();
-        } catch (InvalidNameValueForMenu e) {
-            e.printStackTrace();
-        } catch (InvalidTempPreparationValueForMenu e) {
-            e.printStackTrace();
-        } catch (InvalidStatutValueForMenu e) {
+        }
+        message.put("message", "Erreur interne du serveur");
+        return new ResponseEntity<Map<String, String>>(message, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @Override
+    public ResponseEntity<Map<String, String>> updateMenu(Map<String, Object> requestMap, Long menu_id,
+            Long restaurant_id) {
+        Map<String, String> message = new HashMap<>();
+        try {
+            if (MenuValidators.validateMenuEntry(requestMap)) {
+                MenuDTO menuDTO = new MenuDTO();
+                Menu menu = menuRepository.getById(menu_id);
+                menuDTO.setNom((String) requestMap.get("nom"));
+                menuDTO.setPrix((Double) requestMap.get("prix"));
+                menuDTO.setStatut((String) requestMap.get("statut"));
+                menuDTO.setTemps_preparation((String) requestMap.get("temps_preparation"));
+                List<Composant> composants = getComposantsByIds(requestMap.get("composantes"));
+
+                Restaurant restaurant = restaurantRepository.getById(restaurant_id);
+                menuDTO.setRestaurant(restaurant);
+
+                menuDTO.setComposants(composants);
+                menu = MenuMapper.mapToMenu(menuDTO, menu);
+                // menuRepository.save(menu);
+                message.put("message", "Menu mis à jour correctement");
+                return new ResponseEntity<Map<String, String>>(message, HttpStatus.OK);
+            }
+        } catch (InvalidNameValueForMenu | InvalidPriceValueForMenu | InvalidTempPreparationValueForMenu
+                | InvalidStatutValueForMenu e) {
+            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         message.put("message", "Erreur interne du serveur");
