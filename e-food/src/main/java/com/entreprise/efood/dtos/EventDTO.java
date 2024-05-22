@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.text.ParseException;
 
 import com.entreprise.efood.utils.FormatDate;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import groovyjarjarantlr4.v4.runtime.misc.NotNull;
 import lombok.Getter;
@@ -12,16 +13,21 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class EventDTO {
+public class EventDTO implements Serializable {
 
     @NotNull
     private Long id_restaurant;
     @NotNull
     private String description;
+
     @NotNull()
+    @JsonFormat(shape = JsonFormat.Shape.NUMBER)
     private Date date_debut;
+
     @NotNull
+    @JsonFormat(shape = JsonFormat.Shape.NUMBER)
     private Date date_fin;
+
     @NotNull
     private Long code;
     @NotNull

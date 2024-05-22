@@ -6,6 +6,7 @@ import java.sql.Date;
 
 
 import com.entreprise.efood.utils.AppConstant;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Basic;
 
@@ -54,11 +55,13 @@ public class Evenement implements Serializable {
     private String description;
 
     @Temporal(TemporalType.DATE)
+    @JsonFormat(shape = JsonFormat.Shape.NUMBER)
     @Column(name = "date_debut")
     private Date date_debut;
 
     
     @Temporal(TemporalType.DATE)
+    @JsonFormat(shape = JsonFormat.Shape.NUMBER)
     @Column(name = "date_fin")
     private Date date_fin;
 
