@@ -64,6 +64,8 @@ public class Restaurant {
     @Column(name = "jour_ouverture", nullable = true)
     private ArrayList<String> jour_ouverture;
 
+
+
     @Basic
     @Column(name = "coordonnee_gps_x",length = 50)
     private double coordonnee_gps_x;

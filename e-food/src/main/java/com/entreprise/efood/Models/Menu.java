@@ -1,6 +1,7 @@
 package com.entreprise.efood.Models;
 
 import java.util.List;
+import java.io.Serializable;
 import java.time.Instant;
 
 import org.springframework.data.annotation.CreatedDate;
@@ -8,6 +9,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import com.entreprise.efood.utils.AppConstant;
 
+import groovyjarjarantlr4.v4.parse.ANTLRParser.finallyClause_return;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -33,7 +35,10 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "menus", schema = AppConstant.SCHEMA_MENU)
-public class Menu {
+public class Menu implements Serializable {
+
+    private static final long serialVersionUID = 123456L;
+
     @Id
     @Column(name = "code")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "menu_id_seq")
