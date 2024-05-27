@@ -21,11 +21,9 @@ public class EventDTO implements Serializable {
     private String description;
 
     @NotNull()
-    @JsonFormat(shape = JsonFormat.Shape.NUMBER)
     private Date date_debut;
 
     @NotNull
-    @JsonFormat(shape = JsonFormat.Shape.NUMBER)
     private Date date_fin;
 
     @NotNull
