@@ -1,9 +1,9 @@
 package com.entreprise.efood.Models;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.entreprise.efood.utils.AppConstant;
-
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -20,15 +20,17 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
-@NoArgsConstructor
-@AllArgsConstructor
+
+
+
+
 @Setter
 @Getter
 
 @Entity
 @Table(name = "publicites",schema = AppConstant.SCHEMA_RESTAURANT)
 
-public class Publicite {
+public class Publicite implements Serializable {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,7 +48,28 @@ public class Publicite {
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
+  // @JsonIgnore
     @OneToMany(mappedBy = "publicite")
+   
     private List<Image> images;
+
+    
+
+  public Publicite() {
+  }
+
+
+
+  public Publicite(Long id, String titre, String description, Restaurant restaurant, List<Image> images) {
+    this.id = id;
+    this.titre = titre;
+    this.description = description;
+    this.restaurant = restaurant;
+    this.images = images;
+  }
+
+
+
+    
 
 }

@@ -61,8 +61,8 @@ public class Restaurant {
     private String heure_fermeture;
 
     @Basic
-    @Column(name = "jour_ouverture", nullable = false)
-    private String jour_ouverture;
+    @Column(name = "jour_ouverture", nullable = true)
+    private ArrayList<String> jour_ouverture;
 
     @Basic
     @Column(name = "coordonnee_gps_x",length = 50)
