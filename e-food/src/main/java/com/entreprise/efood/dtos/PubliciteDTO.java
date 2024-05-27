@@ -42,10 +42,10 @@ public class PubliciteDTO{
         List<Long> ids = new ArrayList<>();
 
         if(pub.getImages() != null){
-            System.err.println("NULL");
             for (Image i : pub.getImages()) {
                 Long id =  i.getId();
                 ids.add(id);
+                
             }
     }
         this.id = pub.getId();

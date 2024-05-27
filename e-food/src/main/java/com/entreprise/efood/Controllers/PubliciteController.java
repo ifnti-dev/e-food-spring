@@ -17,6 +17,7 @@ import com.entreprise.efood.services.PubliciteService;
 
 
 @RestController
+@CrossOrigin("http://192.168.62.119:8888/")
 @RequestMapping("/api/v1/publicites")
 public class PubliciteController {
 

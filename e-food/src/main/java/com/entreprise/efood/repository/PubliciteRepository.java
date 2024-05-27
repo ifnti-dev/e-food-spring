@@ -12,7 +12,7 @@ import org.springframework.data.repository.query.Param;
 
 public interface PubliciteRepository extends JpaRepository<Publicite, Long> {
 
-    @Query("select new com.entreprise.efood.dtos.PubliciteDTO(p.id, p.titre, p.description) from Publicite p")
+    @Query("select new com.entreprise.efood.dtos.PubliciteDTO(p) from Publicite p")
     public List<PubliciteDTO> findAllPub() ;
 
     @Query("select new com.entreprise.efood.dtos.PubliciteDTO(p.id, p.titre, p.description) from Publicite p "+
