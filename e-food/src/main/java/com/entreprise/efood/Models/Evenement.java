@@ -63,7 +63,7 @@ public class Evenement implements Serializable {
     @Temporal(TemporalType.DATE)
     @JsonFormat(shape = JsonFormat.Shape.NUMBER)
     @Column(name = "date_fin")
-    private Date date_fin;
+    private String date_fin;
 
     @ManyToOne
     @JoinColumn(name = "restaurant_id")
