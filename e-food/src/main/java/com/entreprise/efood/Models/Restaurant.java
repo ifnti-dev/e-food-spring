@@ -93,7 +93,7 @@ public class Restaurant {
     private List<Employee> employees;
 
     public Restaurant(Long id) {
-        this.id = id;
+        this.code = id;
     }
 
 
