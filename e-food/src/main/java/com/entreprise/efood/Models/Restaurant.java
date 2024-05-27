@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalTime;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -91,5 +91,13 @@ public class Restaurant {
 
     @OneToMany(mappedBy = "restaurant")
     private List<Employee> employees;
+
+    public Restaurant(Long id) {
+        this.id = id;
+    }
+
+
+
+    
 
 }
