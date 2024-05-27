@@ -1,10 +1,12 @@
 package com.entreprise.efood.Models;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-import org.hibernate.annotations.ManyToAny;
+
 
 import com.entreprise.efood.utils.AppConstant;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Basic;
 
@@ -31,7 +33,11 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "evenements",schema = AppConstant.SCHEMA_RESTAURANT)
-public class Evenement {
+public class Evenement implements Serializable {
+
+
+    private static final long serialVersionUID = 1L;
+
     @Id
     @Column(name = "code")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "event_id_seq")
@@ -49,13 +55,15 @@ public class Evenement {
     private String description;
 
     @Temporal(TemporalType.DATE)
+    @JsonFormat(shape = JsonFormat.Shape.NUMBER)
     @Column(name = "date_debut")
     private Date date_debut;
 
     
     @Temporal(TemporalType.DATE)
+    @JsonFormat(shape = JsonFormat.Shape.NUMBER)
     @Column(name = "date_fin")
-    private Date date_fin;
+    private String date_fin;
 
     @ManyToOne
     @JoinColumn(name = "restaurant_id")

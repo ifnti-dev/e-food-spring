@@ -28,22 +28,22 @@ import lombok.Setter;
 @NoArgsConstructor
 
 @Entity
-@Table(name = "composants",schema = AppConstant.SCHEMA_MENU)
+@Table(name = "composants", schema = AppConstant.SCHEMA_MENU)
 public class Composant {
 
     @Id
     @Column(name = "code")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-  
+
     @Basic
-    @Column(name ="nom", nullable = false)
+    @Column(name = "nom", nullable = false)
     private String nom;
 
-    @Column(name ="prix", nullable = false)
+    @Column(name = "prix", nullable = false)
     private double prix;
 
-    @Column(name ="composition")
+    @Column(name = "composition")
     private ArrayList<String> composition;
 
     @ManyToMany(mappedBy = "composants")
@@ -51,12 +51,10 @@ public class Composant {
 
     @CreatedDate
     @Column(name = "created_at")
-    private Instant createdAt=Instant.now();
+    private Instant createdAt = Instant.now();
 
-   
-    
     @LastModifiedDate
     @Column(name = "updated_at")
-    private Instant updatedAt=Instant.now();
+    private Instant updatedAt = Instant.now();
 
 }
