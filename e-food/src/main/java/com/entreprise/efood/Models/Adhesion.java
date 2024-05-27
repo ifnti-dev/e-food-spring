@@ -10,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,7 +19,8 @@ import lombok.Setter;
 
 
 @Entity
-@Table(name = "adhesions")
+@Table(name = "adhesions" ,schema = AppConstant.SCHEMA_RESTAURANT)
+
 @Setter
 @Getter
 @NoArgsConstructor
@@ -26,7 +28,8 @@ import lombok.Setter;
 public class Adhesion {
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY  ,generator = "adhesion_id_seq")
+    @SequenceGenerator(name = "adhesion_id_seq", sequenceName = "adhesion_id_seq",allocationSize = 10)
     private Long id;
 
     @Basic
