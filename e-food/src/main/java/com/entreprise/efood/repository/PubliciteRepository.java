@@ -5,14 +5,14 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-
+import com.entreprise.efood.Models.Image;
 import com.entreprise.efood.Models.Publicite;
 import com.entreprise.efood.dtos.PubliciteDTO;
 import org.springframework.data.repository.query.Param;
 
 public interface PubliciteRepository extends JpaRepository<Publicite, Long> {
      @Query("SELECT new com.entreprise.efood.Models.Image(i) FROM Image i "
-            + " WHERE i.publicite_id=:pubID")
+            + " WHERE i.publicite.id=:pubID")
     public List<Image> getEventImages(@Param("pubID") String pubID);
 
 
