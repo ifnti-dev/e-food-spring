@@ -51,7 +51,6 @@ public class MenuCommande {
     @JoinColumn(name = "menus_id")
     private Menu menu;
 
-      
 
     @Column(name = "quantite")
     private int quantite;
