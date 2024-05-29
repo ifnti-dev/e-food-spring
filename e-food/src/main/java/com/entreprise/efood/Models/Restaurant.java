@@ -34,7 +34,7 @@ public class Restaurant {
     @Column(name = "code")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "restaurant_id_seq")
     @SequenceGenerator(name = "restaurant_id_seq", sequenceName = "restaurant_id_seq",allocationSize = 100)
-    private Long id;
+    private Long code;
     
     @Basic
     @Column(name = "nom", length = 30, nullable = false)
@@ -93,7 +93,7 @@ public class Restaurant {
     private List<Employee> employees;
 
     public Restaurant(Long id) {
-        this.id = id;
+        this.code = id;
     }
 
 
