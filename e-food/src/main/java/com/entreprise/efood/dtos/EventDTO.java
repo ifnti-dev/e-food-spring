@@ -2,6 +2,7 @@ package com.entreprise.efood.dtos;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.text.ParseException;
 
 import com.entreprise.efood.utils.FormatDate;
@@ -21,12 +22,12 @@ public class EventDTO implements Serializable {
     private String description;
 
     @NotNull()
-    @JsonFormat(shape = JsonFormat.Shape.NUMBER)
-    private Date date_debut;
+
+    private Timestamp date_debut;
 
     @NotNull
     @JsonFormat(shape = JsonFormat.Shape.NUMBER)
-    private Date date_fin;
+    private Timestamp date_fin;
 
     @NotNull
     private Long code;
@@ -44,7 +45,7 @@ public class EventDTO implements Serializable {
     }
 
     // Celui-ci pour la lecture des events d'un restaurant
-    public EventDTO(Long id_restaurant, String description, Date date_debut, Date date_fin, String titre, Long code)
+    public EventDTO(Long id_restaurant, String description, Timestamp date_debut, Timestamp date_fin, String titre, Long code)
             throws ParseException {
         this.id_restaurant = id_restaurant;
         this.description = description;

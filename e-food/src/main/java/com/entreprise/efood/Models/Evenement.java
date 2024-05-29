@@ -1,12 +1,10 @@
 package com.entreprise.efood.Models;
 
 import java.io.Serializable;
-import java.sql.Date;
-
-
+import java.sql.Timestamp;
 
 import com.entreprise.efood.utils.AppConstant;
-import com.fasterxml.jackson.annotation.JsonFormat;
+
 
 import jakarta.persistence.Basic;
 
@@ -54,16 +52,17 @@ public class Evenement implements Serializable {
     @Column(name = "description",nullable = false)
     private String description;
 
-    @Temporal(TemporalType.DATE)
-    @JsonFormat(shape = JsonFormat.Shape.NUMBER)
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "date_debut")
-    private Date date_debut;
+    private Timestamp date_debut;
+
+    @Column(name = "status")
+    private boolean status = false;
 
     
-    @Temporal(TemporalType.DATE)
-    @JsonFormat(shape = JsonFormat.Shape.NUMBER)
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "date_fin")
-    private Date date_fin;
+    private Timestamp date_fin;
 
     @ManyToOne
     @JoinColumn(name = "restaurant_id")

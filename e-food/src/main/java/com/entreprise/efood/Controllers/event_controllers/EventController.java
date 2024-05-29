@@ -37,7 +37,10 @@ public class EventController {
 
     @PostMapping(value="/")
     public EventDTO createRestaurantEvents(@RequestBody EventDTO event) {
+
         
+        
+
         eventService.createEvent(event);
         
         return event;

@@ -57,6 +57,10 @@
             <column name="description" type="TEXT">
                 <constraints nullable="false" />
             </column>
+
+            <column name="status" type="BOOL" >
+                <constraints nullable="false" />
+            </column>
             <column name="date_debut" type="DATE"/>
              <column name="date_fin" type="DATE"/>
              <!-- add foreignkey after -->
