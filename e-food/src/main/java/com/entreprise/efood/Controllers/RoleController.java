@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,9 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.entreprise.efood.dtos.RoleDTO;
 import com.entreprise.efood.services.RoleService;
-
+@CrossOrigin("*")
 @RestController
-@RequestMapping("/role")
+@RequestMapping("/roles")
 public class RoleController {
 
     @Autowired
@@ -35,7 +36,7 @@ public class RoleController {
         return ResponseEntity.ok(roleDTO);
     }
 
-    @GetMapping("/listroles")
+    @GetMapping()
     public ResponseEntity<List<RoleDTO>> getAllRoles(){
         List<RoleDTO> roleDTOs = roleService.getAllRoles();
         return ResponseEntity.ok(roleDTOs);

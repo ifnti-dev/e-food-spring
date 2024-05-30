@@ -1,8 +1,10 @@
 package com.entreprise.efood.services;
 
+import com.entreprise.efood.Models.Role;
 import com.entreprise.efood.Models.User;
 import com.entreprise.efood.dtos.LoginUserDto;
 import com.entreprise.efood.dtos.RegisterUserDto;
+import com.entreprise.efood.repository.RoleRepository;
 import com.entreprise.efood.repository.UserRepository;
 
 import org.springframework.security.authentication.AuthenticationManager;
@@ -29,6 +31,10 @@ public class AuthenticationService {
     }
 
     public User signup(RegisterUserDto input) {
+        Role roleUser = new Role();
+        roleUser.setId((long) 2);
+        roleUser.setLibelle("ROLE_USER");
+
         User user = new User();
                 user.setNom(input.getNom());
                 user.setUsername(input.getUsername());
@@ -38,11 +44,7 @@ public class AuthenticationService {
                 user.setAdresse(input.getAdresse());
                 user.setTelephone(input.getTelephone());
                 user.setVille(input.getVille());
-
-
-
-
-
+                user.setRole(roleUser);
         return userRepository.save(user);
     }
 

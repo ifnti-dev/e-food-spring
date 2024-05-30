@@ -35,6 +35,7 @@ public class RoleService {
         role.setLibelle(roleDTO.getLibelle());
         role.setUsers(userRepository.findAllById(roleDTO.getUsers()));
         role.setPermissions(permissionRepository.findAllById(roleDTO.getPermissions()));
+        
         Role savedRole = roleRepository.save(role);
         return RoleMapper.maptoRoleDto(savedRole);
     }

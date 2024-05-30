@@ -1,6 +1,7 @@
 package com.entreprise.efood.Controllers;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,7 @@ import com.entreprise.efood.services.AuthenticationService;
 import com.entreprise.efood.services.JwtService;
 import com.entreprise.efood.utils.LoginResponse;
 
+@CrossOrigin("http://localhost:5173/")
 @RequestMapping("/auth")
 @RestController
 public class AuthenticationController {
