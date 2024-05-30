@@ -1,5 +1,7 @@
 package com.entreprise.efood.dtos;
 
+import java.util.ArrayList;
+
 import groovyjarjarantlr4.v4.runtime.misc.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,7 +13,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class RestaurantDTO {
     
-    private String id;
+    private Long code;
 
     @NotNull
     private String nom;
@@ -49,6 +51,7 @@ public class RestaurantDTO {
 
     @NotNull
     private double coordonnee_gps_y;
+
 
    
 }
