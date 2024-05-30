@@ -51,7 +51,7 @@ public class PubliciteDTO{
         this.id = pub.getId();
         this.titre = pub.getTitre();
         this.description = pub.getDescription();
-        this.restaurantId = pub.getRestaurant().getId();
+        this.restaurantId = pub.getRestaurant().getCode();
         this.imagesIds = ids;
   
 }
