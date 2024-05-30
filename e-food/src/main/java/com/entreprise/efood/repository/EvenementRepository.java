@@ -17,7 +17,7 @@ import com.entreprise.efood.dtos.EventDTO;
 
 public interface EvenementRepository extends JpaRepository<Evenement, Long> {
 
-    @Query("SELECT new com.entreprise.efood.dtos.EventDTO(event.restaurant.id,event.description,event.date_debut,event.date_fin,event.titre,event.id) FROM Evenement event Where event.restaurant.id=:restaurant_id")
+    @Query("SELECT new com.entreprise.efood.dtos.EventDTO(event.restaurant.id,event.description,event.date_debut,event.date_fin,event.titre,event.id,event.status) FROM Evenement event Where event.restaurant.id=:restaurant_id")
     public List<EventDTO> getEventsByRestaurant(@Param("restaurant_id") Long restaurant_id);
 
     @Transactional
