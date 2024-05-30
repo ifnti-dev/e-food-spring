@@ -39,15 +39,20 @@ public class MenuDTO {
 
     private List<Composant> composants;
 
-    public MenuDTO(Long id, String nom, double prix, String temps_preparation, String statut, Restaurant restaurant) {
+    public MenuDTO(Long id, String nom, double prix, String temps_preparation, String statut) {
         this.id = id;
         this.nom = nom;
         this.prix = prix;
         this.temps_preparation = temps_preparation;
         this.statut = statut;
-        this.restaurant = restaurant;
+
     }
 
-    
+    @Override
+    public String toString() {
+        return "MenuDTO [id=" + id + ", nom=" + nom + ", prix=" + prix + ", temps_preparation=" + temps_preparation
+                + ", statut=" + statut + ", images=" + images + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt
+                + ", restaurant=" + restaurant + ", composants=" + composants + "]";
+    }
 
 }
