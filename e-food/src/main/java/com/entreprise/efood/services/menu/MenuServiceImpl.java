@@ -80,6 +80,10 @@ public class MenuServiceImpl implements MenuService {
         Map<String, MenuDTO> message = new HashMap<>();
         try {
             MenuDTO menuDTO = menuRepository.getMenuById(menu_id);
+            if (menuDTO == null) {
+                message.put("message", menuDTO);
+                return new ResponseEntity<Map<String, MenuDTO>>(message, HttpStatus.NOT_FOUND);
+            }
             Menu menu = menuRepository.findById(menu_id).get();
             List<Long> composants_ids = new ArrayList<>();
             for (Composant composant : menu.getComposants()) {
@@ -110,7 +114,7 @@ public class MenuServiceImpl implements MenuService {
                 menuDTO.setPrix((Double) requestMap.get("prix"));
                 menuDTO.setStatut((String) requestMap.get("statut"));
                 menuDTO.setTemps_preparation((String) requestMap.get("temps_preparation"));
-                Restaurant restaurant = restaurantRepository.getById(restaurant_id);
+                Restaurant restaurant = restaurantRepository.findById(restaurant_id).get();
                 List<Composant> composants = getComposantsByIds(
                         Converters.convertStringArrayToLongArray(requestMap.get("composantes")));
                 menuDTO.setComposantes(composants);
@@ -139,7 +143,11 @@ public class MenuServiceImpl implements MenuService {
         try {
             if (MenuValidators.validateMenuEntry(requestMap)) {
                 MenuDTO menuDTO = new MenuDTO();
-                Menu menu = menuRepository.getById(menu_id);
+                Menu menu = menuRepository.findById(restaurant_id).get();
+                if (menu == null) {
+                    message.put("message", "Menu inexistant");
+                    return new ResponseEntity<Map<String, String>>(message, HttpStatus.NOT_FOUND);
+                }
                 menuDTO.setNom((String) requestMap.get("nom"));
                 menuDTO.setPrix((Double) requestMap.get("prix"));
                 menuDTO.setStatut((String) requestMap.get("statut"));
@@ -148,7 +156,7 @@ public class MenuServiceImpl implements MenuService {
                         Converters.convertStringArrayToLongArray(requestMap.get("composantes")));
                 menuDTO.setComposantes(composants);
 
-                Restaurant restaurant = restaurantRepository.getById(restaurant_id);
+                Restaurant restaurant = restaurantRepository.findById(restaurant_id).get();
 
                 menu.setRestaurant(restaurant);
                 menu = MenuMapper.mapToMenu(menuDTO, menu);
@@ -170,6 +178,10 @@ public class MenuServiceImpl implements MenuService {
         Map<String, String> message = new HashMap<>();
         try {
             Menu menu = menuRepository.findById(menu_id).get();
+            if (menu == null) {
+                message.put("message", "Menu inexistant");
+                return new ResponseEntity<Map<String, String>>(message, HttpStatus.NOT_FOUND);
+            }
             List<Composant> composants = new ArrayList<Composant>();
             menu.setComposants(composants);
             menuRepository.save(menu);
