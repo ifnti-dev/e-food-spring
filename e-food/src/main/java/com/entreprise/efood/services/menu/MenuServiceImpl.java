@@ -43,10 +43,18 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    public ResponseEntity<Map<String, List<MenuDTO>>> getAllMenus(Long restaurant_id) {
+    public ResponseEntity getAllMenus(Long restaurant_id) {
         Map<String, List<MenuDTO>> menus = new HashMap<>();
         try {
             List<MenuDTO> menuDTOs = menuRepository.getMenus(restaurant_id);
+            for (MenuDTO menuDTO : menuDTOs) {
+                Menu menu = menuRepository.findById(menuDTO.getId()).get();
+                List<Long> composants_ids = new ArrayList<>();
+                for (Composant composant : menu.getComposants()) {
+                    composants_ids.add(composant.getId());
+                }
+                menuDTO.setComposants_ids(composants_ids);
+            }
             menus.put("menus", menuDTOs);
             return new ResponseEntity<Map<String, List<MenuDTO>>>(menus, HttpStatus.OK);
 
@@ -58,10 +66,10 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    public ResponseEntity<Map<String, MenuDTO>> getMenu(Long menu_id) {
+    public ResponseEntity getMenu(Long menu_id) {
         Map<String, MenuDTO> message = new HashMap<>();
         try {
-            MenuDTO menuDTO = menuRepository.getMenuById(menu_id);
+            MenuDTO menuDTO = MenuMapper.mapToMenuDTO(menuRepository.findById(menu_id).get());
             message.put("menu", menuDTO);
             return new ResponseEntity<Map<String, MenuDTO>>(message, HttpStatus.OK);
         } catch (Exception e) {
@@ -83,18 +91,14 @@ public class MenuServiceImpl implements MenuService {
                 menuDTO.setStatut((String) requestMap.get("statut"));
                 menuDTO.setTemps_preparation((String) requestMap.get("temps_preparation"));
                 Restaurant restaurant = restaurantRepository.getById(restaurant_id);
-                menuDTO.setRestaurant(restaurant);
-
                 List<Composant> composants = getComposantsByIds(requestMap.get("composantes"));
-                menuDTO.setComposants(composants);
 
                 // System.out.println(composants.get(0).toString());
 
                 menu = MenuMapper.mapToMenu(menuDTO, menu);
 
                 for (Composant composant : composants) {
-                    List<Menu> menus = composant.getMenus();
-                    menus.add(menu);
+                    composant.assignMenu(menu);
                     composantRepository.save(composant);
                 }
 
@@ -127,9 +131,7 @@ public class MenuServiceImpl implements MenuService {
                 List<Composant> composants = getComposantsByIds(requestMap.get("composantes"));
 
                 Restaurant restaurant = restaurantRepository.getById(restaurant_id);
-                menuDTO.setRestaurant(restaurant);
 
-                menuDTO.setComposants(composants);
                 menu = MenuMapper.mapToMenu(menuDTO, menu);
                 // menuRepository.save(menu);
                 message.put("message", "Menu mis à jour correctement");
@@ -143,5 +145,4 @@ public class MenuServiceImpl implements MenuService {
         message.put("message", "Erreur interne du serveur");
         return new ResponseEntity<Map<String, String>>(message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
-
 }
