@@ -57,4 +57,7 @@ public class Composant {
     @Column(name = "updated_at")
     private Instant updatedAt = Instant.now();
 
+    public void assignMenu(Menu menu) {
+        menus.add(menu);
+    }
 }

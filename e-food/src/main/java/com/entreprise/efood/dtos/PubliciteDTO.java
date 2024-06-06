@@ -1,12 +1,10 @@
 package com.entreprise.efood.dtos;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
 import com.entreprise.efood.Models.Image;
 import com.entreprise.efood.Models.Publicite;
-
 
 // import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -20,14 +18,12 @@ import com.entreprise.efood.Models.Publicite;
 // @Getter
 // // @NoArgsConstructor
 // @Setter
-public class PubliciteDTO{
+public class PubliciteDTO {
     private Long id;
     private String titre;
     private String description;
     private Long restaurantId;
     private List<Long> imagesIds;
-
-    
 
     public PubliciteDTO() {
     }
@@ -38,23 +34,23 @@ public class PubliciteDTO{
         this.description = description;
     }
 
-    public PubliciteDTO(Publicite pub){
+    public PubliciteDTO(Publicite pub) {
         List<Long> ids = new ArrayList<>();
 
-        if(pub.getImages() != null){
+        if (pub.getImages() != null) {
             for (Image i : pub.getImages()) {
-                Long id =  i.getId();
+                Long id = i.getId();
                 ids.add(id);
-                
+
             }
-    }
+        }
         this.id = pub.getId();
         this.titre = pub.getTitre();
         this.description = pub.getDescription();
-        this.restaurantId = pub.getRestaurant().getId();
+        this.restaurantId = pub.getRestaurant().getCode();
         this.imagesIds = ids;
-  
-}
+
+    }
 
     public Long getId() {
         return id;
@@ -105,10 +101,4 @@ public class PubliciteDTO{
                 + ", toString()=" + super.toString() + "]";
     }
 
-
-
-
-
 }
-
-

@@ -6,6 +6,8 @@ import com.entreprise.efood.dtos.MenuDTO;
 public class MenuMapper {
 
     public static Menu mapToMenu(MenuDTO menuDTO, Menu menu) {
+
+        // si le DTO contient un identifiant celui-ci est affecté au menu
         if (menuDTO.getId() != null) {
             menu.setId(menuDTO.getId());
         }
@@ -13,8 +15,7 @@ public class MenuMapper {
         menu.setPrix(menuDTO.getPrix());
         menu.setTemps_preparation(menuDTO.getTemps_preparation());
         menu.setStatut(menuDTO.getStatut());
-        menu.setRestaurant(menuDTO.getRestaurant());
-        menu.setComposants(menuDTO.getComposants());
+        menu.setComposants(menuDTO.getComposantes());
         menu.setImages(menuDTO.getImages());
         return menu;
     }
@@ -26,8 +27,6 @@ public class MenuMapper {
         menuDTO.setPrix(menu.getPrix());
         menuDTO.setTemps_preparation(menu.getTemps_preparation());
         menuDTO.setStatut(menu.getStatut());
-        menuDTO.setRestaurant(menu.getRestaurant());
-        menuDTO.setComposants(menu.getComposants());
         menuDTO.setImages(menu.getImages());
         return menuDTO;
     }

@@ -19,6 +19,4 @@ public interface ComposantRepository extends JpaRepository<Composant, Long> {
     @Query("SELECT new com.entreprise.efood.dtos.ComposantDTO(c.id, c.nom, c.prix, c.composition,  c.createdAt, c.updatedAt) from Composant c ")
     public List<ComposantDTO> getComposants();
 
-    
-
 }
