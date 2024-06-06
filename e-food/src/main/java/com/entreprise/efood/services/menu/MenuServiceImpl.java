@@ -46,15 +46,25 @@ public class MenuServiceImpl implements MenuService {
     public ResponseEntity getAllMenus(Long restaurant_id) {
         Map<String, List<MenuDTO>> menus = new HashMap<>();
         try {
+            // récupération de la liste des menus d'un restaurant sans les restaurants et
+            // les composantes
             List<MenuDTO> menuDTOs = menuRepository.getMenus(restaurant_id);
+
+            // boucle permettant de récupérer les identifiants des composantes de chaque
+            // menu
             for (MenuDTO menuDTO : menuDTOs) {
+                // on récupère le menu et ses composantes
                 Menu menu = menuRepository.findById(menuDTO.getId()).get();
+                // tableau vide destiné à contenir les identifiants
                 List<Long> composants_ids = new ArrayList<>();
+                // sur chaque composant du menu on ajoute son identifiant au tableau
                 for (Composant composant : menu.getComposants()) {
                     composants_ids.add(composant.getId());
                 }
+                // ici est affecté le tableau d'identifiants des composantes du menu à celui-ci
                 menuDTO.setComposants_ids(composants_ids);
             }
+            // ajout de la liste de menus dans la réponse
             menus.put("menus", menuDTOs);
             return new ResponseEntity<Map<String, List<MenuDTO>>>(menus, HttpStatus.OK);
 
