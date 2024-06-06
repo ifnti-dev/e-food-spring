@@ -14,4 +14,6 @@ public interface MenuService {
 
     public ResponseEntity updateMenu(Map<String, Object> requestMap, Long menu_id,
             Long restaurant_id);
+
+    public ResponseEntity deleteMenu(Long menu_id);
 }

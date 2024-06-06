@@ -90,7 +90,7 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    public ResponseEntity<Map<String, String>> createMenu(Map<String, Object> requestMap, Long restaurant_id) {
+    public ResponseEntity createMenu(Map<String, Object> requestMap, Long restaurant_id) {
         Map<String, String> message = new HashMap<>();
         try {
             if (MenuValidators.validateMenuEntry(requestMap)) {
@@ -123,7 +123,7 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    public ResponseEntity<Map<String, String>> updateMenu(Map<String, Object> requestMap, Long menu_id,
+    public ResponseEntity updateMenu(Map<String, Object> requestMap, Long menu_id,
             Long restaurant_id) {
         Map<String, String> message = new HashMap<>();
         try {
@@ -154,4 +154,22 @@ public class MenuServiceImpl implements MenuService {
         message.put("message", "Erreur interne du serveur");
         return new ResponseEntity<Map<String, String>>(message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    @Override
+    public ResponseEntity deleteMenu(Long menu_id) {
+        Map<String, String> message = new HashMap<>();
+        try {
+            Menu menu = menuRepository.findById(menu_id).get();
+            List<Composant> composants = new ArrayList<Composant>();
+            menu.setComposants(composants);
+            menuRepository.save(menu);
+            menuRepository.delete(menu);
+            message.put("message", "Menu supprimé correctement");
+            return new ResponseEntity<>(message, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(message, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
 }
