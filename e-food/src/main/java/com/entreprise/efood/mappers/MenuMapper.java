@@ -13,6 +13,7 @@ public class MenuMapper {
         menu.setPrix(menuDTO.getPrix());
         menu.setTemps_preparation(menuDTO.getTemps_preparation());
         menu.setStatut(menuDTO.getStatut());
+        menu.setComposants(menuDTO.getComposantes());
         menu.setImages(menuDTO.getImages());
         return menu;
     }
