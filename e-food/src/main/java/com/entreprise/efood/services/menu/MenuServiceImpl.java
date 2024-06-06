@@ -38,8 +38,8 @@ public class MenuServiceImpl implements MenuService {
     @Autowired
     private ComposantRepository composantRepository;
 
-    public List<Composant> getComposantsByIds(Object object) {
-        return composantRepository.findAllById(Converters.convertStringArrayToLongArray(object));
+    public List<Composant> getComposantsByIds(List<Long> ids) {
+        return composantRepository.findAllById(ids);
     }
 
     @Override
@@ -69,7 +69,17 @@ public class MenuServiceImpl implements MenuService {
     public ResponseEntity getMenu(Long menu_id) {
         Map<String, MenuDTO> message = new HashMap<>();
         try {
-            MenuDTO menuDTO = MenuMapper.mapToMenuDTO(menuRepository.findById(menu_id).get());
+            MenuDTO menuDTO = menuRepository.getMenuById(menu_id);
+            Menu menu = menuRepository.findById(menu_id).get();
+            List<Long> composants_ids = new ArrayList<>();
+            for (Composant composant : menu.getComposants()) {
+                composants_ids.add(composant.getId());
+            }
+            List<Composant> composants = getComposantsByIds(composants_ids);
+            for (Composant composant : composants) {
+                composant.setMenus(null);
+            }
+            menuDTO.setComposantes(composants);
             message.put("menu", menuDTO);
             return new ResponseEntity<Map<String, MenuDTO>>(message, HttpStatus.OK);
         } catch (Exception e) {
@@ -91,7 +101,8 @@ public class MenuServiceImpl implements MenuService {
                 menuDTO.setStatut((String) requestMap.get("statut"));
                 menuDTO.setTemps_preparation((String) requestMap.get("temps_preparation"));
                 Restaurant restaurant = restaurantRepository.getById(restaurant_id);
-                List<Composant> composants = getComposantsByIds(requestMap.get("composantes"));
+                List<Composant> composants = getComposantsByIds(
+                        Converters.convertStringArrayToLongArray(requestMap.get("composantes")));
 
                 // System.out.println(composants.get(0).toString());
 
@@ -128,7 +139,8 @@ public class MenuServiceImpl implements MenuService {
                 menuDTO.setPrix((Double) requestMap.get("prix"));
                 menuDTO.setStatut((String) requestMap.get("statut"));
                 menuDTO.setTemps_preparation((String) requestMap.get("temps_preparation"));
-                List<Composant> composants = getComposantsByIds(requestMap.get("composantes"));
+                List<Composant> composants = getComposantsByIds(
+                        Converters.convertStringArrayToLongArray(requestMap.get("composantes")));
 
                 Restaurant restaurant = restaurantRepository.getById(restaurant_id);
 

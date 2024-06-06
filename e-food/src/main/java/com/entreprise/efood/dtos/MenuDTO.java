@@ -4,6 +4,7 @@ import java.time.Instant;
 
 import java.util.List;
 
+import com.entreprise.efood.Models.Composant;
 import com.entreprise.efood.Models.Image;
 
 import lombok.Getter;
@@ -31,6 +32,8 @@ public class MenuDTO {
     private Long restaurant_id;
 
     private List<Long> composants_ids;
+
+    private List<Composant> composantes;
 
     private Instant createdAt = Instant.now();
 
