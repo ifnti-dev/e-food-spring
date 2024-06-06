@@ -6,6 +6,8 @@ import com.entreprise.efood.dtos.MenuDTO;
 public class MenuMapper {
 
     public static Menu mapToMenu(MenuDTO menuDTO, Menu menu) {
+
+        // si le DTO contient un identifiant celui-ci est affecté au menu
         if (menuDTO.getId() != null) {
             menu.setId(menuDTO.getId());
         }
