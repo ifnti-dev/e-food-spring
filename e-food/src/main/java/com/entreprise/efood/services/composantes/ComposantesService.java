@@ -11,12 +11,12 @@ import com.entreprise.efood.dtos.ComposantDTO;
 public interface ComposantesService {
     // cette methode retourne la liste des composantes sous la forme d'un tableau de
     // clé valeur (clée: liste des composantes)
-    public ResponseEntity<Map<String, List<ComposantDTO>>> getAllComposants();
+    public ResponseEntity getAllComposants(Long restaurant_id);
 
-    public ResponseEntity<Map<String, String>> addComponsant(ComposantDTO composantDTO);
+    public ResponseEntity addComponsant(ComposantDTO composantDTO);
 
-    public ResponseEntity<Map<String, String>> updateComposant(ComposantDTO composantDTO, String id);
+    public ResponseEntity updateComposant(ComposantDTO composantDTO, String id);
 
-    public ResponseEntity<Map<String, String>> deleteComposant(String id);
+    public ResponseEntity deleteComposant(String id);
 
 }
