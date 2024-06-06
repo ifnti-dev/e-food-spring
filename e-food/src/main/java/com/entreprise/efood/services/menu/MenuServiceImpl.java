@@ -46,8 +46,7 @@ public class MenuServiceImpl implements MenuService {
     public ResponseEntity getAllMenus(Long restaurant_id) {
         Map<String, List<MenuDTO>> menus = new HashMap<>();
         try {
-            // récupération de la liste des menus d'un restaurant sans les restaurants et
-            // les composantes
+            // récupération de la liste des menus d'un restaurant sans les composantes
             List<MenuDTO> menuDTOs = menuRepository.getMenus(restaurant_id);
 
             // boucle permettant de récupérer les identifiants des composantes de chaque
@@ -79,22 +78,32 @@ public class MenuServiceImpl implements MenuService {
     public ResponseEntity getMenu(Long menu_id) {
         Map<String, MenuDTO> message = new HashMap<>();
         try {
+            // ici on récupère le menu sans ses composantes
             MenuDTO menuDTO = menuRepository.getMenuById(menu_id);
+
+            // si aucun menu n'est retrouvé une erreur 404 est retournée
             if (menuDTO == null) {
                 message.put("message", menuDTO);
                 return new ResponseEntity<Map<String, MenuDTO>>(message, HttpStatus.NOT_FOUND);
             }
+
+            // ici on recupère le menu et toutes ses associations
             Menu menu = menuRepository.findById(menu_id).get();
-            List<Long> composants_ids = new ArrayList<>();
-            for (Composant composant : menu.getComposants()) {
-                composants_ids.add(composant.getId());
-            }
-            List<Composant> composants = getComposantsByIds(composants_ids);
+
+            // récupérations des composantes du menu
+            List<Composant> composants = menu.getComposants();
+
+            // pour chaque composant l'attribut menu est défini à null pour éviter les
+            // récursions
             for (Composant composant : composants) {
                 composant.setMenus(null);
             }
+
+            // ici on affecte la liste de composantes du menu au menuDTO
             menuDTO.setComposantes(composants);
             message.put("menu", menuDTO);
+
+            // renvoi de la réponse
             return new ResponseEntity<Map<String, MenuDTO>>(message, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
@@ -107,23 +116,35 @@ public class MenuServiceImpl implements MenuService {
     public ResponseEntity createMenu(Map<String, Object> requestMap, Long restaurant_id) {
         Map<String, String> message = new HashMap<>();
         try {
+            // vérification des données en entrée
             if (MenuValidators.validateMenuEntry(requestMap)) {
+                // instanciation du DTO et de l'entitée
                 MenuDTO menuDTO = new MenuDTO();
                 Menu menu = new Menu();
+
+                // affectation des données aux attributs du DTO
                 menuDTO.setNom((String) requestMap.get("nom"));
                 menuDTO.setPrix((Double) requestMap.get("prix"));
                 menuDTO.setStatut((String) requestMap.get("statut"));
                 menuDTO.setTemps_preparation((String) requestMap.get("temps_preparation"));
                 Restaurant restaurant = restaurantRepository.findById(restaurant_id).get();
+                menu.setRestaurant(restaurant);
+
+                // récupération des composants depuis la liste d'identifiants des composantes
                 List<Composant> composants = getComposantsByIds(
+                        // conversion de la liste de chaine de caractère d'identifiants de composantes
+                        // en liste de Long
                         Converters.convertStringArrayToLongArray(requestMap.get("composantes")));
                 menuDTO.setComposantes(composants);
 
+                // mappage du DTO en entitée
                 menu = MenuMapper.mapToMenu(menuDTO, menu);
-                menu.setRestaurant(restaurant);
 
+                // sauvegarde des modifications
                 menuRepository.save(menu);
                 message.put("message", "Menu créé avec succès");
+
+                // renvoi de la réponse
                 return new ResponseEntity<Map<String, String>>(message, HttpStatus.CREATED);
 
             }
@@ -141,27 +162,44 @@ public class MenuServiceImpl implements MenuService {
             Long restaurant_id) {
         Map<String, String> message = new HashMap<>();
         try {
+            // vérification des données en entrée
             if (MenuValidators.validateMenuEntry(requestMap)) {
                 MenuDTO menuDTO = new MenuDTO();
+
+                // récupération de l'entitéz Menu
                 Menu menu = menuRepository.findById(restaurant_id).get();
+
+                // si l'entitée n'est pas retrouvée une erreur 404 est retournée
                 if (menu == null) {
                     message.put("message", "Menu inexistant");
                     return new ResponseEntity<Map<String, String>>(message, HttpStatus.NOT_FOUND);
                 }
+
+                // passage des donnée dans le dto
                 menuDTO.setNom((String) requestMap.get("nom"));
                 menuDTO.setPrix((Double) requestMap.get("prix"));
                 menuDTO.setStatut((String) requestMap.get("statut"));
                 menuDTO.setTemps_preparation((String) requestMap.get("temps_preparation"));
+
+                // récupération des nouvelles composantes du menu
                 List<Composant> composants = getComposantsByIds(
                         Converters.convertStringArrayToLongArray(requestMap.get("composantes")));
+
+                // changement des composantes du menu
                 menuDTO.setComposantes(composants);
 
+                // affectation du restaurant au menu
                 Restaurant restaurant = restaurantRepository.findById(restaurant_id).get();
-
                 menu.setRestaurant(restaurant);
+
+                // mappage du DTO à l'entitée
                 menu = MenuMapper.mapToMenu(menuDTO, menu);
+
+                // sauvegarde des modifications
                 menuRepository.save(menu);
                 message.put("message", "Menu mis à jour correctement");
+
+                // renvoi de la réponse
                 return new ResponseEntity<Map<String, String>>(message, HttpStatus.OK);
             }
         } catch (InvalidNameValueForMenu | InvalidPriceValueForMenu | InvalidTempPreparationValueForMenu
