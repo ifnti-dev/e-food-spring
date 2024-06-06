@@ -216,15 +216,27 @@ public class MenuServiceImpl implements MenuService {
         Map<String, String> message = new HashMap<>();
         try {
             Menu menu = menuRepository.findById(menu_id).get();
+
+            // si l'entitée n'est pas retrouvée une erreur 404 est retournée
             if (menu == null) {
                 message.put("message", "Menu inexistant");
                 return new ResponseEntity<Map<String, String>>(message, HttpStatus.NOT_FOUND);
             }
+
+            // tableau vide permettant de "vider" les composantes du menu
             List<Composant> composants = new ArrayList<Composant>();
+
+            // retrait des composantes du menu en affectant une liste vide de composantes
             menu.setComposants(composants);
+
+            // sauvegarde de la modification
             menuRepository.save(menu);
+
+            // suppression du menu
             menuRepository.delete(menu);
             message.put("message", "Menu supprimé correctement");
+
+            // renvoi de la réponse
             return new ResponseEntity<>(message, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
