@@ -103,15 +103,10 @@ public class MenuServiceImpl implements MenuService {
                 Restaurant restaurant = restaurantRepository.getById(restaurant_id);
                 List<Composant> composants = getComposantsByIds(
                         Converters.convertStringArrayToLongArray(requestMap.get("composantes")));
-
-                // System.out.println(composants.get(0).toString());
+                menuDTO.setComposantes(composants);
 
                 menu = MenuMapper.mapToMenu(menuDTO, menu);
-
-                for (Composant composant : composants) {
-                    composant.assignMenu(menu);
-                    composantRepository.save(composant);
-                }
+                menu.setRestaurant(restaurant);
 
                 menuRepository.save(menu);
                 message.put("message", "Menu créé avec succès");
@@ -141,11 +136,13 @@ public class MenuServiceImpl implements MenuService {
                 menuDTO.setTemps_preparation((String) requestMap.get("temps_preparation"));
                 List<Composant> composants = getComposantsByIds(
                         Converters.convertStringArrayToLongArray(requestMap.get("composantes")));
+                menuDTO.setComposantes(composants);
 
                 Restaurant restaurant = restaurantRepository.getById(restaurant_id);
 
+                menu.setRestaurant(restaurant);
                 menu = MenuMapper.mapToMenu(menuDTO, menu);
-                // menuRepository.save(menu);
+                menuRepository.save(menu);
                 message.put("message", "Menu mis à jour correctement");
                 return new ResponseEntity<Map<String, String>>(message, HttpStatus.OK);
             }
