@@ -14,7 +14,7 @@ import com.entreprise.efood.services.AuthenticationService;
 import com.entreprise.efood.services.JwtService;
 import com.entreprise.efood.utils.LoginResponse;
 
-@CrossOrigin("http://localhost:5173/")
+// @CrossOrigin("http://localhost:5173/")
 @RequestMapping("/auth")
 @RestController
 public class AuthenticationController {

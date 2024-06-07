@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.entreprise.efood.Models.User;
 import com.entreprise.efood.services.UserService;
 
-@CrossOrigin("http://localhost:5173/")
+// @CrossOrigin("*")
 @RequestMapping("/users")
 @RestController
 public class UserController {
@@ -32,7 +32,7 @@ public class UserController {
 
         return ResponseEntity.ok(currentUser);
     }
-    // @PreAuthorize("hasAnyRole('ADMIN', 'SUPER_ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'SUPER_ADMIN')")
     @GetMapping()
     public ResponseEntity<List <User>> allUsers() {
         List <User> users = userService.allUsers();
