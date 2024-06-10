@@ -1,6 +1,7 @@
 package com.entreprise.efood.Models;
 
 
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -38,9 +39,9 @@ public class Commande {
     @SequenceGenerator(name = "commande_id_seq", sequenceName = "commande_id_seq",allocationSize = 10)
     private Long id;
 
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "date_commande")
-    private LocalDate date_commande;
+    private Timestamp date_commande;
 
     @Column(name = "etat")
     private String etat;
