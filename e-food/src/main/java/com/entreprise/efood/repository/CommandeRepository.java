@@ -9,6 +9,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 
 @Repository
-public interface commandeRepository  extends JpaRepository<Commande, Long>{
+public interface CommandeRepository  extends JpaRepository<Commande, Long>{
 
 }

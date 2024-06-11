@@ -1,4 +1,4 @@
-package com.entreprise.efood.Controllers.event_controllers;
+package com.entreprise.efood.Controllers;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

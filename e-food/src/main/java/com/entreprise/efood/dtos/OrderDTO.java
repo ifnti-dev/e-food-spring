@@ -11,7 +11,7 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class OrderCommandDTO {
+public class OrderDTO {
     @NotNull
     private String idClient;
     @NotNull
@@ -24,6 +24,8 @@ public class OrderCommandDTO {
     private String coordX;
     @Nullable
     private String coordY;
+    @NotNull
+    private int montant;
 
 }
 
