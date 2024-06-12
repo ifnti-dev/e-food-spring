@@ -50,13 +50,6 @@ public class Commande {
     @Column(name = "montant")
     private double montant;
 
-    @OneToOne
-    @JoinColumn(name = "paiement_id")
-    private Paiement paiement;
-
-    @OneToOne
-    @JoinColumn(name = "livraison_id")
-    private Paiement Livraison;
 
     @ManyToOne
     @JoinColumn(name = "client_id")

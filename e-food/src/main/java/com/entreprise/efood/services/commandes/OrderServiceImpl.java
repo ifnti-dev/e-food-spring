@@ -33,8 +33,9 @@ public class OrderServiceImpl implements CommandService {
         commande.setClient(client);
         commande.setDate_commande(Timestamp.from(Instant.now()));
         commande.setMontant(orderDTO.getMontant());
-        commandeRepository.save(commande);
-        return commande.getId();
+        commande.setEtat("en cours");
+        Commande savCommande = commandeRepository.save(commande);
+        return savCommande.getId();
     }
     
 }

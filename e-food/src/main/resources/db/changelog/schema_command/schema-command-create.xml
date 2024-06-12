@@ -125,12 +125,6 @@
 
 
 
- <!-- Roland addForeignKeyConstraint -->
-    <changeSet author="Roland" id="LIVRAISONS-FORENGKEY--UID001">
-        <addForeignKeyConstraint baseTableSchemaName="${schema_name}" baseColumnNames="commande_id" baseTableName="livraisons" constraintName="livraison_commandes_fk" deferrable="false" 
-        initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="code" referencedTableName="livraisons" referencedTableSchemaName="${schema_name}"/>
-</changeSet>
-
 
 
 
