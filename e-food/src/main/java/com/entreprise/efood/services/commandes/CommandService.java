@@ -1,7 +1,11 @@
 package com.entreprise.efood.services.commandes;
 
+import java.util.Map;
+
+import org.springframework.http.ResponseEntity;
+
 import com.entreprise.efood.dtos.OrderDTO;
 
 public interface CommandService {
-    public String storeOrder( OrderDTO orderDTO);
+    public ResponseEntity<Map<String, String>> storeOrder( OrderDTO orderDTO);
 }

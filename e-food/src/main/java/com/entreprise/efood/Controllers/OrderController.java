@@ -24,10 +24,10 @@ public class OrderController {
     }
     @PostMapping(value="/")
     public ResponseEntity<Map<String,String>>  order(@RequestBody OrderDTO orderDTO){
-        String cmdId =  orderServiceImpl.storeOrder(orderDTO);
-        Map<String,String> resMap = new HashMap<>();
-        //return idcommande like json
-        resMap.put("response", cmdId);
-        return ResponseEntity.ok(resMap);
+        
+        ResponseEntity<Map<String,String>> responseEntity =  orderServiceImpl.storeOrder(orderDTO);
+
+        
+        return responseEntity;
     }
 }

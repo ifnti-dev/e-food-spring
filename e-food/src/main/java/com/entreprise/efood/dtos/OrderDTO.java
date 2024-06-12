@@ -26,6 +26,8 @@ public class OrderDTO {
     private String coordY;
     @NotNull
     private int montant;
+    @Nullable
+    private boolean livrable ;
 
 }
 

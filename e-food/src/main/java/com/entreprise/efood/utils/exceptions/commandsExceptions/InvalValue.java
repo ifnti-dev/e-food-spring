@@ -1,8 +1,8 @@
 package com.entreprise.efood.utils.exceptions.commandsExceptions;
 
-public class InvalidIdValue extends Exception {
+public class InvalValue extends Exception {
 
-    public InvalidIdValue(String message){
+    public InvalValue(String message){
         super(message);
     }
     
