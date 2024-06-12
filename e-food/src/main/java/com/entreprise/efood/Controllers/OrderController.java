@@ -1,5 +1,8 @@
 package com.entreprise.efood.Controllers;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,8 +23,11 @@ public class OrderController {
         this.orderServiceImpl = orderServiceImpl;
     }
     @PostMapping(value="/")
-    public ResponseEntity<OrderDTO>  order(@RequestBody OrderDTO orderDTO){
-        orderServiceImpl.storeOrder(orderDTO);
-        return ResponseEntity.ok(orderDTO);
+    public ResponseEntity<Map<String,String>>  order(@RequestBody OrderDTO orderDTO){
+        String cmdId =  orderServiceImpl.storeOrder(orderDTO);
+        Map<String,String> resMap = new HashMap<>();
+        //return idcommande like json
+        resMap.put("response", cmdId);
+        return ResponseEntity.ok(resMap);
     }
 }

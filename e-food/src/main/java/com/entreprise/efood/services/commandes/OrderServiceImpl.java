@@ -10,9 +10,16 @@ import com.entreprise.efood.Models.Client;
 import com.entreprise.efood.Models.Commande;
 import com.entreprise.efood.dtos.OrderDTO;
 import com.entreprise.efood.repository.CommandeRepository;
+import com.entreprise.efood.utils.encryDecry.EncryptionUtil;
 
 @Service
 public class OrderServiceImpl implements CommandService {
+    @Autowired
+    EncryptionUtil encryptionUtil;
+
+    public OrderServiceImpl(EncryptionUtil encryptionUtil){
+        this.encryptionUtil = encryptionUtil;
+    }
 
     @Autowired
     CommandeRepository commandeRepository;
@@ -24,7 +31,7 @@ public class OrderServiceImpl implements CommandService {
     }
 
     @Override
-    public Long storeOrder(OrderDTO orderDTO) {
+    public String storeOrder(OrderDTO orderDTO) {
         // TODO Auto-generated method stub
         Long idClient = Long.parseLong(orderDTO.getIdClient());
         Client client = new Client();
@@ -35,7 +42,9 @@ public class OrderServiceImpl implements CommandService {
         commande.setMontant(orderDTO.getMontant());
         commande.setEtat("en cours");
         Commande savCommande = commandeRepository.save(commande);
-        return savCommande.getId();
+
+        String cmdId = Long.toString(savCommande.getId());
+        return encryptionUtil.encrypt(cmdId);
     }
     
 }
