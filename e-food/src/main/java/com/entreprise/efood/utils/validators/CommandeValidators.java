@@ -16,7 +16,7 @@ public class CommandeValidators {
             throw new InvalValue("Le montant est invalide");
         }
 
-        else if (orderDTO.isLivrable() == true && (orderDTO.getCoordX() == null || orderDTO.getCoordY() == null)) {
+        else if (orderDTO.isLivrable() == true && (orderDTO.getCoordX() == 0.0 || orderDTO.getCoordY() == 0.0)) {
             throw new InvalValue("Veuillez renseigner vos coordonnées");
         }
         return true;

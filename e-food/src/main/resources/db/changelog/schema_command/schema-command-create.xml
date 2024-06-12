@@ -36,9 +36,6 @@
 </changeSet>
 
 
-
-
-
 <!-- Table Livraison  -->
 <changeSet author="Roland" id="LIVRAISONS-CREATE-UID001">
         <createTable schemaName="${schema_name}" tableName="livraisons">
@@ -130,6 +127,11 @@
 
 <changeSet author="Roland" id="PAIEMENTS-FORENGKEY--UID001">
         <addForeignKeyConstraint baseTableSchemaName="${schema_name}" baseColumnNames="commande_id" baseTableName="paiements" constraintName="paiement_commandes_fk" deferrable="false" 
+        initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="code" referencedTableName="commandes" referencedTableSchemaName="${schema_name}"/>
+</changeSet>
+
+<changeSet author="Roland" id="LIVRAISON-COM-FORENGKEY--UID001">
+        <addForeignKeyConstraint baseTableSchemaName="${schema_name}" baseColumnNames="commande_id" baseTableName="livraisons" constraintName="livraisons_commandes_fk" deferrable="false" 
         initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="code" referencedTableName="commandes" referencedTableSchemaName="${schema_name}"/>
 </changeSet>
 

@@ -12,8 +12,10 @@ import org.springframework.stereotype.Service;
 
 import com.entreprise.efood.Models.Client;
 import com.entreprise.efood.Models.Commande;
+import com.entreprise.efood.Models.Livraison;
 import com.entreprise.efood.dtos.OrderDTO;
 import com.entreprise.efood.repository.CommandeRepository;
+import com.entreprise.efood.repository.LivraisonRepository;
 import com.entreprise.efood.utils.encryDecry.EncryptionUtil;
 import com.entreprise.efood.utils.exceptions.commandsExceptions.InvalValue;
 import com.entreprise.efood.utils.validators.CommandeValidators;
@@ -29,6 +31,8 @@ public class OrderServiceImpl implements CommandService {
 
     @Autowired
     CommandeRepository commandeRepository;
+    @Autowired
+    LivraisonRepository lRepository;
 
     @Override
     public String toString() {
@@ -57,6 +61,18 @@ public class OrderServiceImpl implements CommandService {
                 String cmdId = Long.toString(savCommande.getId());
 
                 if (orderDTO.isLivrable()) {
+                    // Instance of livraison
+                    Livraison livraison = new Livraison();
+                    livraison.setCoordonnee_x(orderDTO.getCoordX());
+                    livraison.setCoordonnee_y(orderDTO.getCoordY());
+                    livraison.setDescription(orderDTO.getDescription());
+                    //TODO:Create enumeration
+                    livraison.setStatut("En cours");
+                    livraison.setDate(Timestamp.from(Instant.now()));
+                    livraison.setCode("Liv");
+                    livraison.setCommande(commande);
+                    //data persist
+                    lRepository.save(livraison);
                     System.out.println("good job");
                 } else {
                     System.out.println("Oups !");
@@ -66,7 +82,10 @@ public class OrderServiceImpl implements CommandService {
             }
         } catch (InvalValue e) {
             message.put("Error", e.getMessage());
-           return new ResponseEntity<Map<String, String>>(message, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<Map<String, String>>(message, HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (Exception e) {
+            message.put("Error", e.getMessage());
+            return new ResponseEntity<Map<String, String>>(message, HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
         message.put("message", "Erreur lors de la création de la commande");

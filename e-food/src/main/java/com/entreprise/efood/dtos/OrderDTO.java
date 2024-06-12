@@ -21,13 +21,15 @@ public class OrderDTO {
     @Nullable
     private String preferences;
     @Nullable
-    private String coordX;
+    private double coordX;
     @Nullable
-    private String coordY;
+    private double coordY;
     @NotNull
     private int montant;
     @Nullable
     private boolean livrable ;
+    @Nullable
+    private String description;
 
 }
 

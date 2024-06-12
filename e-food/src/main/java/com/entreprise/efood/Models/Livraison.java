@@ -1,4 +1,5 @@
 package com.entreprise.efood.Models;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 
 import com.entreprise.efood.utils.AppConstant;
@@ -11,7 +12,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -37,9 +41,9 @@ public class Livraison {
     @Column(length = 30, nullable = false)
     private String description;
 
-    
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(length = 30, nullable = false)
-    private LocalDate date;
+    private Timestamp date;
 
     
     @Column(length = 30, nullable = false)
@@ -47,15 +51,19 @@ public class Livraison {
 
     
     @Column(length = 30, nullable = false)
-    private Long coordonnee_x;
+    private double coordonnee_x;
 
     
     @Column(length = 30, nullable = false)
-    private Long coordonnee_y;
+    private double coordonnee_y;
 
     @ManyToOne
     @JoinColumn(name = "employee_id")
     private Employee employee;
+
+    @OneToOne
+    @JoinColumn(name = "commande_id")
+    private Commande commande;
 
 
 }
