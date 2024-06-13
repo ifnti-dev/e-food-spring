@@ -16,6 +16,7 @@ import com.entreprise.efood.Models.Commande;
 import com.entreprise.efood.Models.Livraison;
 import com.entreprise.efood.dtos.OrderDTO;
 import com.entreprise.efood.dtos.StatusDTO;
+import com.entreprise.efood.enums.StatusEnum;
 import com.entreprise.efood.repository.CommandeRepository;
 import com.entreprise.efood.repository.LivraisonRepository;
 import com.entreprise.efood.utils.encryDecry.EncryptionUtil;
@@ -57,7 +58,7 @@ public class OrderServiceImpl implements CommandService {
                 commande.setClient(client);
                 commande.setDate_commande(Timestamp.from(Instant.now()));
                 commande.setMontant(orderDTO.getMontant());
-                commande.setEtat("en cours");
+                commande.setEtat(StatusEnum.EN_COURS.toString());
 
                 // Save commande
                 Commande savCommande = commandeRepository.save(commande);
@@ -112,10 +113,8 @@ public class OrderServiceImpl implements CommandService {
             Client client = new Client();
             client.setId(Long.parseLong(statusDTO.getIdClient()));
 
-            
-
             if (theCommande != null) {
-                theCommande.get().setEtat(statusDTO.getStatus());
+                theCommande.get().setEtat(StatusEnum.valueOf(statusDTO.getStatus()).toString());
                 theCommande.get().setClient(client);
                 commandeRepository.save(theCommande.get());
             }
@@ -126,6 +125,9 @@ public class OrderServiceImpl implements CommandService {
             
             return false;
 
+        }
+        catch(Exception e){
+            return false;
         }
 
       
