@@ -36,12 +36,13 @@
 </changeSet>
 
 
-<!-- Table Livraison  -->
+<!-- Table Livraisons  -->
 <changeSet author="Roland" id="LIVRAISONS-CREATE-UID001">
         <createTable schemaName="${schema_name}" tableName="livraisons">
             <column name="code" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
+
             <column name="description" type="VARCHAR(100)"/>
             <column name="date" type="date"/>
             <column name="statut" type="VARCHAR(10)"/>
@@ -50,12 +51,15 @@
             <column name="commande_id" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
+             <!-- <column name="employee_id" type="BIGINT">
+                <constraints nullable="true"/>
+            </column> -->
 
         </createTable>
 </changeSet>
 
 <changeSet author="Roland" id="LIVRAISONS-PRIMARYKEY-UID001">
-        <addPrimaryKey schemaName="${schema_name}" columnNames="code" constraintName="livraison-code_pk" tableName="livraisons"/>
+        <addPrimaryKey schemaName="${schema_name}" columnNames="code" constraintName="livraisons-pk" tableName="livraisons"/>
 </changeSet>
 
 

@@ -45,6 +45,6 @@ public class Employee extends Personne{
     @JoinColumn(name = "role_id")
     private Role role;
 
-    @OneToMany(mappedBy = "employee")
-    private List<Livraison> livraisons;
+    // @OneToMany(mappedBy = "employee")
+    // private List<Livraison> livraisons;
 }

@@ -47,7 +47,6 @@ public class OrderServiceImpl implements CommandService {
 
         try {
             if (CommandeValidators.validateCommandEntry(orderDTO)) {
-
                 Long idClient = Long.parseLong(orderDTO.getIdClient());
                 Client client = new Client();
                 client.setId(idClient);
@@ -56,24 +55,29 @@ public class OrderServiceImpl implements CommandService {
                 commande.setDate_commande(Timestamp.from(Instant.now()));
                 commande.setMontant(orderDTO.getMontant());
                 commande.setEtat("en cours");
+               
+                //Save commande
                 Commande savCommande = commandeRepository.save(commande);
+
 
                 String cmdId = Long.toString(savCommande.getId());
 
                 if (orderDTO.isLivrable()) {
                     // Instance of livraison
                     Livraison livraison = new Livraison();
+                    livraison.setCommande(savCommande);
                     livraison.setCoordonnee_x(orderDTO.getCoordX());
                     livraison.setCoordonnee_y(orderDTO.getCoordY());
                     livraison.setDescription(orderDTO.getDescription());
-                    //TODO:Create enumeration
+                    // TODO:Create enumeration
                     livraison.setStatut("En cours");
                     livraison.setDate(Timestamp.from(Instant.now()));
-                    livraison.setCode("Liv");
-                    livraison.setCommande(commande);
-                    //data persist
+                    
+                    // data persist
                     lRepository.save(livraison);
-                    System.out.println("good job");
+
+                    message.put("ok", "true");
+                    return new ResponseEntity<Map<String, String>>(message, HttpStatus.OK);
                 } else {
                     System.out.println("Oups !");
                 }
