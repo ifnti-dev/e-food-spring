@@ -10,6 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class StatusDTO {
-    private String id;
+    private String idCmd;
     private String status;
+    private String idClient;
 }
