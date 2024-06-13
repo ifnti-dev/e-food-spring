@@ -1,7 +1,9 @@
 package com.entreprise.efood.utils.validators;
 
 import com.entreprise.efood.dtos.OrderDTO;
+import com.entreprise.efood.dtos.StatusDTO;
 import com.entreprise.efood.utils.exceptions.commandsExceptions.InvalValue;
+import com.entreprise.efood.utils.exceptions.commandsExceptions.InvalidIdCommand;
 
 
 public class CommandeValidators {
@@ -20,5 +22,13 @@ public class CommandeValidators {
             throw new InvalValue("Veuillez renseigner vos coordonnées");
         }
         return true;
+    }
+
+    public static boolean validate(StatusDTO statusDTO) throws InvalidIdCommand{
+
+        
+
+        return true;
+
     }
 }

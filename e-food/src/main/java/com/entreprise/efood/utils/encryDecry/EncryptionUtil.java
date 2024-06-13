@@ -10,13 +10,15 @@ import javax.crypto.spec.SecretKeySpec;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.stereotype.Component;
 
+import com.entreprise.efood.utils.exceptions.commandsExceptions.InvalidIdCommand;
+
 @Component
 public class EncryptionUtil {
     private String key = "1234567812345678";
     private String initVector = "1234567812345678";
     private String algo = "AES/CBC/PKCS5PADDING";
 
-    public String encrypt(String value) {
+    public String encrypt(String value) throws InvalidIdCommand {
         try {
             IvParameterSpec iv = new IvParameterSpec(initVector.getBytes(StandardCharsets.UTF_8));
             SecretKeySpec skeySpec = new SecretKeySpec(key.getBytes(StandardCharsets.UTF_8), "AES");
@@ -27,12 +29,12 @@ public class EncryptionUtil {
             byte[] encrypted = cipher.doFinal(value.getBytes());
             return Base64.encodeBase64String(encrypted);
         } catch (Exception ex) {
-            ex.printStackTrace();
+            throw new InvalidIdCommand("Requête insatifaisante");
         }
-        return null;
+        
     }
 
-    public String decrypt(String encrypted) {
+    public String decrypt(String encrypted) throws InvalidIdCommand{
         try {
             IvParameterSpec iv = new IvParameterSpec(initVector.getBytes(StandardCharsets.UTF_8));
             SecretKeySpec skeySpec = new SecretKeySpec(key.getBytes(StandardCharsets.UTF_8), "AES");
@@ -43,8 +45,8 @@ public class EncryptionUtil {
             byte[] original = cipher.doFinal(Base64.decodeBase64(encrypted));
             return new String(original);
         } catch (Exception ex) {
-            ex.printStackTrace();
+            throw new InvalidIdCommand("Requête insatifaisante");
         }
-        return null;
+        
     }
 }

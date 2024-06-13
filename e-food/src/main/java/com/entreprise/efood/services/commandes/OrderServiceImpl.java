@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,10 +15,12 @@ import com.entreprise.efood.Models.Client;
 import com.entreprise.efood.Models.Commande;
 import com.entreprise.efood.Models.Livraison;
 import com.entreprise.efood.dtos.OrderDTO;
+import com.entreprise.efood.dtos.StatusDTO;
 import com.entreprise.efood.repository.CommandeRepository;
 import com.entreprise.efood.repository.LivraisonRepository;
 import com.entreprise.efood.utils.encryDecry.EncryptionUtil;
 import com.entreprise.efood.utils.exceptions.commandsExceptions.InvalValue;
+import com.entreprise.efood.utils.exceptions.commandsExceptions.InvalidIdCommand;
 import com.entreprise.efood.utils.validators.CommandeValidators;
 
 @Service
@@ -55,12 +58,13 @@ public class OrderServiceImpl implements CommandService {
                 commande.setDate_commande(Timestamp.from(Instant.now()));
                 commande.setMontant(orderDTO.getMontant());
                 commande.setEtat("en cours");
-               
-                //Save commande
+
+                // Save commande
                 Commande savCommande = commandeRepository.save(commande);
 
-
                 String cmdId = Long.toString(savCommande.getId());
+
+                String encrypString = encryptionUtil.encrypt(cmdId);
 
                 if (orderDTO.isLivrable()) {
                     // Instance of livraison
@@ -72,16 +76,17 @@ public class OrderServiceImpl implements CommandService {
                     // TODO:Create enumeration
                     livraison.setStatut("En cours");
                     livraison.setDate(Timestamp.from(Instant.now()));
-                    
+
                     // data persist
                     lRepository.save(livraison);
 
                     message.put("ok", "true");
+                    message.put("idCmd", encrypString);
                     return new ResponseEntity<Map<String, String>>(message, HttpStatus.OK);
                 } else {
                     System.out.println("Oups !");
                 }
-                message.put("response", encryptionUtil.encrypt(cmdId));
+                message.put("response", encrypString);
                 return new ResponseEntity<Map<String, String>>(message, HttpStatus.CREATED);
             }
         } catch (InvalValue e) {
@@ -94,6 +99,33 @@ public class OrderServiceImpl implements CommandService {
 
         message.put("message", "Erreur lors de la création de la commande");
         return new ResponseEntity<Map<String, String>>(message, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public Boolean getCommandById(StatusDTO statusDTO) {
+        
+
+        try {
+            Long decryptedId = Long.parseLong(encryptionUtil.decrypt(statusDTO.getId()));
+            Optional<Commande> theCommande =  commandeRepository.findById(decryptedId);
+
+            System.out.println(theCommande.get().getClient());
+
+            if (theCommande != null) {
+                // theCommande.setEtat(statusDTO.getStatus());
+                // commandeRepository.save(theCommande);
+            }
+           
+            
+            return true;
+        } catch (InvalidIdCommand e) {
+            
+            return false;
+
+        }
+
+      
     }
 
 }
