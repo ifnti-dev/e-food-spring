@@ -68,7 +68,7 @@ public class OrderController {
     @GetMapping(value="/all/")
     public ResponseEntity<List<RetrieveCmdDTO>> getCommandsByStatus(@RequestBody StatusDTO statusDTO, @RequestParam int page){
 
-        System.out.println(page);
+        
 
         ResponseEntity<List<RetrieveCmdDTO>> commandes = orderServiceImpl.getCommandsByStatus(statusDTO);
 
