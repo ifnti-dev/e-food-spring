@@ -190,7 +190,6 @@ public class OrderServiceImpl implements CommandService {
         Commande commande = new Commande();
         commande.setId(Long.parseLong(id));
         List<MenuCommandeClientDTO> menuCommandes  =  menuCommandeRepository.findByCommande( commande.getId()) ;
-        System.out.println(menuCommandes);
         
        return menuCommandes;
     }
