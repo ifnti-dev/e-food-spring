@@ -57,6 +57,6 @@ public class MenuCommande {
     private int quantite;
 
     @Column(name = "preference")
-    private ArrayList<String> preference;
+    private String preference;
     
 }

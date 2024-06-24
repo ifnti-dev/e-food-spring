@@ -1,8 +1,11 @@
 package com.entreprise.efood.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.entreprise.efood.Models.MenuCommande;
+
 @Repository
-public interface MenuCommandeRepository {
+public interface MenuCommandeRepository extends JpaRepository<MenuCommande,Long> {
 
 }

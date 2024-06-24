@@ -2,6 +2,7 @@ package com.entreprise.efood.services.commandes;
 
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,11 +16,16 @@ import org.springframework.stereotype.Service;
 import com.entreprise.efood.Models.Client;
 import com.entreprise.efood.Models.Commande;
 import com.entreprise.efood.Models.Livraison;
+import com.entreprise.efood.Models.Menu;
+import com.entreprise.efood.Models.MenuCommande;
+import com.entreprise.efood.dtos.ClientMenuDTO;
 import com.entreprise.efood.dtos.OrderDTO;
+import com.entreprise.efood.dtos.RetrieveCmdDTO;
 import com.entreprise.efood.dtos.StatusDTO;
 import com.entreprise.efood.enums.StatusEnum;
 import com.entreprise.efood.repository.CommandeRepository;
 import com.entreprise.efood.repository.LivraisonRepository;
+import com.entreprise.efood.repository.MenuCommandeRepository;
 import com.entreprise.efood.utils.encryDecry.EncryptionUtil;
 import com.entreprise.efood.utils.exceptions.commandsExceptions.InvalValue;
 import com.entreprise.efood.utils.exceptions.commandsExceptions.InvalidIdCommand;
@@ -38,6 +44,8 @@ public class OrderServiceImpl implements CommandService {
     CommandeRepository commandeRepository;
     @Autowired
     LivraisonRepository lRepository;
+    @Autowired
+    MenuCommandeRepository menuCommandeRepository;
 
     @Override
     public String toString() {
@@ -61,13 +69,18 @@ public class OrderServiceImpl implements CommandService {
                 commande.setMontant(orderDTO.getMontant());
                 commande.setEtat(StatusEnum.EN_COURS.toString());
                 
-                System.out.println(orderDTO.getClientMenus()[1].getPreference());
+                
                 // Save commande
                 Commande savCommande = commandeRepository.save(commande);
 
                 String cmdId = Long.toString(savCommande.getId());
 
                 String encrypString = encryptionUtil.encrypt(cmdId);
+
+                final List<MenuCommande> menuCommandes = constructMenusCommand(orderDTO.getClientMenus(),savCommande);
+
+               
+                menuCommandeRepository.saveAll(menuCommandes);
 
                 if (orderDTO.isLivrable()) {
                     // Instance of livraison
@@ -135,12 +148,33 @@ public class OrderServiceImpl implements CommandService {
       
     }
 
+    private List<MenuCommande> constructMenusCommand( ClientMenuDTO[] clientMenuDTOs,Commande cmd ){
+
+        final List<MenuCommande> menuCommandes = new ArrayList<>();
+
+        for (int index = 0; index < clientMenuDTOs.length; index++) {
+            MenuCommande mCommande = new MenuCommande();
+            Menu menu = new Menu();
+            menu.setId(Long.parseLong(clientMenuDTOs[index].getId()));
+            mCommande.setPreference( clientMenuDTOs[index].getPreference() );
+            mCommande.setQuantite(clientMenuDTOs[index].getQuantite());
+            mCommande.setCommande(cmd);
+            mCommande.setMenu(menu);
+            menuCommandes.add(mCommande);
+          
+
+        }
+        return menuCommandes;
+    }
+
     @Override
-    public ResponseEntity<List<Commande>> getCommandsByStatus(StatusDTO statusDTO) {
+    public ResponseEntity<List<RetrieveCmdDTO>> getCommandsByStatus(StatusDTO statusDTO) {
         try {
-            List<Commande> commmands = commandeRepository.findByEtat(statusDTO.getStatus());
+            List<RetrieveCmdDTO> commmands = commandeRepository.findCommandsByEtat(statusDTO.getStatus());
+
+            // System.out.println(commmands);
             
-            return new ResponseEntity<List<Commande>>(commmands,HttpStatus.OK);
+            return new ResponseEntity<List<RetrieveCmdDTO>>(commmands,HttpStatus.OK);
         } catch (Exception e) {
             // TODO: handle exception
             System.out.println(e.getMessage());

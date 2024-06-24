@@ -7,13 +7,16 @@ import java.util.Map;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.entreprise.efood.Models.Commande;
 import com.entreprise.efood.dtos.OrderDTO;
+import com.entreprise.efood.dtos.RetrieveCmdDTO;
 import com.entreprise.efood.dtos.StatusDTO;
 import com.entreprise.efood.services.commandes.OrderServiceImpl;
 import com.entreprise.efood.utils.AppConstant;
@@ -61,9 +64,11 @@ public class OrderController {
     }
 
     @GetMapping(value="/all/")
-    public ResponseEntity<List<Commande>> getCommandsByStatus(@RequestBody StatusDTO statusDTO){
+    public ResponseEntity<List<RetrieveCmdDTO>> getCommandsByStatus(@RequestBody StatusDTO statusDTO, @RequestParam int page){
 
-        ResponseEntity<List<Commande>> commandes = orderServiceImpl.getCommandsByStatus(statusDTO);
+        System.out.println(page);
+
+        ResponseEntity<List<RetrieveCmdDTO>> commandes = orderServiceImpl.getCommandsByStatus(statusDTO);
 
         return commandes;
 

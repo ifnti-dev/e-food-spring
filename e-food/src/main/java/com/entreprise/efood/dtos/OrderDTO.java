@@ -10,7 +10,6 @@ import lombok.Setter;
 @Setter
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
 public class OrderDTO {
     @NotNull
     private String idClient;
@@ -23,13 +22,13 @@ public class OrderDTO {
     @Nullable
     private double coordY;
     @NotNull
-    private int montant;
+    private double montant;
     @Nullable
-    private boolean livrable ;
+    private boolean livrable;
     @Nullable
     private String description;
+   
 
+  
 
 }
-
-
