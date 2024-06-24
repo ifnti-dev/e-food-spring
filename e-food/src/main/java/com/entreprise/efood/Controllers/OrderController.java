@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.entreprise.efood.Models.Commande;
+import com.entreprise.efood.dtos.MenuCommandeClientDTO;
 import com.entreprise.efood.dtos.OrderDTO;
 import com.entreprise.efood.dtos.RetrieveCmdDTO;
 import com.entreprise.efood.dtos.StatusDTO;
@@ -73,6 +75,17 @@ public class OrderController {
         return commandes;
 
     }
+
+    @GetMapping("/")
+    public ResponseEntity<Map<String,List<MenuCommandeClientDTO>>> getCommandById(@RequestBody String id) {
+      
+        Map<String,List<MenuCommandeClientDTO>> responseEntity = new HashMap();
+
+        List<MenuCommandeClientDTO>  mcmds= orderServiceImpl.retrieveMenus(id);
+        responseEntity.put("menus", mcmds);
+        return new ResponseEntity<>(responseEntity,HttpStatus.OK);
+    }
+    
 
 
 }

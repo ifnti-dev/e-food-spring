@@ -19,6 +19,7 @@ import com.entreprise.efood.Models.Livraison;
 import com.entreprise.efood.Models.Menu;
 import com.entreprise.efood.Models.MenuCommande;
 import com.entreprise.efood.dtos.ClientMenuDTO;
+import com.entreprise.efood.dtos.MenuCommandeClientDTO;
 import com.entreprise.efood.dtos.OrderDTO;
 import com.entreprise.efood.dtos.RetrieveCmdDTO;
 import com.entreprise.efood.dtos.StatusDTO;
@@ -182,6 +183,16 @@ public class OrderServiceImpl implements CommandService {
         }
 
         
+    }
+
+    @Override
+    public List<MenuCommandeClientDTO> retrieveMenus(String id) {
+        Commande commande = new Commande();
+        commande.setId(Long.parseLong(id));
+        List<MenuCommandeClientDTO> menuCommandes  =  menuCommandeRepository.findByCommande( commande.getId()) ;
+        System.out.println(menuCommandes);
+        
+       return menuCommandes;
     }
 
 }
