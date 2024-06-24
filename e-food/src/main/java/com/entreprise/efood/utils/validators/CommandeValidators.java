@@ -9,7 +9,7 @@ import com.entreprise.efood.utils.exceptions.commandsExceptions.InvalidIdCommand
 public class CommandeValidators {
 
     public static boolean validateCommandEntry(OrderDTO orderDTO) throws InvalValue {
-        if (orderDTO.getIdMenus() == null) {
+        if (orderDTO.getClientMenus() == null) {
             throw new InvalValue("Veuillez choisir un ménu");
         } else if (orderDTO.getIdClient()== null) {
             throw new InvalValue("Veuillez renseigner vos informations");

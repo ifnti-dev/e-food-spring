@@ -11,25 +11,11 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class OrderDTO {
+public class ClientMenuDTO {
     @NotNull
-    private String idClient;
+    private String id;
+    @Nullable
+    private String preference;
     @NotNull
-    private String idRestaurant;
-    @NotNull
-    private ClientMenuDTO[] clientMenus;
-    @Nullable
-    private double coordX;
-    @Nullable
-    private double coordY;
-    @NotNull
-    private int montant;
-    @Nullable
-    private boolean livrable ;
-    @Nullable
-    private String description;
-
-
+    private int quantite;
 }
-
-

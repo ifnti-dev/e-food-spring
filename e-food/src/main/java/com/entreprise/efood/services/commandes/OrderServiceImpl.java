@@ -3,6 +3,7 @@ package com.entreprise.efood.services.commandes;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -59,7 +60,8 @@ public class OrderServiceImpl implements CommandService {
                 commande.setDate_commande(Timestamp.from(Instant.now()));
                 commande.setMontant(orderDTO.getMontant());
                 commande.setEtat(StatusEnum.EN_COURS.toString());
-
+                
+                System.out.println(orderDTO.getClientMenus()[1].getPreference());
                 // Save commande
                 Commande savCommande = commandeRepository.save(commande);
 
@@ -131,6 +133,21 @@ public class OrderServiceImpl implements CommandService {
         }
 
       
+    }
+
+    @Override
+    public ResponseEntity<List<Commande>> getCommandsByStatus(StatusDTO statusDTO) {
+        try {
+            List<Commande> commmands = commandeRepository.findByEtat(statusDTO.getStatus());
+            
+            return new ResponseEntity<List<Commande>>(commmands,HttpStatus.OK);
+        } catch (Exception e) {
+            // TODO: handle exception
+            System.out.println(e.getMessage());
+            return null;
+        }
+
+        
     }
 
 }

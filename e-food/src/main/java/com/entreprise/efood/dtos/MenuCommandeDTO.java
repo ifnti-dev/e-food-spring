@@ -7,12 +7,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-public class StatusDTO {
-    private String idCmd;
-    private String status;
-    private String idClient;
-
-    
+@NoArgsConstructor
+public class MenuCommandeDTO {
+    private String preference;
+    private int quantite; 
 }
