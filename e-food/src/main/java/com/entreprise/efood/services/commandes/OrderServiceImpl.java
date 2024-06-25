@@ -9,6 +9,9 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -169,13 +172,14 @@ public class OrderServiceImpl implements CommandService {
     }
 
     @Override
-    public ResponseEntity<List<RetrieveCmdDTO>> getCommandsByStatus(StatusDTO statusDTO) {
+    public ResponseEntity<Page<RetrieveCmdDTO>> getCommandsByStatus(StatusDTO statusDTO,int page,int size) {
         try {
-            List<RetrieveCmdDTO> commmands = commandeRepository.findCommandsByEtat(statusDTO.getStatus());
+            Pageable pageable = PageRequest.of(page,size);
+            Page<RetrieveCmdDTO> commmands = commandeRepository.findCommandsByEtat(statusDTO.getStatus(),pageable);
 
             // System.out.println(commmands);
             
-            return new ResponseEntity<List<RetrieveCmdDTO>>(commmands,HttpStatus.OK);
+            return new ResponseEntity<Page<RetrieveCmdDTO>>(commmands,HttpStatus.OK);
         } catch (Exception e) {
             // TODO: handle exception
             System.out.println(e.getMessage());

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -66,11 +67,11 @@ public class OrderController {
     }
 
     @GetMapping(value="/all/")
-    public ResponseEntity<List<RetrieveCmdDTO>> getCommandsByStatus(@RequestBody StatusDTO statusDTO, @RequestParam int page){
+    public ResponseEntity<Page<RetrieveCmdDTO>> getCommandsByStatus(@RequestBody StatusDTO statusDTO, @RequestParam(defaultValue = "0") int page,@RequestParam(defaultValue = "10") int size){
 
         
 
-        ResponseEntity<List<RetrieveCmdDTO>> commandes = orderServiceImpl.getCommandsByStatus(statusDTO);
+        ResponseEntity<Page<RetrieveCmdDTO>> commandes = orderServiceImpl.getCommandsByStatus(statusDTO,page,size);
 
         return commandes;
 
