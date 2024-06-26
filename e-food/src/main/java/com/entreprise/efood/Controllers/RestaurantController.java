@@ -3,11 +3,10 @@ package com.entreprise.efood.Controllers;
 import java.util.ArrayList;
 import java.util.List;
 
-import java.util.HashMap;
-import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,18 +14,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.entreprise.efood.constants.RestaurantConstant;
 import com.entreprise.efood.dtos.RestaurantDTO;
 import com.entreprise.efood.services.RestaurantService;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping(path = RestaurantConstant.RESTAURANT_REQUEST_MAPPING)
 public class RestaurantController {
 
     @Autowired
-    private  RestaurantService  restaurantService;
+    private RestaurantService restaurantService;
 
     @GetMapping("/ListeRestaurant")
     public ResponseEntity<List<RestaurantDTO>> getAllRestaurant() {
@@ -39,22 +41,23 @@ public class RestaurantController {
     }
 
     @PostMapping("/SaveRestaurant")
-    public RestaurantDTO postMethodName(@RequestBody() RestaurantDTO restaurantDTO) {
+    public ResponseEntity<RestaurantDTO> createRestaurant(@RequestPart("restaurant") RestaurantDTO restaurantDTO,
+                                                          @RequestPart("photoFile") MultipartFile photoFile) {
         try {
-            restaurantService.createRestaurant(restaurantDTO);
+            RestaurantDTO createdRestaurant = restaurantService.createRestaurant(restaurantDTO, photoFile);
+            return ResponseEntity.ok(createdRestaurant);
         } catch (Exception e) {
             e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
-        return null;
     }
 
-
-
     @PutMapping("/updateRestaurant/{code}")
-    public ResponseEntity<Object> updateRestaurant(@PathVariable Long code, @RequestBody RestaurantDTO restaurantDTO) {
+    public ResponseEntity<Object> updateRestaurant(@PathVariable Long code,
+                                                   @RequestPart("restaurant") RestaurantDTO restaurantDTO,
+                                                   @RequestPart(value = "photoFile", required = false) MultipartFile photoFile) {
         try {
-            RestaurantDTO updatedRestaurant = restaurantService.updateRestaurant(code, restaurantDTO);
+            RestaurantDTO updatedRestaurant = restaurantService.updateRestaurant(code, restaurantDTO, photoFile);
             return ResponseEntity.ok(updatedRestaurant);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
@@ -63,26 +66,18 @@ public class RestaurantController {
         }
     }
 
-
-
-    
     @DeleteMapping(value = "/deleteRestaurant/{code}")
-    public ResponseEntity<String> deleteRestaurant(@RequestBody Map<String, Long> requestBody) {
-        Long code = requestBody.get("code");
+    public ResponseEntity<String> deleteRestaurant(@PathVariable("code") Long code) {
         restaurantService.deleteRestaurant(code);
         return ResponseEntity.ok("Restaurant supprimé avec succès");
     }
-
-
 
     @GetMapping("/getRestaurantById/{code}")
     public ResponseEntity<RestaurantDTO> getRestaurantById(@PathVariable("code") Long code) {
         try {
             return restaurantService.getRestaurantById(code);
-        } 
-        catch (RuntimeException e) {
+        } catch (RuntimeException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND); // Retourne 404 si le restaurant n'est pas trouvé
         }
     }
-
 }

@@ -1,13 +1,11 @@
 package com.entreprise.efood.Models;
 
-
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,12 +26,12 @@ import jakarta.persistence.SequenceGenerator;
 @Getter
 
 @Entity
-@Table(name = "restaurants",schema = AppConstant.SCHEMA_RESTAURANT)
+@Table(name = "restaurants", schema = AppConstant.SCHEMA_RESTAURANT)
 public class Restaurant {
     @Id
     @Column(name = "code")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "restaurant_id_seq")
-    @SequenceGenerator(name = "restaurant_id_seq", sequenceName = "restaurant_id_seq",allocationSize = 100)
+    @SequenceGenerator(name = "restaurant_id_seq", sequenceName = "restaurant_id_seq", allocationSize = 100)
     private Long code;
     
     @Basic
@@ -49,7 +47,7 @@ public class Restaurant {
     private String adresse;
 
     @Basic
-    @Column(name = "telephone",length = 30, nullable = false, unique =true)
+    @Column(name = "telephone", length = 30, nullable = false, unique = true)
     private String telephone;
 
     @Basic
@@ -65,31 +63,33 @@ public class Restaurant {
     private String jour_ouverture;
 
     @Basic
-    @Column(name = "coordonnee_gps_x",length = 50)
+    @Column(name = "coordonnee_gps_x", length = 50)
     private double coordonnee_gps_x;
 
     @Basic
-    @Column(name = "coordonnee_gps_y",length = 50)
+    @Column(name = "coordonnee_gps_y", length = 50)
     private double coordonnee_gps_y;
 
     @Basic
     @Column(length = 30, nullable = false)
     private String etat;
 
-    @OneToMany(mappedBy = "restaurant")
-    private List<Evenement> evenements;
+    @Basic
+    @Column(name = "photo_profil", nullable = true)
+    private String photoProfil; // Nouveau champ pour la photo de profil
 
     @OneToMany(mappedBy = "restaurant")
-    private List<Adhesion> adhesions;
-
-
-    @OneToMany(mappedBy = "restaurant")
-    private List<Publicite> publicites;
+    private List<Evenement> evenements = new ArrayList<>();
 
     @OneToMany(mappedBy = "restaurant")
-    private List<Menu> menus;
+    private List<Adhesion> adhesions = new ArrayList<>();
 
     @OneToMany(mappedBy = "restaurant")
-    private List<Employee> employees;
+    private List<Publicite> publicites = new ArrayList<>();
 
+    @OneToMany(mappedBy = "restaurant")
+    private List<Menu> menus = new ArrayList<>();
+
+    @OneToMany(mappedBy = "restaurant")
+    private List<Employee> employees = new ArrayList<>();
 }

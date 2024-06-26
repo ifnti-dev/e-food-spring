@@ -13,7 +13,7 @@ import org.springframework.data.jpa.repository.Query;
 @Repository
 public interface RestaurantRepository extends JpaRepository<Restaurant,Long>{
 
-    @Query("SELECT new com.entreprise.efood.dtos.RestaurantDTO(r.code, r.nom, r.ville, r.adresse, r.telephone, r.heure_ouverture, r.heure_fermeture, r.jour_ouverture , r.etat,r.coordonnee_gps_x,r.coordonnee_gps_y) FROM Restaurant r ")
+    @Query("SELECT new com.entreprise.efood.dtos.RestaurantDTO(r.code, r.nom, r.ville, r.adresse, r.telephone, r.heure_ouverture, r.heure_fermeture, r.jour_ouverture , r.etat,r.coordonnee_gps_x,r.coordonnee_gps_y,r.photoProfil) FROM Restaurant r ")
     public List<RestaurantDTO> getAllRestaurants();
 
 }
