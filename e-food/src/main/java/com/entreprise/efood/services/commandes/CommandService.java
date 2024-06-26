@@ -15,7 +15,7 @@ import com.entreprise.efood.dtos.StatusDTO;
 public interface CommandService {
     public ResponseEntity<Map<String, String>> storeOrder( OrderDTO orderDTO);
     public Boolean getCommandById(StatusDTO statusDTO);
-    public ResponseEntity<Page<RetrieveCmdDTO>> getCommandsByStatus(StatusDTO statusDTO,int page,int size);
+    public ResponseEntity<Page<RetrieveCmdDTO>> getCommandsByStatus(String status,int page,int size);
     public List<MenuCommandeClientDTO> retrieveMenus(String id);
     
 }

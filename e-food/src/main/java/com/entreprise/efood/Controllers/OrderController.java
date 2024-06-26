@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.catalina.connector.Request;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
 
 import com.entreprise.efood.Models.Commande;
 import com.entreprise.efood.dtos.MenuCommandeClientDTO;
@@ -34,6 +38,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 public class OrderController {
     private OrderServiceImpl orderServiceImpl;
     private EncryptionUtil encryptionUtil;
+
+
+    private static final Logger LOGGER = LogManager.getLogger(OrderController.class);
+
 
     public OrderController(OrderServiceImpl orderServiceImpl, EncryptionUtil eUtil){
         this.orderServiceImpl = orderServiceImpl;
@@ -66,12 +74,14 @@ public class OrderController {
         
     }
 
-    @GetMapping(value="/all/")
-    public ResponseEntity<Page<RetrieveCmdDTO>> getCommandsByStatus(@RequestBody StatusDTO statusDTO, @RequestParam(defaultValue = "0") int page,@RequestParam(defaultValue = "10") int size){
+    @GetMapping(value="/all")
+    public ResponseEntity<Page<RetrieveCmdDTO>> getCommandsByStatus(@RequestParam String status, @RequestParam(defaultValue = "0") int page,@RequestParam(defaultValue = "10") int size){
 
-        
+        LOGGER.info("OK");
+        LOGGER.debug("Debugging");
+        LOGGER.error(Request.CLIENT_CERT_AUTH);
 
-        ResponseEntity<Page<RetrieveCmdDTO>> commandes = orderServiceImpl.getCommandsByStatus(statusDTO,page,size);
+        ResponseEntity<Page<RetrieveCmdDTO>> commandes = orderServiceImpl.getCommandsByStatus(status,page,size);
 
         return commandes;
 

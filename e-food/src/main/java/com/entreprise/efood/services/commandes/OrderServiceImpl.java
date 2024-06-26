@@ -172,10 +172,10 @@ public class OrderServiceImpl implements CommandService {
     }
 
     @Override
-    public ResponseEntity<Page<RetrieveCmdDTO>> getCommandsByStatus(StatusDTO statusDTO,int page,int size) {
+    public ResponseEntity<Page<RetrieveCmdDTO>> getCommandsByStatus(String status,int page,int size) {
         try {
             Pageable pageable = PageRequest.of(page,size);
-            Page<RetrieveCmdDTO> commmands = commandeRepository.findCommandsByEtat(statusDTO.getStatus(),pageable);
+            Page<RetrieveCmdDTO> commmands = commandeRepository.findCommandsByEtat(status,pageable);
 
             // System.out.println(commmands);
             
