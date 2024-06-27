@@ -127,8 +127,9 @@ public class OrderServiceImpl implements CommandService {
         
 
         try {
+            //TODOS: replace decripted
             Long decryptedId = Long.parseLong(encryptionUtil.decrypt(statusDTO.getIdCmd()));
-            Optional<Commande> theCommande =  commandeRepository.findById(decryptedId);
+            Optional<Commande> theCommande =  commandeRepository.findById(Long.parseLong(statusDTO.getIdCmd()));
             Client client = new Client();
             client.setId(Long.parseLong(statusDTO.getIdClient()));
 

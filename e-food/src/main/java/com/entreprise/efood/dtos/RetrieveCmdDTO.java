@@ -12,12 +12,12 @@ public class RetrieveCmdDTO {
     @NotNull
     private double montant;
     @NotNull
-    private Long idCmd;
+    private Long id;
   
 
 
     public RetrieveCmdDTO(Long id, double mnt) {
-        this.idCmd = id;
+        this.id = id;
         this.montant = mnt;
 
 
