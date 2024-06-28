@@ -9,6 +9,7 @@ import com.entreprise.efood.utils.AppConstant;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -50,15 +51,8 @@ public class Commande {
     @Column(name = "montant")
     private double montant;
 
-    @OneToOne
-    @JoinColumn(name = "paiement_id")
-    private Paiement paiement;
 
-    @OneToOne
-    @JoinColumn(name = "livraison_id")
-    private Paiement Livraison;
-
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "client_id")
     private Client client;
 
