@@ -19,3 +19,4 @@ public interface MenuCommandeRepository extends JpaRepository<MenuCommande,Long>
     List<MenuCommandeClientDTO> findByCommande(@Param("id") Long id);
 
 }
+

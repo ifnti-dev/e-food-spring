@@ -32,7 +32,6 @@ import com.entreprise.efood.repository.LivraisonRepository;
 import com.entreprise.efood.repository.MenuCommandeRepository;
 import com.entreprise.efood.utils.encryDecry.EncryptionUtil;
 import com.entreprise.efood.utils.exceptions.commandsExceptions.InvalValue;
-import com.entreprise.efood.utils.exceptions.commandsExceptions.InvalidIdCommand;
 import com.entreprise.efood.utils.validators.CommandeValidators;
 
 @Service
@@ -121,7 +120,7 @@ public class OrderServiceImpl implements CommandService {
         return new ResponseEntity<Map<String, String>>(message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @SuppressWarnings("deprecation")
+ 
     @Override
     public Boolean getCommandById(StatusDTO statusDTO) {
         
@@ -177,9 +176,7 @@ public class OrderServiceImpl implements CommandService {
         try {
             Pageable pageable = PageRequest.of(page,size);
             Page<RetrieveCmdDTO> commmands = commandeRepository.findCommandsByEtat(status,pageable);
-
-            // System.out.println(commmands);
-            
+                     
             return new ResponseEntity<Page<RetrieveCmdDTO>>(commmands,HttpStatus.OK);
         } catch (Exception e) {
             // TODO: handle exception
@@ -194,8 +191,7 @@ public class OrderServiceImpl implements CommandService {
     public List<MenuCommandeClientDTO> retrieveMenus(String id) {
         Commande commande = new Commande();
         commande.setId(Long.parseLong(id));
-        List<MenuCommandeClientDTO> menuCommandes  =  menuCommandeRepository.findByCommande( commande.getId()) ;
-        
+        List<MenuCommandeClientDTO> menuCommandes  =  menuCommandeRepository.findByCommande( commande.getId()) ;  
        return menuCommandes;
     }
 

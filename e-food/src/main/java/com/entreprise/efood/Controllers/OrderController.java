@@ -85,7 +85,7 @@ public class OrderController {
     }
 
     @GetMapping("/")
-    public ResponseEntity<Map<String,List<MenuCommandeClientDTO>>> getCommandById(@RequestBody String id) {
+    public ResponseEntity<Map<String,List<MenuCommandeClientDTO>>> getCommandById(@RequestParam String id) {
       
         Map<String,List<MenuCommandeClientDTO>> responseEntity = new HashMap();
 

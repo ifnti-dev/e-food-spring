@@ -1,10 +1,7 @@
 package com.entreprise.efood.dtos;
 
 
-import java.util.List;
 
-import com.entreprise.efood.Models.Composant;
-import com.entreprise.efood.Models.Image;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,6 +19,6 @@ public class MenuCommandeClientDTO {
     private String temps_preparation;
     private double prix;
     private Long id;
-    
+   
 
 }
