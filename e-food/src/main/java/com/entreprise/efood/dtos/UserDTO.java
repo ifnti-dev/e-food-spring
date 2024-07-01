@@ -30,4 +30,4 @@ public class UserDTO {
     private String email;
     
     private Long role_id;
-    }
+}
