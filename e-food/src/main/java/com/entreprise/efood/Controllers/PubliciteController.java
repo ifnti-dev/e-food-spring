@@ -113,7 +113,7 @@ public class PubliciteController {
         Publicite publicite = new Publicite();
         // resto id
         Restaurant restaurant = new Restaurant();
-        restaurant.setId(dto.getRestaurantId());
+        restaurant.setCode(dto.getRestaurantId());
         // Liste des images
         List<Long> imagesID = dto.getImagesIds();
         List<Image> images = new ArrayList<>();

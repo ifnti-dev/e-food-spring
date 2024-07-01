@@ -32,6 +32,7 @@ public class MenuCommande {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
     @CreatedDate
@@ -56,6 +57,6 @@ public class MenuCommande {
     private int quantite;
 
     @Column(name = "preference")
-    private ArrayList<String> preference;
+    private String preference;
     
 }
