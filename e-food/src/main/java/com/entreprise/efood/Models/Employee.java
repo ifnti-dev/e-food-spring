@@ -51,4 +51,10 @@ public class Employee {
     @OneToOne
     @JoinColumn(name = "user_id", unique=true )
     private User user;
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
+
+    // @OneToMany(mappedBy = "employee")
+    // private List<Livraison> livraisons;
 }

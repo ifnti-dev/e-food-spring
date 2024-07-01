@@ -6,6 +6,7 @@ public class AppConstant {
     public static final String SCHEMA_STAFF = "staff";
 
     public static final String EVENT_REST_PATH_API = "api/restaurant/events";
+    public static final String ORDER_REST_PATH_API = "api/client/order";
 
     public static final String SCHEMA_COMMAND = "command";
 

@@ -76,14 +76,7 @@ public class Menu implements Serializable {
     private Restaurant restaurant;
 
     @ManyToMany()
-<<<<<<< HEAD
-    @JoinTable( name = "menu_composant",
-    joinColumns = @JoinColumn(name= "menu_id",referencedColumnName = "code"),
-    inverseJoinColumns=@JoinColumn( name ="composant_id",referencedColumnName = "code")
-    )
-=======
     @JoinTable(name = "menu_composant", joinColumns = @JoinColumn(name = "menu_id", referencedColumnName = "code"), inverseJoinColumns = @JoinColumn(name = "composant_id", referencedColumnName = "code"), schema = AppConstant.SCHEMA_MENU)
->>>>>>> df55d01ed12be40255034603c716bd4d1d75bd70
     private List<Composant> composants;
 
 }

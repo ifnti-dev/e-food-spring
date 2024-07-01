@@ -92,7 +92,10 @@
 
      <changeSet author="eklou(generated)" id="MENU_COMMANDE-CREATE-UID003">
         <createTable schemaName="${schema_name}" tableName="menu_commandes">
-            
+        
+             <column name="id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
             <column name="commandes_id" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
@@ -210,6 +213,8 @@
                                  initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="code"
                                   referencedTableSchemaName="${schema_name}" referencedTableName="composants"/>
     </changeSet>
+
+    
 
 
 
