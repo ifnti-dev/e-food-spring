@@ -1,5 +1,7 @@
 package com.entreprise.efood.dtos;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import groovyjarjarantlr4.v4.runtime.misc.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -45,5 +47,7 @@ public class RestaurantDTO {
     private double coordonnee_gps_y;
 
     @NotNull
-    private String photoProfil; 
+    private MultipartFile photoFile; 
+
+    private String photoProfil;
 }

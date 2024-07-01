@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,7 +36,7 @@ public class RestaurantController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new ResponseEntity<List<RestaurantDTO>>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @PostMapping("/SaveRestaurant")
@@ -48,7 +47,7 @@ public class RestaurantController {
             return ResponseEntity.ok(createdRestaurant);
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
 
@@ -68,8 +67,12 @@ public class RestaurantController {
 
     @DeleteMapping(value = "/deleteRestaurant/{code}")
     public ResponseEntity<String> deleteRestaurant(@PathVariable("code") Long code) {
-        restaurantService.deleteRestaurant(code);
-        return ResponseEntity.ok("Restaurant supprimé avec succès");
+        try {
+            restaurantService.deleteRestaurant(code);
+            return ResponseEntity.ok("Restaurant supprimé avec succès");
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 
     @GetMapping("/getRestaurantById/{code}")
@@ -77,7 +80,7 @@ public class RestaurantController {
         try {
             return restaurantService.getRestaurantById(code);
         } catch (RuntimeException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND); // Retourne 404 si le restaurant n'est pas trouvé
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 }
