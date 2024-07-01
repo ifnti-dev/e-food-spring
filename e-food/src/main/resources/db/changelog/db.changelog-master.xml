@@ -1,4 +1,4 @@
-<!-- <databaseChangeLog 
+ <databaseChangeLog 
     xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
     xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -35,11 +35,12 @@
 
     <include file="db/changelog/seeders/publicites/publicite-create.xml"/>
     
-    <include file="db/changelog/seeders/evenements/evenement-create.xml"/> -->
+    <!-- <include file="db/changelog/seeders/evenements/evenement-create.xml"/>  -->
 
-    <!-- <include file="db/changelog/seeders/image-create.xml"/>  -->
+     <!-- <include file="db/changelog/seeders/image-create.xml"/>   -->
+
     
-    <include file="db/changelog/seeders/restaurant/restaurant-create.xml"/>
+    <!-- <include file="db/changelog/seeders/restaurant/restaurant-create.xml"/> -->
 
     <include file="db/changelog/seeders/adhesion/adhesion-create.xml"/> 
      
