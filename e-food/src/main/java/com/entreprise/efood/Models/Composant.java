@@ -28,9 +28,7 @@ import lombok.Setter;
 @NoArgsConstructor
 
 @Entity
-// @Table(name = "composants", schema = AppConstant.SCHEMA_MENU)
-
-@Table(name = "composants")
+@Table(name = "composants", schema = AppConstant.SCHEMA_MENU)
 public class Composant {
 
     @Id

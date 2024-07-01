@@ -9,7 +9,6 @@ import com.entreprise.efood.Models.Evenement;
 import com.entreprise.efood.Models.Restaurant;
 import com.entreprise.efood.dtos.EventDTO;
 import com.entreprise.efood.repository.EvenementRepository;
-import com.entreprise.efood.services.EventService;
 
 @Service
 public class JsonEventRestaurantEvent implements EventService {

@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.entreprise.efood.Models.User;
+import com.entreprise.efood.dtos.UserDTO;
 import com.entreprise.efood.repository.UserRepository;
 
 @Service
@@ -16,10 +17,10 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public List<User> allUsers() {
-        List<User> users = new ArrayList<>();
+    public List<UserDTO> allUsers() {
+        List<UserDTO> users = new ArrayList<>();
 
-        userRepository.findAll().forEach(users::add);
+        userRepository.getAllUsers().forEach(users::add);
 
         return users;
     }

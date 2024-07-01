@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.entreprise.efood.Models.User;
+import com.entreprise.efood.dtos.UserDTO;
 import com.entreprise.efood.services.UserService;
 
 // @CrossOrigin("*")
@@ -34,8 +35,8 @@ public class UserController {
     }
     @PreAuthorize("hasAnyRole('ADMIN', 'SUPER_ADMIN')")
     @GetMapping()
-    public ResponseEntity<List <User>> allUsers() {
-        List <User> users = userService.allUsers();
+    public ResponseEntity<List <UserDTO>> allUsers() {
+        List <UserDTO> users = userService.allUsers();
         return ResponseEntity.ok(users);
     }
 }
