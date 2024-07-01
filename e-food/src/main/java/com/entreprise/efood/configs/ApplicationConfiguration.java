@@ -1,5 +1,6 @@
 package com.entreprise.efood.configs;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,6 +15,8 @@ import com.entreprise.efood.repository.UserRepository;
 
 @Configuration
 public class ApplicationConfiguration {
+
+    @Autowired
     private final UserRepository userRepository;
 
     public ApplicationConfiguration(UserRepository userRepository) {

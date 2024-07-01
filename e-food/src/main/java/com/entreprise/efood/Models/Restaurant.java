@@ -27,7 +27,7 @@ import jakarta.persistence.SequenceGenerator;
 @Getter
 
 @Entity
-@Table(name = "restaurants", schema = AppConstant.SCHEMA_RESTAURANT)
+@Table(name = "restaurants")
 public class Restaurant {
     @Id
     @Column(name = "code")

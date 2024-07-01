@@ -27,7 +27,7 @@ import lombok.Setter;
 @NoArgsConstructor
 
 @Entity
-@Table(name = "images",schema = AppConstant.SCHEMA_MENU)
+@Table(name = "images")
 public class Image implements Serializable{
     
     @Id
