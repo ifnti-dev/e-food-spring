@@ -30,25 +30,22 @@
     
     <include file="db/changelog/seeders/permissions/permission-create.xml"/>
 
-<!-- 
+
     <include file="db/changelog/seeders/restaurants/restaurant-create.xml"/>
 
-<<<<<<< HEAD
     <include file="db/changelog/seeders/publicites/publicite-create.xml"/>
     
     <include file="db/changelog/seeders/evenements/evenement-create.xml"/> -->
-=======
 
     <!-- <include file="db/changelog/seeders/image-create.xml"/>  -->
->>>>>>> df55d01ed12be40255034603c716bd4d1d75bd70
     
     <include file="db/changelog/seeders/restaurant/restaurant-create.xml"/>
 
-     <include file="db/changelog/seeders/adhesion/adhesion-create.xml"/> 
+    <include file="db/changelog/seeders/adhesion/adhesion-create.xml"/> 
      
 </databaseChangeLog>
 
 
 
 
- -->
+ 
