@@ -3,7 +3,6 @@ package com.entreprise.efood.Models;
 import java.util.List;
 
 
-import com.entreprise.efood.utils.AppConstant;
 
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
@@ -28,7 +27,8 @@ import lombok.Setter;
 @Getter
 
 @Entity
-@Table(name = "roles",schema = AppConstant.SCHEMA_STAFF)
+// @Table(name = "roles",schema = AppConstant.SCHEMA_STAFF)
+@Table(name = "roles")
 public class Role {
 
     @Id
@@ -43,13 +43,12 @@ public class Role {
 
 
     @OneToMany(mappedBy = "role")
-    private List<Employee> employees;
+    private List<User> users;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable( name = "role_permissions",
     joinColumns = @JoinColumn(name= "permission_id",referencedColumnName = "id"),
-    inverseJoinColumns=@JoinColumn( name ="role_id",referencedColumnName = "id"),
-    schema = AppConstant.SCHEMA_STAFF)
+    inverseJoinColumns=@JoinColumn( name ="role_id",referencedColumnName = "id"))
 
     private List<Permission> permissions;
 
