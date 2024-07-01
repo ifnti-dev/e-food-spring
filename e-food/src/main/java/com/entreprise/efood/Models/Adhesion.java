@@ -19,7 +19,7 @@ import lombok.Setter;
 
 
 @Entity
-@Table(name = "adhesions" ,schema = AppConstant.SCHEMA_RESTAURANT)
+@Table(name = "adhesions")
 
 @Setter
 @Getter

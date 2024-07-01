@@ -34,7 +34,7 @@ import lombok.Setter;
 @NoArgsConstructor
 
 @Entity
-@Table(name = "menus", schema = AppConstant.SCHEMA_MENU)
+@Table(name = "menus")
 public class Menu implements Serializable {
 
     private static final long serialVersionUID = 123456L;
@@ -76,7 +76,7 @@ public class Menu implements Serializable {
     private Restaurant restaurant;
 
     @ManyToMany()
-    @JoinTable(name = "menu_composant", joinColumns = @JoinColumn(name = "menu_id", referencedColumnName = "code"), inverseJoinColumns = @JoinColumn(name = "composant_id", referencedColumnName = "code"), schema = AppConstant.SCHEMA_MENU)
+    @JoinTable(name = "menu_composant", joinColumns = @JoinColumn(name = "menu_id", referencedColumnName = "code"), inverseJoinColumns = @JoinColumn(name = "composant_id", referencedColumnName = "code"))
     private List<Composant> composants;
 
     public void assignComposant(Composant composant) {
