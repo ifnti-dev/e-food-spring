@@ -118,7 +118,6 @@ public class ComposantesServiceImpl implements ComposantesService {
     public ResponseEntity<Map<String, String>> deleteComposant(String id) {
         Map<String, String> message = new HashMap<>();
         try {
-            System.out.println(id);
             Composant composant = composantRepository.getById(Long.parseLong(id));
             if (composant != null) {
                 composantRepository.delete(composant);

@@ -9,10 +9,14 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 @Repository
 public interface MenuRepository extends JpaRepository<Menu, Long> {
 
-    @Query("SELECT new com.entreprise.efood.dtos.MenuDTO(m.id, m.nom, m.prix, m.temps_preparation, m.statut, m.restaurant) FROM Menu m")
-    public List<MenuDTO> getMenus();
+    @Query("SELECT new com.entreprise.efood.dtos.MenuDTO(m.id, m.nom, m.prix, m.temps_preparation, m.statut) FROM Menu m WHERE m.restaurant.id=:restaurant_id ")
+    public List<MenuDTO> getMenus(@Param("restaurant_id") Long restaurant_id);
+
+    @Query("SELECT new com.entreprise.efood.dtos.MenuDTO(m.id, m.nom, m.prix, m.temps_preparation, m.statut) FROM Menu m WHERE m.id=:menu_id")
+    public MenuDTO getMenuById(@Param("menu_id") Long menu_id);
 }
