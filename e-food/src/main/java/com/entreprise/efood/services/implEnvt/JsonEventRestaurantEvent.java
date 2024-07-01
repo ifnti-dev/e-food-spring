@@ -19,7 +19,7 @@ public class JsonEventRestaurantEvent implements EventService {
     @Override
     public List<EventDTO> getEventsByRestaurant(String id) {
         Long id_resto = Long.parseLong(id);
-        
+
         return evenementRepository.getEventsByRestaurant(id_resto);
     }
 
@@ -36,20 +36,18 @@ public class JsonEventRestaurantEvent implements EventService {
         event.setDate_fin(eventDTO.getDate_fin());
         event.setTitre(eventDTO.getTitre());
 
-
         evenementRepository.save(event);
-
 
     }
 
     @Override
     public Evenement deleteEvent(EventDTO eventDTO) {
-        
-         Evenement eventDeleted = new Evenement();
 
-         eventDeleted.setId(eventDTO.getCode());
-        
-        evenementRepository.deleteEventByCodeAndRestaurantId(eventDTO.getCode(),eventDTO.getId_restaurant());
+        Evenement eventDeleted = new Evenement();
+
+        eventDeleted.setId(eventDTO.getCode());
+
+        evenementRepository.deleteEventByCodeAndRestaurantId(eventDTO.getCode(), eventDTO.getId_restaurant());
 
         // evenementRepository.deleteById(eventDeleted.getId());
 
@@ -63,7 +61,6 @@ public class JsonEventRestaurantEvent implements EventService {
 
         // Restaurant restaurant = new Restaurant(eventDTO.getId_restaurant());
 
-
         // eventUpdated.setId(eventDTO.getCode());
         // eventUpdated.setDate_debut(eventDTO.getDate_debut());
         // eventUpdated.setDate_fin(eventDTO.getDate_fin());
@@ -73,7 +70,8 @@ public class JsonEventRestaurantEvent implements EventService {
 
         // evenementRepository.save(eventUpdated);
 
-        evenementRepository.updateEventByCodeAndRestaurantId(eventDTO.getTitre(),eventDTO.getDate_fin(),eventDTO.getDate_debut(),eventDTO.getDescription(),eventDTO.getCode(),eventDTO.getId_restaurant());
+        evenementRepository.updateEventByCodeAndRestaurantId(eventDTO.getTitre(), eventDTO.getDate_fin(),
+                eventDTO.getDate_debut(), eventDTO.getDescription(), eventDTO.getCode(), eventDTO.getId_restaurant());
     }
-    
+
 }

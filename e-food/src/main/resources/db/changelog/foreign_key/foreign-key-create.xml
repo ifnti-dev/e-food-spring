@@ -136,6 +136,20 @@
         initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="code" referencedTableName="commandes" referencedTableSchemaName="${schema_name_command}"/>
 </changeSet>
 
+<changeSet author="roland" id="USER_CLIENT-FORENGKEY-UID001">
+        <addForeignKeyConstraint baseTableSchemaName="${schema_name_command}" baseColumnNames="user_id" 
+                                 baseTableName="clients" constraintName="user_client_for_key" deferrable="false" 
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id"
+                                 referencedTableName="users" referencedTableSchemaName="${schema_name_staff}"/>
+</changeSet>
+
+<changeSet author="roland" id="USER_EMPLOYE-FORENGKEY-UID001">
+        <addForeignKeyConstraint baseTableSchemaName="${schema_name_staff}" baseColumnNames="user_id"
+                                 baseTableName="employees" constraintName="user_employe_for_key" deferrable="false" 
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id"
+                                 referencedTableName="users" referencedTableSchemaName="${schema_name_staff}"/>
+    </changeSet>
+
 
 
 

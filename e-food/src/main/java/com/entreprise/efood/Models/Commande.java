@@ -32,7 +32,8 @@ import lombok.Setter;
 @NoArgsConstructor
 
 @Entity
-@Table(name = "commandes",schema = AppConstant.SCHEMA_COMMAND)
+// @Table(name = "commandes",schema = AppConstant.SCHEMA_COMMAND)
+@Table(name = "commandes")
 public class Commande {
     @Id
     @Column(name = "code")

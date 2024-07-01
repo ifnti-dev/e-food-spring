@@ -11,13 +11,12 @@ import com.entreprise.efood.Models.exeptionHandle.InterneExpection;
 import com.entreprise.efood.dtos.RestaurantDTO;
 import com.entreprise.efood.repository.RestaurantRepository;
 import java.util.ArrayList;
+
 @Service
 public class RestaurantService implements RestaurantInterface {
 
     @Autowired
     private RestaurantRepository restaurantRepository;
-
-    
 
     @Override
     public ResponseEntity<List<RestaurantDTO>> getAllRestaurants() {
@@ -34,9 +33,8 @@ public class RestaurantService implements RestaurantInterface {
     @Override
     public RestaurantDTO createRestaurant(RestaurantDTO restaurantDTO) {
 
-
-            //ArrayList<String> jours=new ArrayList<>();
-            //jours.add(restaurantDTO.getJour_ouverture());
+        // ArrayList<String> jours=new ArrayList<>();
+        // jours.add(restaurantDTO.getJour_ouverture());
         try {
             Restaurant restaurant = new Restaurant();
             restaurant.setNom(restaurantDTO.getNom());
@@ -58,27 +56,26 @@ public class RestaurantService implements RestaurantInterface {
         return null;
     }
 
-    //cette méthode mette à jour un restaurant en fonction des données fournies dans le corps de la requête, puis renvoie un objet
-    // contenant des informations sur la mise à jour effectuée, y compris l'ID du restaurant et l'objet RestaurantDTO mis à jour.
+    // cette méthode mette à jour un restaurant en fonction des données fournies
+    // dans le corps de la requête, puis renvoie un objet
+    // contenant des informations sur la mise à jour effectuée, y compris l'ID du
+    // restaurant et l'objet RestaurantDTO mis à jour.
 
     // public RestaurantDTO mappedRestaurantDTO(Restaurant r) {
-    //     RestaurantDTO restaurantDTO = new RestaurantDTO();
-    //     restaurantDTO.setCode(r.getCode());
-    //     restaurantDTO.setNom(r.getNom());
-    //     restaurantDTO.setVille(r.getVille());
-    //     restaurantDTO.setAdresse(r.getAdresse());
-    //     restaurantDTO.setTelephone(r.getTelephone());
-    //     restaurantDTO.setHeure_ouverture(r.getHeure_ouverture());
-    //     restaurantDTO.setHeure_fermeture(r.getHeure_fermeture());
-    //     restaurantDTO.setJour_ouverture(r.getJour_ouverture());
-    //     restaurantDTO.setEtat(r.getEtat());
-    //     restaurantDTO.setCoordonnee_gps_x(r.getCoordonnee_gps_x());
-    //     restaurantDTO.setCoordonnee_gps_y(r.getCoordonnee_gps_y());
-    //     return restaurantDTO;
+    // RestaurantDTO restaurantDTO = new RestaurantDTO();
+    // restaurantDTO.setCode(r.getCode());
+    // restaurantDTO.setNom(r.getNom());
+    // restaurantDTO.setVille(r.getVille());
+    // restaurantDTO.setAdresse(r.getAdresse());
+    // restaurantDTO.setTelephone(r.getTelephone());
+    // restaurantDTO.setHeure_ouverture(r.getHeure_ouverture());
+    // restaurantDTO.setHeure_fermeture(r.getHeure_fermeture());
+    // restaurantDTO.setJour_ouverture(r.getJour_ouverture());
+    // restaurantDTO.setEtat(r.getEtat());
+    // restaurantDTO.setCoordonnee_gps_x(r.getCoordonnee_gps_x());
+    // restaurantDTO.setCoordonnee_gps_y(r.getCoordonnee_gps_y());
+    // return restaurantDTO;
     // }
-
-
-
 
     private void mapDtoToEntity(RestaurantDTO dto, Restaurant entity) {
         entity.setNom(dto.getNom());
@@ -93,9 +90,6 @@ public class RestaurantService implements RestaurantInterface {
         entity.setCoordonnee_gps_y(dto.getCoordonnee_gps_y());
     }
 
-
-
-
     private RestaurantDTO mapEntityToDto(Restaurant entity) {
         return new RestaurantDTO(
                 entity.getCode(),
@@ -108,8 +102,7 @@ public class RestaurantService implements RestaurantInterface {
                 entity.getJour_ouverture(),
                 entity.getEtat(),
                 entity.getCoordonnee_gps_x(),
-                entity.getCoordonnee_gps_y()
-        );
+                entity.getCoordonnee_gps_y());
     }
 
     @Override
@@ -132,51 +125,42 @@ public class RestaurantService implements RestaurantInterface {
         return mapEntityToDto(updatedRestaurant);
     }
 
-
-
-
-
     // public RestaurantDTO updateRestaurant(RestaurantDTO restaurantDTO) {
-    //     Restaurant resto = new Restaurant();
-    //     if (restaurantDTO.getCode() != null) {
-    //         resto = this.restaurantRepository.getById(restaurantDTO.getCode());
-    //         resto.setCode(restaurantDTO.getCode());
-    //         resto.setNom(restaurantDTO.getNom());
-    //         resto.setVille(restaurantDTO.getVille());
-    //         resto.setAdresse(restaurantDTO.getAdresse());
-    //         resto.setTelephone(restaurantDTO.getTelephone());
-    //         resto.setHeure_ouverture(restaurantDTO.getHeure_ouverture());
-    //         resto.setHeure_fermeture(restaurantDTO.getHeure_fermeture());
-    //         resto.setJour_ouverture(restaurantDTO.getJour_ouverture());
-    //         resto.setEtat(restaurantDTO.getEtat());
-    //         resto.setCoordonnee_gps_x(restaurantDTO.getCoordonnee_gps_x());
-    //         resto.setCoordonnee_gps_y(restaurantDTO.getCoordonnee_gps_y());
-    //     } else {
-    //         throw new InterneExpection("Restaurant uuid is requiered", null);
-    //     }
-    //     //cette ligne de code enregistre un objet Restaurant dans la base de données, puis le convertit en un objet RestaurantDTO 
-    //     //à l'aide de la méthode mappedRestaurantDTO() avant de le renvoyer.
-    //     return this.mappedRestaurantDTO(this.restaurantRepository.save(resto));
+    // Restaurant resto = new Restaurant();
+    // if (restaurantDTO.getCode() != null) {
+    // resto = this.restaurantRepository.getById(restaurantDTO.getCode());
+    // resto.setCode(restaurantDTO.getCode());
+    // resto.setNom(restaurantDTO.getNom());
+    // resto.setVille(restaurantDTO.getVille());
+    // resto.setAdresse(restaurantDTO.getAdresse());
+    // resto.setTelephone(restaurantDTO.getTelephone());
+    // resto.setHeure_ouverture(restaurantDTO.getHeure_ouverture());
+    // resto.setHeure_fermeture(restaurantDTO.getHeure_fermeture());
+    // resto.setJour_ouverture(restaurantDTO.getJour_ouverture());
+    // resto.setEtat(restaurantDTO.getEtat());
+    // resto.setCoordonnee_gps_x(restaurantDTO.getCoordonnee_gps_x());
+    // resto.setCoordonnee_gps_y(restaurantDTO.getCoordonnee_gps_y());
+    // } else {
+    // throw new InterneExpection("Restaurant uuid is requiered", null);
     // }
-
-
-    
-
-
+    // //cette ligne de code enregistre un objet Restaurant dans la base de données,
+    // puis le convertit en un objet RestaurantDTO
+    // //à l'aide de la méthode mappedRestaurantDTO() avant de le renvoyer.
+    // return this.mappedRestaurantDTO(this.restaurantRepository.save(resto));
+    // }
 
     @Override
     public void deleteRestaurant(Long code) {
-       
-         // Récupérerons le restaurant par son code, ou lancer une exception si non trouvé
+
+        // Récupérerons le restaurant par son code, ou lancer une exception si non
+        // trouvé
         Restaurant restaurant = restaurantRepository.findById(code)
-        .orElseThrow(() -> new RuntimeException("Restaurant non trouvé avec le code: " + code));
+                .orElseThrow(() -> new RuntimeException("Restaurant non trouvé avec le code: " + code));
 
         // Suppresion du restaurant
         restaurantRepository.deleteById(code);
-        
-    }
 
-    
+    }
 
     @Override
     public ResponseEntity<RestaurantDTO> getRestaurantById(Long code) {
@@ -184,19 +168,14 @@ public class RestaurantService implements RestaurantInterface {
             // Récupérons le restaurant par son ID
             Restaurant restaurant = restaurantRepository.findById(code)
                     .orElseThrow(() -> new RuntimeException("Restaurant non trouvé avec le code: " + code));
-            
+
             // Mappage de l'objet Restaurant en RestaurantDTO
             RestaurantDTO restaurantDTO = mapEntityToDto(restaurant);
 
             return ResponseEntity.ok(restaurantDTO);
-        } 
-        catch (RuntimeException e) {
+        } catch (RuntimeException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND); // Retourne 404 si le restaurant n'est pas trouvé
         }
     }
 
-
 }
-
-    
-

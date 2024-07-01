@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -72,6 +73,19 @@ public class MenuController {
         Map<String, String> message = new HashMap<>();
         try {
             return menuServiceImpl.updateMenu(requestMap, Long.parseLong(menu_id), Long.parseLong(restaurant_id));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        message.put("message", "Erreur interne du serveur");
+        return new ResponseEntity<Map<String, String>>(message, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @DeleteMapping("/{menu_id}/delete")
+    public ResponseEntity deleteMenu(@PathVariable String menu_id) {
+        Map<String, String> message = new HashMap<>();
+        try {
+            return menuServiceImpl.deleteMenu(Long.parseLong(menu_id));
         } catch (Exception e) {
             e.printStackTrace();
         }

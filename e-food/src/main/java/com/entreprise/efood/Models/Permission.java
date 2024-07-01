@@ -23,7 +23,9 @@ import lombok.Setter;
 @Getter
 
 @Entity
-@Table(name = "permissions",schema = AppConstant.SCHEMA_STAFF)
+// @Table(name = "permissions",schema = AppConstant.SCHEMA_STAFF)
+@Table(name = "permissions")
+
 public class Permission {
 
     @Id
