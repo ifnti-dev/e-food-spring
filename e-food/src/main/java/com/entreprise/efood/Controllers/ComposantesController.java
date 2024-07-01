@@ -30,10 +30,10 @@ public class ComposantesController {
     private ComposantesServiceImpl composantesServiceImpl;
 
     // méthode GET retournant l'ensemble des composantes
-    @GetMapping("/")
-    public ResponseEntity<Map<String, List<ComposantDTO>>> getAllComposantes() {
+    @GetMapping("/{restaurant_id}")
+    public ResponseEntity<Map<String, List<ComposantDTO>>> getAllComposantes(@PathVariable String restaurant_id) {
         try {
-            return composantesServiceImpl.getAllComposants();
+            return composantesServiceImpl.getAllComposants(Long.parseLong(restaurant_id));
         } catch (Exception e) {
             e.printStackTrace();
         }

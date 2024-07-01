@@ -20,7 +20,7 @@ import com.entreprise.efood.repository.PubliciteRepository;
 @Service
 @Transactional(readOnly = false)
 public class PubliciteService {
-    
+
     @Autowired
     private final PubliciteRepository repo;
 
@@ -59,7 +59,7 @@ public class PubliciteService {
         List<Long> imagesID = dto.getImagesIds();
         List<Image> images = new ArrayList<>();
 
-        if(imagesID != null){
+        if (imagesID != null) {
             for (Long id : imagesID) {
                 Image img = new Image();
                 img.setId(id);
@@ -73,26 +73,17 @@ public class PubliciteService {
         publicite.setTitre(dto.getTitre());
         publicite.setDescription(dto.getDescription());
         publicite.setRestaurant(restaurant);
-        
-        
+
         return publicite;
     }
 
     // private PubliciteDTO convertToDto(Publicite publicite) {
-    //     PubliciteDTO dto = new PubliciteDTO();
-    //     dto.setId(publicite.getId());
-    //     dto.setTitre(publicite.getTitre());
-    //     dto.setDescription(publicite.getDescription());
-    //     dto.setRestaurantId(publicite.getRestaurant().getId());
-    //     dto.setImagesIds(publicite.getImages().stream().map(Image::getId).collect(Collectors.toList()));
-    //     return dto;
+    // PubliciteDTO dto = new PubliciteDTO();
+    // dto.setId(publicite.getId());
+    // dto.setTitre(publicite.getTitre());
+    // dto.setDescription(publicite.getDescription());
+    // dto.setRestaurantId(publicite.getRestaurant().getId());
+    // dto.setImagesIds(publicite.getImages().stream().map(Image::getId).collect(Collectors.toList()));
+    // return dto;
     // }
 }
-
-
-
-
-
-
-
-

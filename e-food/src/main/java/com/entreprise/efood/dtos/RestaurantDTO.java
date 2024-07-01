@@ -40,7 +40,7 @@ public class RestaurantDTO {
     private String heure_fermeture;
 
     @NotNull
-    private String jour_ouverture;
+    private ArrayList<String> jour_ouverture;
 
     @NotNull
     private String etat;

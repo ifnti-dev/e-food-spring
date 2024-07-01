@@ -72,11 +72,23 @@ public class Menu implements Serializable {
     private Instant updatedAt = Instant.now();
 
     @ManyToOne
-    @JoinColumn(name = "restaurant_id")
+    @JoinColumn(name = "restaurant_id" )
     private Restaurant restaurant;
 
     @ManyToMany()
     @JoinTable(name = "menu_composant", joinColumns = @JoinColumn(name = "menu_id", referencedColumnName = "code"), inverseJoinColumns = @JoinColumn(name = "composant_id", referencedColumnName = "code"), schema = AppConstant.SCHEMA_MENU)
     private List<Composant> composants;
+
+    public void assignComposant(Composant composant) {
+        composants.add(composant);
+
+    }
+
+    @Override
+    public String toString() {
+        return "Menu [id=" + id + ", nom=" + nom + ", prix=" + prix + ", temps_preparation=" + temps_preparation
+                + ", statut=" + statut + ", images=" + images + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt
+                + ", restaurant=" + restaurant + ", composants=" + composants + "]";
+    }
 
 }

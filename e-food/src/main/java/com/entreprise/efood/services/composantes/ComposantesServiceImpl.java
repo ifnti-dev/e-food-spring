@@ -11,8 +11,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.entreprise.efood.Models.Composant;
+import com.entreprise.efood.Models.Menu;
+import com.entreprise.efood.Models.Restaurant;
 import com.entreprise.efood.dtos.ComposantDTO;
 import com.entreprise.efood.repository.ComposantRepository;
+import com.entreprise.efood.repository.RestaurantRepository;
 import com.entreprise.efood.utils.exceptions.composantExceptions.InvalidNameValueForComposant;
 import com.entreprise.efood.utils.exceptions.composantExceptions.InvalidPriceValueForComposant;
 import com.entreprise.efood.utils.validators.ComposantValidators;
@@ -26,23 +29,39 @@ public class ComposantesServiceImpl implements ComposantesService {
     @Autowired
     private ComposantRepository composantRepository;
 
+    @Autowired
+    private RestaurantRepository restaurantRepository;
+
     @Override
     /*
-     * cette méthode permet de retourner la liste des composantes de menu
-     * elle retourne une réponse Http contenant un message et un code HTTP
+     * cette méthode permet de retourner la liste des composantes des menus
+     * du restaurant elle retourne une réponse Http contenant un message et
+     * un code HTTP
      */
 
-    public ResponseEntity<Map<String, List<ComposantDTO>>> getAllComposants() {
+    public ResponseEntity<Map<String, List<ComposantDTO>>> getAllComposants(Long restaurant_id) {
         Map<String, List<ComposantDTO>> mappedComposants = new HashMap<>();
         try {
-            List<ComposantDTO> composants = composantRepository.getComposants();
-            mappedComposants.put("composantes", composants);
+            Restaurant restaurant = restaurantRepository.findById(restaurant_id).get();
+            List<ComposantDTO> composantDTOs = new ArrayList<ComposantDTO>();
+            List<Long> composantIds = new ArrayList<Long>();
+            for (Menu menu : restaurant.getMenus()) {
+                for (Composant composant : menu.getComposants()) {
+                    if (!composantIds.contains(composant.getId())) {
+                        composantIds.add(composant.getId());
+                        composant.setMenus(null);
+                        composantDTOs.add(ComposantMapper.mapToComposantDTO(composant));
+                    }
+
+                }
+            }
+            mappedComposants.put("composantes", composantDTOs);
             return new ResponseEntity<Map<String, List<ComposantDTO>>>(mappedComposants, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
         }
         mappedComposants.put("composantes", new ArrayList<>());
-        return new ResponseEntity<Map<String, List<ComposantDTO>>>(mappedComposants, HttpStatus.OK);
+        return new ResponseEntity<Map<String, List<ComposantDTO>>>(mappedComposants, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @Override
