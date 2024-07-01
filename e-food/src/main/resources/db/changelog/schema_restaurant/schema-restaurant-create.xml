@@ -33,11 +33,13 @@
             <column name="heure_fermeture" type="CHAR(2)">
                 <constraints nullable="false" />
             </column>
+
             <column name="jour_ouverture" type="VARCHAR(10) []">
-                <constraints nullable="false" />
+                <constraints nullable="true" />
+
             </column>
-            <column name="coordonnee_gps_x" type="VARCHAR(50)"/>
-            <column name="coordonnee_gps_y" type="VARCHAR(50)"/>
+            <column name="coordonnee_gps_x" type="FLOAT(53)"/>
+            <column name="coordonnee_gps_y" type="FLOAT(53)"/>
             <column name="etat" type="VARCHAR(30)"/>
             <!-- add foreignkey after -->
             

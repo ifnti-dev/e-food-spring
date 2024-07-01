@@ -1,6 +1,7 @@
 package com.entreprise.efood.Models;
 
 import java.util.List;
+import java.io.Serializable;
 import java.time.Instant;
 
 import org.springframework.data.annotation.CreatedDate;
@@ -8,10 +9,10 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import com.entreprise.efood.utils.AppConstant;
 
+import groovyjarjarantlr4.v4.parse.ANTLRParser.finallyClause_return;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -33,17 +34,19 @@ import lombok.Setter;
 @NoArgsConstructor
 
 @Entity
-// @Table(name = "menus", schema = AppConstant.SCHEMA_MENU)
-@Table(name = "menus")
-public class Menu {
+@Table(name = "menus", schema = AppConstant.SCHEMA_MENU)
+public class Menu implements Serializable {
+
+    private static final long serialVersionUID = 123456L;
+
     @Id
     @Column(name = "code")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "menu_id_seq")
-    @SequenceGenerator(name = "menu_id_seq", sequenceName = "menu_id_seq",allocationSize = 50)
+    @SequenceGenerator(name = "menu_id_seq", sequenceName = "menu_id_seq", allocationSize = 50)
     private Long id;
 
     @Basic
-    @Column(name = "nom",length = 30, nullable = false)
+    @Column(name = "nom", length = 30, nullable = false)
     private String nom;
 
     @Column(name = "prix", nullable = false)
@@ -62,27 +65,25 @@ public class Menu {
 
     @CreatedDate
     @Column(name = "created_at")
-    private Instant createdAt=Instant.now();
+    private Instant createdAt = Instant.now();
 
     @LastModifiedDate
     @Column(name = "updated_at")
-    private Instant updatedAt=Instant.now();
+    private Instant updatedAt = Instant.now();
 
     @ManyToOne
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
     @ManyToMany()
+<<<<<<< HEAD
     @JoinTable( name = "menu_composant",
     joinColumns = @JoinColumn(name= "menu_id",referencedColumnName = "code"),
     inverseJoinColumns=@JoinColumn( name ="composant_id",referencedColumnName = "code")
     )
+=======
+    @JoinTable(name = "menu_composant", joinColumns = @JoinColumn(name = "menu_id", referencedColumnName = "code"), inverseJoinColumns = @JoinColumn(name = "composant_id", referencedColumnName = "code"), schema = AppConstant.SCHEMA_MENU)
+>>>>>>> df55d01ed12be40255034603c716bd4d1d75bd70
     private List<Composant> composants;
 
-    
-   
-    
 }
-
-
-

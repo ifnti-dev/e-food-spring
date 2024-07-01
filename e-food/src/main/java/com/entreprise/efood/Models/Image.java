@@ -1,5 +1,10 @@
 package com.entreprise.efood.Models;
 
+import java.io.Serializable;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 import com.entreprise.efood.utils.AppConstant;
 
 import jakarta.persistence.Basic;
@@ -22,9 +27,8 @@ import lombok.Setter;
 @NoArgsConstructor
 
 @Entity
-// @Table(name = "images",schema = AppConstant.SCHEMA_MENU)
-@Table(name = "images")
-public class Image {
+@Table(name = "images",schema = AppConstant.SCHEMA_MENU)
+public class Image implements Serializable{
     
     @Id
     @Column(name = "id")

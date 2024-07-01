@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalTime;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +36,7 @@ public class Restaurant {
     @Column(name = "code")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "restaurant_id_seq")
     @SequenceGenerator(name = "restaurant_id_seq", sequenceName = "restaurant_id_seq",allocationSize = 100)
-    private Long id;
+    private Long code;
     
     @Basic
     @Column(name = "nom", length = 30, nullable = false)
@@ -56,15 +56,17 @@ public class Restaurant {
 
     @Basic
     @Column(name = "heure_ouverture", nullable = false)
-    private LocalTime heure_ouverture;
+    private String heure_ouverture;
 
     @Basic
     @Column(name = "heure_fermeture", nullable = false)
-    private LocalTime heure_fermeture;
+    private String heure_fermeture;
 
     @Basic
-    @Column(name = "jour_ouverture", nullable = false)
+    @Column(name = "jour_ouverture", nullable = true)
     private ArrayList<String> jour_ouverture;
+
+
 
     @Basic
     @Column(name = "coordonnee_gps_x",length = 50)
@@ -93,5 +95,13 @@ public class Restaurant {
 
     @OneToMany(mappedBy = "restaurant")
     private List<Employee> employees;
+
+    public Restaurant(Long id) {
+        this.code = id;
+    }
+
+
+
+    
 
 }
