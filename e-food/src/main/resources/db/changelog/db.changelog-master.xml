@@ -37,11 +37,12 @@
     
     <include file="db/changelog/seeders/evenements/evenement-create.xml"/> 
 
-    <!-- <include file="db/changelog/seeders/image-create.xml"/>  -->
+     <!-- <include file="db/changelog/seeders/image-create.xml"/>   -->
+
     
     <!-- <include file="db/changelog/seeders/restaurant/restaurant-create.xml"/> -->
 
-     <include file="db/changelog/seeders/adhesion/adhesion-create.xml"/> 
+    <include file="db/changelog/seeders/adhesion/adhesion-create.xml"/> 
      
 </databaseChangeLog>
 
