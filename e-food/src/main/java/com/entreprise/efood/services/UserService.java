@@ -4,18 +4,33 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import com.entreprise.efood.dtos.UserDTO;
-import com.entreprise.efood.Models.User;
 
+import com.entreprise.efood.dtos.RegisterUserDto;
+import com.entreprise.efood.dtos.UserDTO;
+import com.entreprise.efood.Models.Role;
+import com.entreprise.efood.Models.User;
+import com.entreprise.efood.repository.RoleRepository;
 import com.entreprise.efood.repository.UserRepository;
 
 @Service
 public class UserService {
+    @Autowired
     private final UserRepository userRepository;
 
-    public UserService(UserRepository userRepository) {
+    @Autowired
+    private final RoleRepository roleRepository;
+
+    @Autowired
+    private final PasswordEncoder passwordEncoder;
+
+
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder,RoleRepository roleRepository) {
         this.userRepository = userRepository;
+        this.passwordEncoder=passwordEncoder;
+        this.roleRepository=roleRepository;
     }
 
     // Récupérer tous les utilisateurs
@@ -31,12 +46,25 @@ public class UserService {
         return userOptional.map(this::convertToDTO).orElse(null);
     }
 
-    // Ajouter un nouvel utilisateur
-    public UserDTO addUser(UserDTO userDTO) {
-        User user = convertToEntity(userDTO);
-        User savedUser = userRepository.save(user);
-        return convertToDTO(savedUser);
+        public User addUser( UserDTO input) {
+            
+        Role roleUser = roleRepository.findById(input.getRole_id()).orElseThrow();
+        
+        User user = new User();
+                user.setNom(input.getNom());
+                user.setUsername(input.getUsername());
+                user.setPassword(passwordEncoder.encode(input.getPassword()));
+                user.setPrenom(input.getPrenom());
+                user.setEmail(input.getEmail());
+                user.setAdresse(input.getAdresse());
+                user.setTelephone(input.getTelephone());
+                user.setVille(input.getVille());
+                user.setRole(roleUser);
+        return userRepository.save(user);
     }
+
+    // Ajouter un nouvel utilisateur
+    
 
     // Mettre à jour un utilisateur existant
     public UserDTO updateUser(Long id, UserDTO userDTO) {
@@ -82,12 +110,15 @@ public class UserService {
         userDto.setVille(user.getVille());
         userDto.setUsername(user.getUsername());
         userDto.setPassword(user.getPassword());
+        userDto.setRole_id(user.getRole().getId());
         // Ajoutez d'autres champs si nécessaire
         return userDto;
     }
 
     // Méthode utilitaire pour convertir UserDTO en User
     private User convertToEntity(UserDTO userDTO) {
+        Role role = new Role();
+        role.setId(userDTO.getId());
         User user = new User();
         user.setId(userDTO.getId());
         user.setNom(userDTO.getNom());
@@ -98,6 +129,8 @@ public class UserService {
         user.setVille(userDTO.getVille());
         user.setUsername(userDTO.getUsername());
         user.setPassword(userDTO.getPassword());
+        user.setRole(role);
+        
         // Ajoutez d'autres champs si nécessaire
         return user;
     }
