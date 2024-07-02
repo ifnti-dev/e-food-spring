@@ -10,13 +10,13 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 
 import com.entreprise.efood.dtos.MenuCommandeClientDTO;
 import com.entreprise.efood.dtos.OrderDTO;
@@ -29,8 +29,8 @@ import com.entreprise.efood.utils.encryDecry.EncryptionUtil;
 import org.springframework.web.bind.annotation.PutMapping;
 
 
-
 @RestController
+@CrossOrigin("*")
 @RequestMapping(path = AppConstant.ORDER_REST_PATH_API)
 public class OrderController {
     private OrderServiceImpl orderServiceImpl;
@@ -46,6 +46,8 @@ public class OrderController {
     }
     @PostMapping(value="/")
     public ResponseEntity<Map<String,String>>  order(@RequestBody OrderDTO orderDTO){
+
+        System.out.println(orderDTO);
         
         ResponseEntity<Map<String,String>> responseEntity =  orderServiceImpl.storeOrder(orderDTO);
 
@@ -55,6 +57,8 @@ public class OrderController {
 
     @PutMapping(value="/status/")
     public ResponseEntity<Map<String,Boolean>>  updateCommandStatus(@RequestBody StatusDTO statusDTO) {
+        
+        System.out.println(statusDTO.getStatus());
         
         Map<String,Boolean> responseEntity = new HashMap();
         

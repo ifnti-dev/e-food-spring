@@ -127,17 +127,12 @@ public class OrderServiceImpl implements CommandService {
 
         try {
             // Long decryptedId = Long.parseLong(encryptionUtil.decrypt(statusDTO.getIdCmd()));
-            Optional<Commande> theCommande =  commandeRepository.findById(Long.parseLong(statusDTO.getId()));
-            System.out.println(statusDTO.getId());
-            Client client = new Client();
-            client.setId(Long.parseLong(statusDTO.getIdClient()));
 
-            if (theCommande != null) {
-                theCommande.get().setEtat(StatusEnum.valueOf(statusDTO.getStatus()).toString());
-                theCommande.get().setClient(client);
-                commandeRepository.save(theCommande.get());
-            }
-           
+
+              commandeRepository.updateCommandStatus(statusDTO.getStatus(), Long.parseLong(statusDTO.getId()));
+            
+        
+
             
             return true;
         } //catch ( e) {
