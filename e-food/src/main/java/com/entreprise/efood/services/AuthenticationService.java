@@ -33,7 +33,7 @@ public class AuthenticationService {
     public User signup(RegisterUserDto input) {
         Role roleUser = new Role();
         roleUser.setId((long) 2);
-        roleUser.setLibelle("ROLE_USER");
+        roleUser.setLibelle("USER");
 
         User user = new User();
                 user.setNom(input.getNom());
