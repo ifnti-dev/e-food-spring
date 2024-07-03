@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.entreprise.efood.Models.Commande;
 import com.entreprise.efood.Models.MenuCommande;
-import com.entreprise.efood.dtos.MenuCommandeClientDTO;
+import com.entreprise.efood.dtos.commandeDTO.MenuCommandeClientDTO;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import java.util.List;
 @Repository
 public interface MenuCommandeRepository extends JpaRepository<MenuCommande,Long> {
 
-    @Query("SELECT new com.entreprise.efood.dtos.MenuCommandeClientDTO(mcmd.preference,mcmd.quantite,mcmd.menu.temps_preparation,mcmd.menu.prix,mcmd.menu.id) from MenuCommande mcmd where mcmd.commande.id=:id")
+    @Query("SELECT new com.entreprise.efood.dtos.commandeDTO.MenuCommandeClientDTO(mcmd.preference,mcmd.quantite,mcmd.menu.temps_preparation,mcmd.menu.prix,mcmd.menu.id,mcmd.menu.nom) from MenuCommande mcmd where mcmd.commande.id=:id")
     List<MenuCommandeClientDTO> findByCommande(@Param("id") Long id);
 
 }

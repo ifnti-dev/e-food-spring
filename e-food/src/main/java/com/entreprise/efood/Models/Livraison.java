@@ -28,7 +28,7 @@ import lombok.Setter;
 @NoArgsConstructor
 
 @Entity
-@Table(name = "livraisons",schema = AppConstant.SCHEMA_COMMAND)
+@Table(name = "livraisons")
 public class Livraison {
     @Id
     @Column(name = "code")
@@ -55,9 +55,9 @@ public class Livraison {
     @Column(length = 30, nullable = false)
     private double coordonnee_y;
 
-    // @ManyToOne
-    // @JoinColumn(name = "employee_id")
-    // private Employee employee;
+    @ManyToOne
+    @JoinColumn(name = "employee_id")
+    private Employee employee;
 
     @OneToOne
     @JoinColumn(name = "commande_id")

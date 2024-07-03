@@ -1,4 +1,4 @@
-package com.entreprise.efood.dtos;
+package com.entreprise.efood.dtos.commandeDTO;
 
 import groovyjarjarantlr4.v4.runtime.misc.NotNull;
 import groovyjarjarantlr4.v4.runtime.misc.Nullable;

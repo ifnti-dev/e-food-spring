@@ -1,4 +1,4 @@
-package com.entreprise.efood.dtos;
+package com.entreprise.efood.dtos.commandeDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

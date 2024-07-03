@@ -96,6 +96,7 @@ public class ComposantesServiceImpl implements ComposantesService {
         return new ResponseEntity<Map<String, String>>(message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     /*
      * cette methode permet de modifier une composante

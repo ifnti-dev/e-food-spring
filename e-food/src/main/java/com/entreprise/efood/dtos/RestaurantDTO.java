@@ -1,6 +1,7 @@
 package com.entreprise.efood.dtos;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import groovyjarjarantlr4.v4.runtime.misc.NotNull;
 import lombok.AllArgsConstructor;
@@ -40,7 +41,7 @@ public class RestaurantDTO {
     private String heure_fermeture;
 
     @NotNull
-    private ArrayList<String> jour_ouverture;
+    private List<String> jour_ouverture;
 
     @NotNull
     private String etat;

@@ -27,7 +27,7 @@ import jakarta.persistence.SequenceGenerator;
 @Getter
 
 @Entity
-@Table(name = "restaurants", schema = AppConstant.SCHEMA_RESTAURANT)
+@Table(name = "restaurants")
 public class Restaurant {
     @Id
     @Column(name = "code")
@@ -61,7 +61,7 @@ public class Restaurant {
 
     @Basic
     @Column(name = "jour_ouverture", nullable = true)
-    private ArrayList<String> jour_ouverture;
+    private List<String> jour_ouverture;
 
     @Basic
     @Column(name = "coordonnee_gps_x", length = 50)

@@ -11,8 +11,5 @@ import lombok.Setter;
 @AllArgsConstructor
 public class StatusDTO {
     private String id;
-    private String status;
-    private String idClient;
-
-    
+    private String status;    
 }

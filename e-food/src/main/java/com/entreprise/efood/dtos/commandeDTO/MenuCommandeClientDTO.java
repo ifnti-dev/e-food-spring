@@ -1,4 +1,4 @@
-package com.entreprise.efood.dtos;
+package com.entreprise.efood.dtos.commandeDTO;
 
 
 
@@ -19,6 +19,8 @@ public class MenuCommandeClientDTO {
     private String temps_preparation;
     private double prix;
     private Long id;
+    private String nom;
+
    
 
 }

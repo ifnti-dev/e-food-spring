@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import com.entreprise.efood.Models.User;
 import com.entreprise.efood.dtos.LoginUserDto;
 import com.entreprise.efood.dtos.RegisterUserDto;
@@ -18,8 +18,10 @@ import com.entreprise.efood.utils.LoginResponse;
 @RequestMapping("/auth")
 @RestController
 public class AuthenticationController {
+    @Autowired
     private final JwtService jwtService;
     
+    @Autowired
     private final AuthenticationService authenticationService;
 
     public AuthenticationController(JwtService jwtService, AuthenticationService authenticationService) {
