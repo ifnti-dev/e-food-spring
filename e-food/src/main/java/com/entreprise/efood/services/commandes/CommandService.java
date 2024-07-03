@@ -16,8 +16,8 @@ public interface CommandService {
     public ResponseEntity<Map<String, String>> storeOrder( OrderDTO orderDTO);
     public Boolean getCommandById(StatusDTO statusDTO);
     public ResponseEntity<Page<RetrieveCmdDTO>> getCommandsByStatus(String status,int page,int size);
-    public List<MenuCommandeClientDTO> retrieveMenus(String id);
-    public DetailsClientCommandeDTO getClientCommndes(Long idClient);
+    public Map<String,Object> retrieveMenus(String id);
+    public Page<DetailsClientCommandeDTO> getClientCommndes(Long idClient);
     
     
 }
