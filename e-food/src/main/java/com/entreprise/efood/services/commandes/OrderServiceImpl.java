@@ -24,6 +24,7 @@ import com.entreprise.efood.Models.MenuCommande;
 import com.entreprise.efood.dtos.MenuCommandeClientDTO;
 import com.entreprise.efood.dtos.StatusDTO;
 import com.entreprise.efood.dtos.commandeDTO.ClientMenuDTO;
+import com.entreprise.efood.dtos.commandeDTO.DetailsClientCommandeDTO;
 import com.entreprise.efood.dtos.commandeDTO.OrderDTO;
 import com.entreprise.efood.dtos.commandeDTO.RetrieveCmdDTO;
 import com.entreprise.efood.enums.StatusEnum;
@@ -186,8 +187,15 @@ public class OrderServiceImpl implements CommandService {
     public List<MenuCommandeClientDTO> retrieveMenus(String id) {
         Commande commande = new Commande();
         commande.setId(Long.parseLong(id));
+        //retrive menu's commande in database
         List<MenuCommandeClientDTO> menuCommandes  =  menuCommandeRepository.findByCommande( commande.getId()) ;  
        return menuCommandes;
+    }
+
+    @Override
+    public DetailsClientCommandeDTO getClientCommndes(Long idClient) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getClientCommndes'");
     }
 
 }

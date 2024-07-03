@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,7 +48,7 @@ public class OrderController {
     @PostMapping(value="/")
     public ResponseEntity<Map<String,String>>  order(@RequestBody OrderDTO orderDTO){
 
-        System.out.println(orderDTO);
+
         
         ResponseEntity<Map<String,String>> responseEntity =  orderServiceImpl.storeOrder(orderDTO);
 
@@ -97,6 +98,13 @@ public class OrderController {
         responseEntity.put("menus", mcmds);
         return new ResponseEntity<>(responseEntity,HttpStatus.OK);
     }
+
+    @GetMapping("/{id}")
+    public String getClientCommans(@PathVariable String id) {
+        LOGGER.info(id);
+        return new String();
+    }
+    
     
 
 
