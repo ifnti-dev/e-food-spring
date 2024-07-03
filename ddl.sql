@@ -15,3 +15,4 @@ INSERT INTO menus(code,nom,prix,temps_preparation,created_at,updated_at,restaura
 
 INSERT INTO menus(code,nom,prix,temps_preparation,created_at,updated_at,restaurant_id,statut) VALUES (2,'ll',200,'12','2002-02-11','2002-02-11',2,'en cours');
 INSERT INTO menus(code,nom,prix,temps_preparation,created_at,updated_at,restaurant_id,statut) VALUES (3,'hido',1200,'12','2002-02-11','2002-02-11',2,'en cours');
+
