@@ -1,6 +1,7 @@
 package com.entreprise.efood.Models;
 
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.List;
@@ -16,7 +17,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
@@ -34,7 +34,7 @@ import lombok.Setter;
 @Entity
 // @Table(name = "commandes",schema = AppConstant.SCHEMA_COMMAND)
 @Table(name = "commandes")
-public class Commande {
+public class Commande implements Serializable{
     @Id
     @Column(name = "code")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "commande_id_seq")
