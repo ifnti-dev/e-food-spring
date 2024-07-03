@@ -22,7 +22,7 @@ import org.springframework.data.repository.query.Param;
 public interface CommandeRepository  extends JpaRepository<Commande, Long>{
 
 
-    @Query("SELECT new com.entreprise.efood.dtos.RetrieveCmdDTO(cmd.id,cmd.montant) FROM Commande cmd Where cmd.etat=:etat")
+    @Query("SELECT new com.entreprise.efood.dtos.commandeDTO.RetrieveCmdDTO(cmd.id,cmd.montant) FROM Commande cmd Where cmd.etat=:etat")
      Page<RetrieveCmdDTO> findCommandsByEtat(@Param("etat") String etat,Pageable pageable);
 
     @Transactional
