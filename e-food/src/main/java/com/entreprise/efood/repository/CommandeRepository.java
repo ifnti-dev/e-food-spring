@@ -4,8 +4,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.entreprise.efood.Models.Commande;
-import com.entreprise.efood.dtos.RetrieveCmdDTO;
-
+import com.entreprise.efood.dtos.commandeDTO.RetrieveCmdDTO;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

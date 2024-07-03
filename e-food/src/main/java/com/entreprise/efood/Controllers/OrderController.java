@@ -19,9 +19,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.entreprise.efood.dtos.MenuCommandeClientDTO;
-import com.entreprise.efood.dtos.OrderDTO;
-import com.entreprise.efood.dtos.RetrieveCmdDTO;
 import com.entreprise.efood.dtos.StatusDTO;
+import com.entreprise.efood.dtos.commandeDTO.OrderDTO;
+import com.entreprise.efood.dtos.commandeDTO.RetrieveCmdDTO;
 import com.entreprise.efood.services.commandes.OrderServiceImpl;
 import com.entreprise.efood.utils.AppConstant;
 import com.entreprise.efood.utils.encryDecry.EncryptionUtil;
