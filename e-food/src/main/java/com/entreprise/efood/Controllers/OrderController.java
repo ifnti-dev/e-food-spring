@@ -12,16 +12,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.entreprise.efood.dtos.MenuCommandeClientDTO;
-import com.entreprise.efood.dtos.OrderDTO;
-import com.entreprise.efood.dtos.RetrieveCmdDTO;
 import com.entreprise.efood.dtos.StatusDTO;
+import com.entreprise.efood.dtos.commandeDTO.DetailsClientCommandeDTO;
+import com.entreprise.efood.dtos.commandeDTO.MenuCommandeClientDTO;
+import com.entreprise.efood.dtos.commandeDTO.OrderDTO;
+import com.entreprise.efood.dtos.commandeDTO.RetrieveCmdDTO;
 import com.entreprise.efood.services.commandes.OrderServiceImpl;
 import com.entreprise.efood.utils.AppConstant;
 import com.entreprise.efood.utils.encryDecry.EncryptionUtil;
@@ -47,7 +49,7 @@ public class OrderController {
     @PostMapping(value="/")
     public ResponseEntity<Map<String,String>>  order(@RequestBody OrderDTO orderDTO){
 
-        System.out.println(orderDTO);
+
         
         ResponseEntity<Map<String,String>> responseEntity =  orderServiceImpl.storeOrder(orderDTO);
 
@@ -60,7 +62,7 @@ public class OrderController {
         
         System.out.println(statusDTO.getStatus());
         
-        Map<String,Boolean> responseEntity = new HashMap();
+        Map<String,Boolean> responseEntity = new HashMap<>();
         
         boolean ok = orderServiceImpl.getCommandById(statusDTO);
 
@@ -89,14 +91,27 @@ public class OrderController {
     }
 
     @GetMapping("/")
-    public ResponseEntity<Map<String,List<MenuCommandeClientDTO>>> getCommandById(@RequestParam String id) {
+    public ResponseEntity<Map<String,Object>> getCommandById(@RequestParam String id) {
       
-        Map<String,List<MenuCommandeClientDTO>> responseEntity = new HashMap();
 
-        List<MenuCommandeClientDTO>  mcmds= orderServiceImpl.retrieveMenus(id);
-        responseEntity.put("menus", mcmds);
-        return new ResponseEntity<>(responseEntity,HttpStatus.OK);
+        Map<String,Object>  mcmds= orderServiceImpl.retrieveMenus(id);
+        return new ResponseEntity<>(mcmds,HttpStatus.OK);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Map<String,Page<DetailsClientCommandeDTO>>> getClientCommands(@PathVariable String id) {
+        Map<String,Page<DetailsClientCommandeDTO>> responseHashMap = new HashMap<>();
+        
+
+        // LOGGER.info(id);
+
+        Page<DetailsClientCommandeDTO> details = orderServiceImpl.getClientCommndes(Long.parseLong(id));
+        responseHashMap.put("data", details);
+        
+        // LOGGER.info();
+        return new ResponseEntity<>(responseHashMap,HttpStatus.OK);
+    }
+    
     
 
 

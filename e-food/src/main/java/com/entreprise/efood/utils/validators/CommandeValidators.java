@@ -1,7 +1,7 @@
 package com.entreprise.efood.utils.validators;
 
-import com.entreprise.efood.dtos.OrderDTO;
 import com.entreprise.efood.dtos.StatusDTO;
+import com.entreprise.efood.dtos.commandeDTO.OrderDTO;
 import com.entreprise.efood.utils.exceptions.commandsExceptions.InvalValue;
 import com.entreprise.efood.utils.exceptions.commandsExceptions.InvalidIdCommand;
 

@@ -21,11 +21,13 @@ import com.entreprise.efood.Models.Commande;
 import com.entreprise.efood.Models.Livraison;
 import com.entreprise.efood.Models.Menu;
 import com.entreprise.efood.Models.MenuCommande;
-import com.entreprise.efood.dtos.ClientMenuDTO;
-import com.entreprise.efood.dtos.MenuCommandeClientDTO;
-import com.entreprise.efood.dtos.OrderDTO;
-import com.entreprise.efood.dtos.RetrieveCmdDTO;
 import com.entreprise.efood.dtos.StatusDTO;
+import com.entreprise.efood.dtos.commandeDTO.ClientMenuDTO;
+import com.entreprise.efood.dtos.commandeDTO.DetailsClientCommandeDTO;
+import com.entreprise.efood.dtos.commandeDTO.LivraisonDTO;
+import com.entreprise.efood.dtos.commandeDTO.MenuCommandeClientDTO;
+import com.entreprise.efood.dtos.commandeDTO.OrderDTO;
+import com.entreprise.efood.dtos.commandeDTO.RetrieveCmdDTO;
 import com.entreprise.efood.enums.StatusEnum;
 import com.entreprise.efood.repository.CommandeRepository;
 import com.entreprise.efood.repository.LivraisonRepository;
@@ -49,6 +51,8 @@ public class OrderServiceImpl implements CommandService {
     LivraisonRepository lRepository;
     @Autowired
     MenuCommandeRepository menuCommandeRepository;
+    @Autowired
+    LivraisonRepository livraisonRepository;
 
     @Override
     public String toString() {
@@ -183,11 +187,48 @@ public class OrderServiceImpl implements CommandService {
     }
 
     @Override
-    public List<MenuCommandeClientDTO> retrieveMenus(String id) {
-        Commande commande = new Commande();
-        commande.setId(Long.parseLong(id));
-        List<MenuCommandeClientDTO> menuCommandes  =  menuCommandeRepository.findByCommande( commande.getId()) ;  
-       return menuCommandes;
+    public  Map<String,Object> retrieveMenus(String id) {
+        Map<String,Object> map = new HashMap<>();
+        //retrive menu's commande in database
+        try {
+
+        List<MenuCommandeClientDTO> menuCommandes  =  menuCommandeRepository.findByCommande( Long.parseLong(id)) ;
+
+       
+        LivraisonDTO livraison =  livraisonRepository.findCommandLivraison(Long.parseLong(id));
+        map.put("menus", menuCommandes);
+        map.put("livraison", livraison);
+        return map;
+
+        } catch (Exception e) {
+            // TODO: handle exception
+            System.out.println(e.getMessage());
+
+                return null;
+        }
+
+    }
+
+    @Override
+    public Page<DetailsClientCommandeDTO> getClientCommndes(Long idClient) {
+        
+        Pageable pageable = PageRequest.of(0,5);
+        try {
+            
+            Page<DetailsClientCommandeDTO> detailsClientCommands = commandeRepository.retrieveClientCommands(idClient, pageable);
+
+            System.out.println(detailsClientCommands);
+
+            return detailsClientCommands;
+
+
+        } catch (Exception e) {
+            // TODO: handle exception
+            System.out.println(e.getMessage());
+            throw e;
+        }
+        
+
     }
 
 }
