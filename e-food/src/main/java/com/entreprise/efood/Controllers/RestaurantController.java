@@ -1,10 +1,7 @@
 package com.entreprise.efood.Controllers;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import java.util.HashMap;
-import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +23,7 @@ import com.entreprise.efood.services.RestaurantService;
 public class RestaurantController {
 
     @Autowired
-    private  RestaurantService  restaurantService;
+    private RestaurantService restaurantService;
 
     @GetMapping("/ListeRestaurant")
     public ResponseEntity<List<RestaurantDTO>> getAllRestaurant() {
@@ -35,21 +32,18 @@ public class RestaurantController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new ResponseEntity<List<RestaurantDTO>>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @PostMapping("/SaveRestaurant")
-    public RestaurantDTO postMethodName(@RequestBody() RestaurantDTO restaurantDTO) {
+    public RestaurantDTO postMethodName(@RequestBody RestaurantDTO restaurantDTO) {
         try {
             restaurantService.createRestaurant(restaurantDTO);
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return null;
     }
-
-
 
     @PutMapping("/updateRestaurant/{code}")
     public ResponseEntity<Object> updateRestaurant(@PathVariable Long code, @RequestBody RestaurantDTO restaurantDTO) {
@@ -63,26 +57,18 @@ public class RestaurantController {
         }
     }
 
-
-
-    
-    @DeleteMapping(value = "/deleteRestaurant/{code}")
-    public ResponseEntity<String> deleteRestaurant(@RequestBody Map<String, Long> requestBody) {
-        Long code = requestBody.get("code");
+    @DeleteMapping("/deleteRestaurant/{code}")
+    public ResponseEntity<String> deleteRestaurant(@PathVariable Long code) {
         restaurantService.deleteRestaurant(code);
         return ResponseEntity.ok("Restaurant supprimé avec succès");
     }
-
-
 
     @GetMapping("/getRestaurantById/{code}")
     public ResponseEntity<RestaurantDTO> getRestaurantById(@PathVariable("code") Long code) {
         try {
             return restaurantService.getRestaurantById(code);
-        } 
-        catch (RuntimeException e) {
+        } catch (RuntimeException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND); // Retourne 404 si le restaurant n'est pas trouvé
         }
     }
-
 }

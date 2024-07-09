@@ -46,30 +46,32 @@ public class UserService {
         return userOptional.map(this::convertToDTO).orElse(null);
     }
 
-        public User addUser( UserDTO input) {
-            
-        Role roleUser = roleRepository.findById(input.getRole_id()).orElseThrow();
-        
-        User user = new User();
-                user.setNom(input.getNom());
-                user.setUsername(input.getUsername());
-                user.setPassword(passwordEncoder.encode(input.getPassword()));
-                user.setPrenom(input.getPrenom());
-                user.setEmail(input.getEmail());
-                user.setAdresse(input.getAdresse());
-                user.setTelephone(input.getTelephone());
-                user.setVille(input.getVille());
-                user.setRole(roleUser);
-        return userRepository.save(user);
+    public User addUser( UserDTO input) {
+
+    Role roleUser = roleRepository.findById(input.getRole_id()).orElseThrow();
+
+    User user = new User();
+        user.setNom(input.getNom());
+        user.setUsername(input.getUsername());
+        user.setPassword(passwordEncoder.encode(input.getPassword()));
+        user.setPrenom(input.getPrenom());
+        user.setEmail(input.getEmail());
+        user.setAdresse(input.getAdresse());
+        user.setTelephone(input.getTelephone());
+        user.setVille(input.getVille());
+        user.setRole(roleUser);
+    return userRepository.save(user);
     }
 
-    // Ajouter un nouvel utilisateur
     
 
     // Mettre à jour un utilisateur existant
     public UserDTO updateUser(Long id, UserDTO userDTO) {
         Optional<User> userOptional = userRepository.findById(id);
         if (userOptional.isPresent()) {
+
+            Role roleUser = roleRepository.findById(userDTO.getRole_id()).orElseThrow();
+
             User userToUpdate = userOptional.get();
             userToUpdate.setNom(userDTO.getNom());
             userToUpdate.setPrenom(userDTO.getPrenom());
@@ -78,9 +80,11 @@ public class UserService {
             userToUpdate.setAdresse(userDTO.getAdresse());
             userToUpdate.setVille(userDTO.getVille());
             userToUpdate.setUsername(userDTO.getUsername());
-            userToUpdate.setPassword(userDTO.getPassword());
+            //userToUpdate.setPassword(userDTO.getPassword());
+            userToUpdate.setRole(roleUser);
+
+
             
-            // Mettre à jour d'autres champs selon les besoins
 
             User updatedUser = userRepository.save(userToUpdate);
             return convertToDTO(updatedUser);
@@ -111,11 +115,11 @@ public class UserService {
         userDto.setUsername(user.getUsername());
         userDto.setPassword(user.getPassword());
         userDto.setRole_id(user.getRole().getId());
-        // Ajoutez d'autres champs si nécessaire
         return userDto;
     }
 
     // Méthode utilitaire pour convertir UserDTO en User
+
     private User convertToEntity(UserDTO userDTO) {
         Role role = new Role();
         role.setId(userDTO.getId());
@@ -131,7 +135,6 @@ public class UserService {
         user.setPassword(userDTO.getPassword());
         user.setRole(role);
         
-        // Ajoutez d'autres champs si nécessaire
         return user;
     }
 }
