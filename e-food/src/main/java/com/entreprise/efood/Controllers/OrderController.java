@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.entreprise.efood.Models.Restaurant;
 import com.entreprise.efood.dtos.StatusDTO;
 import com.entreprise.efood.dtos.commandeDTO.DetailsClientCommandeDTO;
 import com.entreprise.efood.dtos.commandeDTO.MenuCommandeClientDTO;
@@ -46,7 +47,7 @@ public class OrderController {
         this.orderServiceImpl = orderServiceImpl;
         this.encryptionUtil = eUtil;
     }
-    @PostMapping(value="/")
+    @PostMapping(value="/create")
     public ResponseEntity<Map<String,String>>  order(@RequestBody OrderDTO orderDTO){
 
 
@@ -90,7 +91,21 @@ public class OrderController {
 
     }
 
-    @GetMapping("/")
+    @GetMapping(value="/")
+    public ResponseEntity<Page<RetrieveCmdDTO>> getAllCommands(@RequestParam(defaultValue = "0") int page,@RequestParam(defaultValue = "10") int size ,@RequestParam(required = true) String id){
+
+        LOGGER.info("OK");
+        LOGGER.debug("Debugging");
+        LOGGER.error(Request.CLIENT_CERT_AUTH);
+        Restaurant r = new Restaurant();
+        r.setCode(Long.parseLong(id));
+        ResponseEntity<Page<RetrieveCmdDTO>> commandes = orderServiceImpl.getAllCommands(page,size,r);
+
+        return commandes;
+
+    }
+
+    @GetMapping("/menus")
     public ResponseEntity<Map<String,Object>> getCommandById(@RequestParam String id) {
       
 

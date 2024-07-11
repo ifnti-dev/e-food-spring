@@ -21,6 +21,7 @@ import com.entreprise.efood.Models.Commande;
 import com.entreprise.efood.Models.Livraison;
 import com.entreprise.efood.Models.Menu;
 import com.entreprise.efood.Models.MenuCommande;
+import com.entreprise.efood.Models.Restaurant;
 import com.entreprise.efood.dtos.StatusDTO;
 import com.entreprise.efood.dtos.commandeDTO.ClientMenuDTO;
 import com.entreprise.efood.dtos.commandeDTO.DetailsClientCommandeDTO;
@@ -75,8 +76,7 @@ public class OrderServiceImpl implements CommandService {
                 commande.setDate_commande(Timestamp.from(Instant.now()));
                 commande.setMontant(orderDTO.getMontant());
                 commande.setEtat(StatusEnum.EN_COURS.toString());
-                
-                
+
                 // Save commande
                 Commande savCommande = commandeRepository.save(commande);
 
@@ -84,9 +84,8 @@ public class OrderServiceImpl implements CommandService {
 
                 String encrypString = encryptionUtil.encrypt(cmdId);
 
-                final List<MenuCommande> menuCommandes = constructMenusCommand(orderDTO.getClientMenus(),savCommande);
+                final List<MenuCommande> menuCommandes = constructMenusCommand(orderDTO.getClientMenus(), savCommande);
 
-               
                 menuCommandeRepository.saveAll(menuCommandes);
 
                 if (orderDTO.isLivrable()) {
@@ -124,34 +123,28 @@ public class OrderServiceImpl implements CommandService {
         return new ResponseEntity<Map<String, String>>(message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
- 
     @Override
     public Boolean getCommandById(StatusDTO statusDTO) {
-        
 
         try {
-            // Long decryptedId = Long.parseLong(encryptionUtil.decrypt(statusDTO.getIdCmd()));
+            // Long decryptedId =
+            // Long.parseLong(encryptionUtil.decrypt(statusDTO.getIdCmd()));
 
+            commandeRepository.updateCommandStatus(statusDTO.getStatus(), Long.parseLong(statusDTO.getId()));
 
-              commandeRepository.updateCommandStatus(statusDTO.getStatus(), Long.parseLong(statusDTO.getId()));
-            
-        
-
-            
             return true;
-        } //catch ( e) {
-            
-        //     return false;
+        } // catch ( e) {
+
+        // return false;
 
         // }
-        catch(Exception e){
+        catch (Exception e) {
             return false;
         }
 
-      
     }
 
-    private List<MenuCommande> constructMenusCommand( ClientMenuDTO[] clientMenuDTOs,Commande cmd ){
+    private List<MenuCommande> constructMenusCommand(ClientMenuDTO[] clientMenuDTOs, Commande cmd) {
 
         final List<MenuCommande> menuCommandes = new ArrayList<>();
 
@@ -159,76 +152,82 @@ public class OrderServiceImpl implements CommandService {
             MenuCommande mCommande = new MenuCommande();
             Menu menu = new Menu();
             menu.setId(Long.parseLong(clientMenuDTOs[index].getId()));
-            mCommande.setPreference( clientMenuDTOs[index].getPreference() );
+            mCommande.setPreference(clientMenuDTOs[index].getPreference());
             mCommande.setQuantite(clientMenuDTOs[index].getQuantite());
             mCommande.setCommande(cmd);
             mCommande.setMenu(menu);
             menuCommandes.add(mCommande);
-          
 
         }
         return menuCommandes;
     }
 
     @Override
-    public ResponseEntity<Page<RetrieveCmdDTO>> getCommandsByStatus(String status,int page,int size) {
+    public ResponseEntity<Page<RetrieveCmdDTO>> getCommandsByStatus(String status, int page, int size) {
         try {
-            Pageable pageable = PageRequest.of(page,size);
-            Page<RetrieveCmdDTO> commmands = commandeRepository.findCommandsByEtat(status,pageable);
-                     
-            return new ResponseEntity<Page<RetrieveCmdDTO>>(commmands,HttpStatus.OK);
+            Pageable pageable = PageRequest.of(page, size);
+            Page<RetrieveCmdDTO> commmands = commandeRepository.findCommandsByEtat(status, pageable);
+
+            return new ResponseEntity<Page<RetrieveCmdDTO>>(commmands, HttpStatus.OK);
         } catch (Exception e) {
             // TODO: handle exception
             System.out.println(e.getMessage());
             return null;
         }
 
-        
     }
 
     @Override
-    public  Map<String,Object> retrieveMenus(String id) {
-        Map<String,Object> map = new HashMap<>();
-        //retrive menu's commande in database
+    public Map<String, Object> retrieveMenus(String id) {
+        Map<String, Object> map = new HashMap<>();
+        // retrive menu's commande in database
         try {
 
-        List<MenuCommandeClientDTO> menuCommandes  =  menuCommandeRepository.findByCommande( Long.parseLong(id)) ;
+            List<MenuCommandeClientDTO> menuCommandes = menuCommandeRepository.findByCommande(Long.parseLong(id));
 
-       
-        LivraisonDTO livraison =  livraisonRepository.findCommandLivraison(Long.parseLong(id));
-        map.put("menus", menuCommandes);
-        map.put("livraison", livraison);
-        return map;
+            LivraisonDTO livraison = livraisonRepository.findCommandLivraison(Long.parseLong(id));
+            map.put("menus", menuCommandes);
+            map.put("livraison", livraison);
+            return map;
 
         } catch (Exception e) {
             // TODO: handle exception
             System.out.println(e.getMessage());
 
-                return null;
+            return null;
         }
 
     }
 
     @Override
     public Page<DetailsClientCommandeDTO> getClientCommndes(Long idClient) {
-        
-        Pageable pageable = PageRequest.of(0,5);
+
+        Pageable pageable = PageRequest.of(0, 5);
         try {
-            
-            Page<DetailsClientCommandeDTO> detailsClientCommands = commandeRepository.retrieveClientCommands(idClient, pageable);
+
+            Page<DetailsClientCommandeDTO> detailsClientCommands = commandeRepository.retrieveClientCommands(idClient,
+                    pageable);
 
             System.out.println(detailsClientCommands);
 
             return detailsClientCommands;
-
 
         } catch (Exception e) {
             // TODO: handle exception
             System.out.println(e.getMessage());
             throw e;
         }
-        
 
+    }
+
+    @Override
+    public ResponseEntity<Page<RetrieveCmdDTO>> getAllCommands(int page, int size,Restaurant r) {
+        // TODO Auto-generated method stub
+        
+        System.out.println(r.getCode());
+        Pageable pageable = PageRequest.of(page, size);
+        Page<RetrieveCmdDTO> commmands = commandeRepository.findAllCommands(pageable, r);
+        return new ResponseEntity<Page<RetrieveCmdDTO>>(commmands, HttpStatus.OK);
     }
 
 }
