@@ -3,6 +3,7 @@ package com.entreprise.efood.dtos.commandeDTO;
 import java.sql.Timestamp;
 
 import groovyjarjarantlr4.v4.runtime.misc.NotNull;
+import groovyjarjarantlr4.v4.runtime.misc.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,6 +24,8 @@ public class RetrieveCmdDTO {
     private String nom;
     @NotNull
     private String prenom;
+    @Nullable 
+    private String status = null;
 
 
 
